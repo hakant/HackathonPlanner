@@ -19,6 +19,22 @@ export class Users {
   activate() {
     return this.http.fetch('users')
       .then(response => response.json())
-      .then(users => this.users = users);
+      .then(users => {
+        for(let user of users){
+          user.liked = false;
+        }
+        return users;
+      })
+      .then(users => this.users = users)
+      .then(_ => console.log(this.users[0]))
+  }
+
+  like(event) {
+    let userId = event.srcElement.dataset.userid;
+    for (let user of this.users){
+      if (user.id === userId){
+        user.liked = true;
+      }
+    }
   }
 }

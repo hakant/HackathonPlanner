@@ -20,7 +20,9 @@
     <script src="jspm_packages/system.js"></script>
     <script src="config.js"></script>
     <script>
-      System.import('aurelia-bootstrapper');
+      window.setTimeout(function(){
+        System.import('aurelia-bootstrapper')
+      }, 3000);
     </script>
   </body>
 </html>

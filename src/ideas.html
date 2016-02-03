@@ -16,7 +16,7 @@
               Together with some tagline that explains
               the idea a bit further.
               <br/><br/>
-              Thanks to anyone who shows interest.
+              Thanks to everyone showing interest.
             </p>
             <p>
               <div class="row">
@@ -25,7 +25,9 @@
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4"></div>
                 <div class="col-xs-4 col-sm-4 col-md-4">
-                  <i class="fa fa-heart-o fa-2x"></i>
+                  <i data-userid.bind="user.id" click.trigger="like($event)"
+                     class="fa fa-heart-o fa-2x">
+                  </i>
                 </div>
               </div>
             </p>

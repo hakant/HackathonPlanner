@@ -32,6 +32,7 @@ body {
   padding-top: 20px;
   overflow-x: hidden;
   overflow-y: auto;
+  background-color: #7F6B2F;
 }
 
 @media print {
@@ -90,6 +91,7 @@ div.au-stagger {
   color: #88ACD9;
   margin-bottom: 32px;
   box-shadow: 0 0 5px rgba(0, 0, 0, .5);
+  cursor: pointer;
 }
 
 .card .content {
@@ -130,6 +132,18 @@ div.au-stagger {
 
 .card .fa-heart, .card .fa-heart-o {
   color: red;
+}
+
+.logo{
+  margin-bottom: 10px;
+}
+  .navbar-brand.text{
+    padding-top: 22px;
+    margin-left: -20px;
+  }
+
+.navbar .btn{
+  margin-top: 13px;
 }
 
 /* animation definitions */
