@@ -1,5 +1,6 @@
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
+import {Project} from './project';
 import 'fetch';
 
 @inject(HttpClient)
@@ -20,21 +21,27 @@ export class Users {
     return this.http.fetch('dist/users.json')
       .then(response => response.json())
       .then(users => {
-        for(let user of users){
-          user.liked = false;
+        let projects = [];
+        for (let user of users){
+          projects.push(new Project(user));
         }
-        return users;
+        this.users = projects;
+        return projects;
       })
-      .then(users => this.users = users)
-      .then(_ => console.log(this.users[0]))
+      .then(_ => console.log(this.users))
   }
 
   like(event) {
+    console.log(event);
     let userId = event.srcElement.dataset.userid;
+    console.log("User ID:" + userId);
     for (let user of this.users){
-      if (user.id === userId){
-        user.liked = true;
+      console.log(user.data.id + ' ' + userId);
+      if (user.data.id == userId){
+        user.liked = !user.liked;
       }
     }
+
+    console.log(this.users);
   }
 }

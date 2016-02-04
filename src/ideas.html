@@ -7,10 +7,10 @@
         <div class="card">
           <canvas class="header-bg" width="250" height="70" blur-image.bind="image"></canvas>
           <div class="avatar">
-            <img src.bind="user.avatar_url" crossorigin ref="image"/>
+            <img src.bind="user.data.avatar_url" crossorigin ref="image"/>
           </div>
           <div class="content">
-            <p class="name">${user.name}</p>
+            <p class="name">${user.data.name ? user.data.name : user.data.login}</p>
             <p class="name">
               My best Hackathon Idea ever
               <br/><br/>
@@ -26,9 +26,10 @@
                 </div>
                 <div class="col-xs-4 col-sm-4 col-md-4"></div>
                 <div class="col-xs-4 col-sm-4 col-md-4">
-                  <i data-userid.bind="user.id" click.trigger="like($event)"
-                     class="fa fa-heart-o fa-2x">
+                  <i data-userid.bind="user.data.id" click.trigger="like($event)"
+                     class="fa ${user.liked ? 'fa-heart' : 'fa-heart-o'} fa-2x">
                   </i>
+                  <span class="like-counter" id.bind="user.data.id">5</span>
                 </div>
               </div>
             </p>
