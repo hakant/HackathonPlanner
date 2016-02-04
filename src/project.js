@@ -24,6 +24,20 @@ export class Project {
     }
   }
 
+  get joined(){
+    return this.raw.joined;
+  }
+
+  set joined(value){
+    this.raw.joined = value;
+
+    if (this.raw.joined)
+      this.raw["team-count"]++;
+    else{
+      this.raw["team-count"]--;
+    }
+  }
+
   get likeCount(){
     return this.raw["like-count"];
   }

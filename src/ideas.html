@@ -17,12 +17,16 @@
           </div>
           <div class="row controls">
             <div class="col-xs-4 col-sm-4 col-md-4">
-              <i class="fa fa-plus-square fa-2x"></i>
+              <i data-projectid.bind="project.data.id"
+              click.trigger="join($event)"
+              class="fa ${!project.joined ? 'fa-plus-square' : 'fa-check-square'} fa-2x"></i>
               <span class="team-counter" id.bind="project.data.id">${project.teamCount}</span>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4"></div>
             <div class="col-xs-4 col-sm-4 col-md-4">
-              <i data-userid.bind="project.data.id" click.trigger="like($event)" class="fa ${project.liked ? 'fa-heart' : 'fa-heart-o'} fa-2x">
+              <i data-projectid.bind="project.data.id"
+                 click.trigger="like($event)"
+                 class="fa ${project.liked ? 'fa-heart' : 'fa-heart-o'} fa-2x">
                 </i>
               <span class="like-counter" id.bind="project.data.id">${project.likeCount}</span>
             </div>

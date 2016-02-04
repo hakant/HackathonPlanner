@@ -32,16 +32,30 @@ export class Ideas {
   }
 
   like(event) {
-    console.log(event);
-    let userId = event.srcElement.dataset.userid;
-    console.log("User ID:" + userId);
+    let projectId = event.srcElement.dataset.projectid;
+
     for (let item of this.projects){
-      console.log(item.data.id + ' ' + userId);
-      if (item.data.id == userId){
+      if (item.data.id == projectId){
         item.liked = !item.liked;
       }
     }
+  }
 
-    console.log(this.projects);
+  join(event){
+    let projectId = event.srcElement.dataset.projectid;
+
+    for (let item of this.projects){
+        if (item.joined){
+          item.joined = false;
+      }
+
+      if (item.data.id == projectId){
+        if (item.joined){
+          item.joined = false;
+        } else {
+          item.joined = true;
+        }
+      }
+    }
   }
 }
