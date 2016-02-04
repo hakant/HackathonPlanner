@@ -32,7 +32,7 @@ body {
   padding-top: 20px;
   overflow-x: hidden;
   overflow-y: auto;
-  background-color: #7F6B2F;
+  background-color: rgba(106, 191, 212, 0.53);
 }
 
 @media print {
