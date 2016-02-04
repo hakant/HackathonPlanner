@@ -1,4 +1,6 @@
-<html><head>
+<html>
+
+<head>
     <title>Hackathon Ideas | Hackathon Planner</title>
     <link rel="stylesheet" href="jspm_packages/npm/font-awesome@4.5.0/css/font-awesome.min.css">
     <link rel="stylesheet" href="styles/styles.css">
@@ -18,7 +20,9 @@ html {
 }
 
 /*# sourceMappingURL=bootstrap.css.map */
-</style></head>
+</style>
+
+</head>
 
   <body aurelia-app="main" class=" hasGoogleVoiceExt"><!--<view>-->
 
@@ -59,7 +63,7 @@ html {
   </nav>
 <!--</view>--></nav-bar>
 
-  <div class="page-host">
+  <div class="page-host teams">
     <router-view class="au-target" au-target-id="8"><!--<view>-->
 
 
@@ -69,13 +73,15 @@ html {
       <!--<view>--><div class="col-sm-6 col-md-3 card-container au-animate">
         <div class="card">
           <canvas class="header-bg au-target" width="250" height="70" blur-image.bind="image" au-target-id="9"></canvas>
+<!--
           <div class="avatar">
             <img src.bind="project.data.user.avatar_url" crossorigin="" ref="image" class="au-target" au-target-id="10" src="https://avatars.githubusercontent.com/u/1907367?v=3">
           </div>
+-->
           <div class="content">
-            <p class="username">Hakan Tuncer</p>
-            <p class="name au-target" markdown.bind="project.data.title" au-target-id="12"><p>Hackathon Planner</p></p>
-            <p class="description au-target" markdown.bind="project.data.description" au-target-id="13"><p>Create a fun &amp; useful environment where hackathon ideas can live and team formation around those ideas are easier to manage. Ingredients: Open source software components that we don't yet use at NIPO Software. Suggestion: node.js, aurelia, nosql.</p></p>
+            <h3 class="project-title">Hackathon Planner</h3>
+            <p class="name au-target" markdown.bind="project.data.title" au-target-id="12"><p>Hakan Tuncer</p></p>
+            <p class="team-count">6 members</p>
           </div>
           <div class="row controls">
             <div class="col-xs-4 col-sm-4 col-md-4">

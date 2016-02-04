@@ -6746,3 +6746,15 @@ button.close {
     display: none !important;
   }
 }
+
+.teams .card .header-bg {
+  border: none;
+}
+
+.teams .project-title {
+  color: black;
+}
+
+.teams .team-count {
+  font-size: 2em;
+}
