@@ -47,6 +47,9 @@ export class Ideas {
     for (let item of this.projects){
         if (item.joined){
           item.joined = false;
+          
+          if (item.data.id == projectId)
+            return;
       }
 
       if (item.data.id == projectId){
