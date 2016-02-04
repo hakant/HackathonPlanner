@@ -31,7 +31,13 @@ System.config({
     "core-js": "npm:core-js@1.2.6",
     "fetch": "github:github/fetch@0.10.1",
     "font-awesome": "npm:font-awesome@4.5.0",
+    "gooy/aurelia-markdown": "github:gooy/aurelia-markdown@0.0.3",
+    "showdown": "github:showdownjs/showdown@1.3.0",
     "text": "github:systemjs/plugin-text@0.0.3",
+    "github:gooy/aurelia-markdown@0.0.3": {
+      "prism": "github:PrismJS/prism@master",
+      "showdown": "github:showdownjs/showdown@1.3.0"
+    },
     "github:jspm/nodelibs-assert@0.1.0": {
       "assert": "npm:assert@1.3.0"
     },

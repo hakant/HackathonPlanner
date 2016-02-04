@@ -1,5 +1,6 @@
 <template>
   <require from="blur-image"></require>
+  <require from="components/markdown"></require>
 
   <section class="au-animate">
     <div class="row au-stagger">
@@ -12,10 +13,9 @@
           <div class="content">
             <p class="name">${project.data.user.name ? user.data.user.name : project.data.user.login}</p>
             <p class="name">
-              My best Hackathon Idea ever
+              ${project.data.title}
               <br/><br/>
-              Together with some tagline that explains
-              the idea a bit further.
+              <!--div markdown.bind="project.data.description"></div>-->
               <br/><br/>
               Thanks to everyone showing interest.
             </p>
