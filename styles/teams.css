@@ -6758,3 +6758,7 @@ button.close {
 .teams .team-count {
   font-size: 2em;
 }
+
+.teams .card .content {
+  min-height: 100px;
+}
