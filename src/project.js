@@ -8,7 +8,6 @@ export class Project {
   }
 
   get data(){
-    console.log("Getter is triggered: ");
     return this.raw;
   }
 
@@ -17,7 +16,19 @@ export class Project {
   }
 
   set liked(value){
-    console.log("Setter is triggered: " + value);
     this.raw.liked = value;
+    if (this.raw.liked)
+      this.raw["like-count"]++;
+    else{
+      this.raw["like-count"]--;
+    }
+  }
+
+  get likeCount(){
+    return this.raw["like-count"];
+  }
+
+  get teamCount(){
+    return this.raw["team-count"];
   }
 }

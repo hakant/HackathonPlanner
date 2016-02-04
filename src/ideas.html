@@ -8,31 +8,24 @@
         <div class="card">
           <canvas class="header-bg" width="250" height="70" blur-image.bind="image"></canvas>
           <div class="avatar">
-            <img src.bind="project.data.user.avatar_url" crossorigin ref="image"/>
+            <img src.bind="project.data.user.avatar_url" crossorigin ref="image" />
           </div>
           <div class="content">
-            <p class="name">${project.data.user.name ? user.data.user.name : project.data.user.login}</p>
-            <p class="name">
-              ${project.data.title}
-              <br/><br/>
-              <!--div markdown.bind="project.data.description"></div>-->
-              <br/><br/>
-              Thanks to everyone showing interest.
-            </p>
-            <p>
-              <div class="row">
-                <div class="col-xs-4 col-sm-4 col-md-4">
-                  <i class="fa fa-plus-square fa-2x"></i>
-                </div>
-                <div class="col-xs-4 col-sm-4 col-md-4"></div>
-                <div class="col-xs-4 col-sm-4 col-md-4">
-                  <i data-userid.bind="project.data.id" click.trigger="like($event)"
-                     class="fa ${project.liked ? 'fa-heart' : 'fa-heart-o'} fa-2x">
-                  </i>
-                  <span class="like-counter" id.bind="project.data.id">5</span>
-                </div>
-              </div>
-            </p>
+            <p class="username">${project.data.user.name ? project.data.user.name : project.data.user.login}</p>
+            <p class="name" markdown.bind="project.data.title"></p>
+            <p class="description" markdown.bind="project.data.description"></p>
+          </div>
+          <div class="row controls">
+            <div class="col-xs-4 col-sm-4 col-md-4">
+              <i class="fa fa-plus-square fa-2x"></i>
+              <span class="team-counter" id.bind="project.data.id">${project.teamCount}</span>
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4"></div>
+            <div class="col-xs-4 col-sm-4 col-md-4">
+              <i data-userid.bind="project.data.id" click.trigger="like($event)" class="fa ${project.liked ? 'fa-heart' : 'fa-heart-o'} fa-2x">
+                </i>
+              <span class="like-counter" id.bind="project.data.id">${project.likeCount}</span>
+            </div>
           </div>
         </div>
       </div>
