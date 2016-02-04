@@ -8,8 +8,8 @@
 	},
 	"title": "Hackathon Planner",
 	"description": "Create a fun & useful environment where hackathon ideas can live and team formation around those ideas are easier to manage. Ingredients: Open source software components that we don't yet use at NIPO Software. Suggestion: node.js, aurelia, nosql.",
-	"like-count": 5,
-	"team-count": 3
+	"like-count": 30,
+	"team-count": 5
 }, {
 	"id": 2,
 	"user": {
@@ -32,8 +32,8 @@
 	},
 	"title": "Deployment++",
 	"description": "Hook up the per-team deployment scripts to a slack command for easy deployment. The command would fetch the latest changes in the specified branch and deploy them",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 3,
+	"team-count": 0
 }, {
 	"id": 4,
 	"user": {
@@ -44,8 +44,8 @@
 	},
 	"title": "Online ODIN Developer",
 	"description": "Use CodeMirror (https://codemirror.net/) to implement an online editor for odin scripts. The ODIN developer is the only reason our customers are 'forced' to use windows",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 4,
+	"team-count": 0
 }, {
 	"id": 5,
 	"user": {
@@ -56,8 +56,8 @@
 	},
 	"title": "Manager as an Application",
 	"description": "Use Electron (http://electron.atom.io/) to host the GLU manager inside a native app (for windows/mac/linux). Focus: native experience. Inspiration: Our users might find it nice to use an actual 'app' that can be pinned or pre-installed by IT more easily.",
-	"like-count": 5,
-	"team-count": 3
+	"like-count": 4,
+	"team-count": 0
 }, {
 	"id": 6,
 	"user": {
@@ -68,8 +68,8 @@
 	},
 	"title": "Questionnaire 2.0",
 	"description": "With new VR technologies introduced by Oculus Rift, Google Glass and Microsoft's HoloLens time has come to upgrade the standardized questionnaires to more lively versions. The hackathon is an ideal spot to start brainstorming on this 'futuristic way of interviewing'. The outcome can be a presentation with our vision (pun intended) on how to utilize these technologies. Focus: interviewing. Inspiration: Was in the list last year and almost made it, new progress has been made on releasing HoloLens recently: https://www.microsoft.com/microsoft-hololens/en-us/development-edition",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 1,
+	"team-count": 0
 }, {
 	"id": 7,
 	"user": {
@@ -81,7 +81,7 @@
 	"title": "Offline ODIN Developer",
 	"description": "Reuse the open source Visual Studio Code editor to author ODIN Scripts, syntax hightlighting, preview in Online all from the convenience of a great editor. Focus: native experience, leverage existing technology. Inspiration: Visual Studio Code has proven to be a 'very' nice editor that is getting lots of love from Microsoft. Like one of the lesser ideas on this list Code is based on Electron and now has an extensibility model. One could even imagine to implement the debugger bradge for ODIN and debug scripts in the sky.",
 	"like-count": 6,
-	"team-count": 5
+	"team-count": 3
 }, {
 	"id": 8,
 	"user": {
@@ -92,8 +92,8 @@
 	},
 	"title": "Chicago, City of Spa's",
 	"description": "Let's pour Chicago into a SPA (Single Page App) using Aurelia, the new kid on the block. As a SPA we can give a better user experience and possibily return the snappiness to Nfield (even if it only is a illusion). Focus: state of the art for templating, client side templating in disguise, javascript 'deep' dive. Inspiration: Let's start leveraging the power of the client and offload workloads to the client. Perception is everything, if the interview load only seems quick we are more than half way there.",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 1,
+	"team-count": 0
 }, {
 	"id": 9,
 	"user": {
@@ -104,7 +104,7 @@
 	},
 	"title": "Barcode scanner",
 	"description": "Let's see if we can find a barcode scanner in the app store that we can interfce with from the interviewing app so we can scan barcodes during interviews. Focus: Product enrichment. Inspiration: Barcode scanning capabilities are a returining question from customers, there are even 2 concrete projects it could be used on, the projects are just not big enough to disturb our online priorities so it will not be done as part of the normal development anytime soon.",
-	"like-count": 6,
+	"like-count": 5,
 	"team-count": 5
 }, {
 	"id": 10,
@@ -116,8 +116,8 @@
 	},
 	"title": "Give a Talk for Tech Community",
 	"description": "The purpose of this idea is to prepare a deck for a talk at a meetup. Focus: Introduce Nipo Software to the tech community, create enthusiasm within teams, boost morale. Inspiration: One of the things that we can do to improve enthusiasm in the teams is to encourage teams or individuals to give talks. There are literally hunderds of meetups happening in Amsterdam every year and many companies take part on a regular basis either by hosting the meetup or contributing to the content. We do neither for our tech community. There are so many things to be learned just by attending some meetups every so often. we also have a lot of knowledge here at Nipo and it will be great if we share it. ",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 3,
+	"team-count": 1
 }, {
 	"id": 11,
 	"user": {
@@ -129,7 +129,7 @@
 	"title": "Valhallen",
 	"description": "To Be Revealed at an Appropriate Time. Focus: DIY. Inspiration: Divine.",
 	"like-count": 6,
-	"team-count": 5
+	"team-count": 0
 }, {
 	"id": 12,
 	"user": {
@@ -140,8 +140,8 @@
 	},
 	"title": "Meeting Ender",
 	"description": "Create an app that makes a loud noise after a set time, and won't stop unless you move your phone 15+ meters. Focus: Productivity. Inspiration: Meetings can go over time sometimes.",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 1,
+	"team-count": 0
 }, {
 	"id": 13,
 	"user": {
@@ -152,8 +152,8 @@
 	},
 	"title": "Conducting interview on IoT ",
 	"description": "Interviewers sometimes are not trustable and sending them around is a costly and time consuming process.The answers to lots of simple questions like which type of coffee is mostly selected?, which brand of candy is the most popular purchased?, which door is opened more often in the office?, what is the best temperature in the building? etc are already reflected by human behavior and don't need be collected through the tedious process. To answer those questions we don't need to send interviewers around to waste time an money. With the help of sensors and IoT, we can collect such kind of information more efficiently and quickly.Focus: DIY. Inspiration: Prototype a interviewing system (or data collector) on embed devices to collect Anonymous data automatically. Using a raspberry pi to prototype the idea. I have the pi, If someone can donate sensors to connect to GPIO that will be even nicer.",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 4,
+	"team-count": 0
 }, {
 	"id": 14,
 	"user": {
@@ -164,8 +164,8 @@
 	},
 	"title": "Online documentation for Chicago and ODIN best practices",
 	"description": "Create a template structure for documentation. It should be easier to add content and remove repetitve tasks. It should be easier to use and add edit content. Focus: Productivity, customer communication, consultative selling. Inspiration: It began as a small side project, but was received very positvely and now needs to be solidified. ",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 2,
+	"team-count": 1
 }, {
 	"id": 15,
 	"user": {
@@ -176,8 +176,8 @@
 	},
 	"title": "Link database to Nfield Online",
 	"description": "During the interview we would like to CRUD on an external database. Focus: interviewing, Triple 50, Add value, Extent Nfield Online capabilities. Inspiration: The Nfield Online webinar and a direct request from TNS NIPO (big important Mercedes project) inspired us to add this to the list. Implementing this would be an instant win and a much desired feature by many customers.",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 0,
+	"team-count": 0
 }, {
 	"id": 16,
 	"user": {
@@ -188,8 +188,8 @@
 	},
 	"title": "Adevertising/ marketing Campaign",
 	"description": "Advertise our products electronically, billboards, visits... Focus: Triple 50. Inspiration: So few advertisements. ",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 0,
+	"team-count": 0
 }, {
 	"id": 17,
 	"user": {
@@ -200,8 +200,8 @@
 	},
 	"title": "Integrate online manager with NIPO website",
 	"description": "Enable clients to use the new Manager directly from NIPO software website. Focus: Triple 50, improvements, future insight, possible added value. Inspiration: Other products (not necessarily market research).",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 0,
+	"team-count": 0
 }, {
 	"id": 18,
 	"user": {
@@ -212,8 +212,8 @@
 	},
 	"title": "Make interview audible",
 	"description": "To facilitate the interview for the people with disabilities, it will be nice to let the interview speak out by it self. The coverage of interview will also be increased in this way. Focus: DIY (NOTE BB: Can Amazon Alexa be used?). Inspiration: Technically should be very easy to realize by using the already available TTS engines. For instance : https://msdn.microsoft.com/en-us/library/office/hh361625(v=office.14).aspx or http://responsivevoice.org/api/",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 5,
+	"team-count": 0
 }, {
 	"id": 19,
 	"user": {
@@ -224,8 +224,8 @@
 	},
 	"title": "Make syncing bearable",
 	"description": "Make syncing bearable by either showing best practices from HQ, statistics or a simple game. Anything to kill time. Focus: Product enrichment. Inspiration: When you connect a device to a pc and sync, you actually see something happens when syncing, because it logs a lot. The app is not idle and it isn't conciously annoying you. The progress indicator, however, is. Let's do something about it.",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 0,
+	"team-count": 0
 }, {
 	"id": 20,
 	"user": {
@@ -236,8 +236,8 @@
 	},
 	"title": "Nfield statistics: how far until we hit 50m?",
 	"description": "Find out how Nfield is doing and show some numbers about the usage. And show them on a monitor in the office or... pimp the NIPO Software homepage with them. We could perhaps show current stats about the number of running projects, the number of online users, the number of completed interviews in the last 24 hours, the number of people syncing (or reading best practices), etc. Focus: Triple 50 obviously, insights, ops, marketing. Inspiration: Inspire everyone to reach the 50m mark.",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 1,
+	"team-count": 0
 }, {
 	"id": 21,
 	"user": {
@@ -248,8 +248,8 @@
 	},
 	"title": "Euro 2016 football poule",
 	"description": "Improve and update the World Cup 2014 project and make it work for Euro 2016 and maybe add functionality: daily scores emails, add more editable content, improved user management, etc. Focus: UNICEF. Inspiration: For the fans we could reuse Babis' system and make some Dutchies interested in Euro 2016.",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 1,
+	"team-count": 1
 }, {
 	"id": 22,
 	"user": {
@@ -260,8 +260,8 @@
 	},
 	"title": "Theme roller for Nfield Chicago",
 	"description": "Create an online tool which creates a theme file for NfieldChicago, so customers can use their own color scheme and logo's. Focus: Template, theming, triple 50. Inspiration: Sales and HD get a lot of requests how to change colors and logo's, because many of our customers are not capable of writing some JavaScript and CSS. Why not help them a little?",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 0,
+	"team-count": 0
 }, {
 	"id": 23,
 	"user": {
@@ -272,8 +272,8 @@
 	},
 	"title": "External Big Fish",
 	"description": "Come up with a plan to grow more externally. Using the hackathon to work out further the plans Sales already has for extending new business, but also do brainsession for new ideas/approach. Focus: Getting more external business. Inspiration: Triple-50",
-	"like-count": 6,
-	"team-count": 5
+	"like-count": 0,
+	"team-count": 0
 }, {
 	"id": 31,
 	"user": {
@@ -283,7 +283,7 @@
 		"name": "irfan Metin"
 	},
 	"title": "be awesome like me",
-	"description": "eat a lot of bananas. we need to find a way to have an endless supply of bananas in our office.",
-	"like-count": 6,
-	"team-count": 5
+	"description": "Bananas are awesome, we should all eat more of them. we need to find a way to have an endless supply of bananas in our office.",
+	"like-count": 40,
+	"team-count": 3
 }]
