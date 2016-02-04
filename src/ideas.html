@@ -20,7 +20,7 @@
               <i data-projectid.bind="project.data.id"
               click.trigger="join($event)"
               class="fa ${!project.joined ? 'fa-plus-square' : 'fa-check-square'} fa-2x"></i>
-              <span class="team-counter" id.bind="project.data.id">${project.teamCount}</span>
+              <span click.trigger="goToTeams()" class="team-counter" id.bind="project.data.id">${project.teamCount}</span>
             </div>
             <div class="col-xs-4 col-sm-4 col-md-4"></div>
             <div class="col-xs-4 col-sm-4 col-md-4">

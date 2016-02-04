@@ -47,7 +47,7 @@ export class Ideas {
     for (let item of this.projects){
         if (item.joined){
           item.joined = false;
-          
+
           if (item.data.id == projectId)
             return;
       }
@@ -60,5 +60,9 @@ export class Ideas {
         }
       }
     }
+  }
+
+  goToTeams(){
+    window.location = "./teams.html";
   }
 }
