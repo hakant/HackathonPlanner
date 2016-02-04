@@ -4,8 +4,8 @@ import {Project} from './project';
 import 'fetch';
 
 @inject(HttpClient)
-export class Users {
-  users = [];
+export class Ideas {
+  projects = [];
 
   constructor(http) {
     http.configure(config => {
@@ -18,30 +18,30 @@ export class Users {
   }
 
   activate() {
-    return this.http.fetch('dist/users.json')
+    return this.http.fetch('dist/data.json')
       .then(response => response.json())
-      .then(users => {
-        let projects = [];
-        for (let user of users){
-          projects.push(new Project(user));
+      .then(projects => {
+        let items = [];
+        for (let item of projects){
+          items.push(new Project(item));
         }
-        this.users = projects;
-        return projects;
+        this.projects = items;
+        return items;
       })
-      .then(_ => console.log(this.users))
+      .then(_ => console.log(this.projects))
   }
 
   like(event) {
     console.log(event);
     let userId = event.srcElement.dataset.userid;
     console.log("User ID:" + userId);
-    for (let user of this.users){
-      console.log(user.data.id + ' ' + userId);
-      if (user.data.id == userId){
-        user.liked = !user.liked;
+    for (let item of this.projects){
+      console.log(item.data.id + ' ' + userId);
+      if (item.data.id == userId){
+        item.liked = !item.liked;
       }
     }
 
-    console.log(this.users);
+    console.log(this.projects);
   }
 }
