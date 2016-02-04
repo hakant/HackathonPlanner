@@ -30,7 +30,7 @@
   "following": 0,
   "created_at": "2012-06-29T20:50:08Z",
   "updated_at": "2016-02-03T18:36:58Z"
-}, 
+},
 {
   "login": "irfanmetin",
   "id": 11663362,
@@ -354,7 +354,7 @@
 {
   "login": "Diana Odinsdottir",
   "id": 99999999,
-  "avatar_url": "http://icons.iconarchive.com/icons/paomedia/small-n-flat/1024/lightning-icon.png",
+  "avatar_url": "http://www.niposoftware.com/nipo/media/Nipo/logo.png",
   "gravatar_id": "",
   "url": "https://api.github.com/users/rutger-de-jong",
   "html_url": "https://github.com/rutger-de-jong",
