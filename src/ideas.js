@@ -10,14 +10,14 @@ export class Users {
     http.configure(config => {
       config
         .useStandardConfiguration()
-        .withBaseUrl('https://api.github.com/');
+        .withBaseUrl('/');
     });
 
     this.http = http;
   }
 
   activate() {
-    return this.http.fetch('users')
+    return this.http.fetch('dist/users.json')
       .then(response => response.json())
       .then(users => {
         for(let user of users){
