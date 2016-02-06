@@ -28,7 +28,7 @@ export class Ideas {
         this.projects = items;
         return items;
       })
-      .then(_ => console.log(this.projects))
+      .then(_ => console.log(this.projects));
   }
 
   like(event) {
