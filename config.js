@@ -27,13 +27,14 @@ System.config({
     "aurelia-templating-router": "npm:aurelia-templating-router@1.0.0-beta.1.0.5",
     "babel": "npm:babel-core@5.8.34",
     "babel-runtime": "npm:babel-runtime@5.8.34",
-    "bootstrap": "github:twbs/bootstrap@3.3.6",
+    "bootstrap": "github:twbs/bootstrap@4.0.0-alpha.2",
     "core-js": "npm:core-js@1.2.6",
     "fetch": "github:github/fetch@0.10.1",
     "font-awesome": "npm:font-awesome@4.5.0",
     "gooy/aurelia-markdown": "github:gooy/aurelia-markdown@0.0.3",
     "showdown": "github:showdownjs/showdown@1.3.0",
     "text": "github:systemjs/plugin-text@0.0.3",
+    "twbs/bootstrap": "github:twbs/bootstrap@4.0.0-alpha.2",
     "github:gooy/aurelia-markdown@0.0.3": {
       "prism": "github:PrismJS/prism@master",
       "showdown": "github:showdownjs/showdown@1.3.0"
@@ -52,6 +53,10 @@ System.config({
     },
     "github:twbs/bootstrap@3.3.6": {
       "jquery": "github:components/jquery@2.2.0"
+    },
+    "github:twbs/bootstrap@4.0.0-alpha.2": {
+      "jquery": "github:components/jquery@2.2.0",
+      "tether": "github:HubSpot/tether@1.1.1"
     },
     "npm:assert@1.3.0": {
       "util": "npm:util@0.10.3"
