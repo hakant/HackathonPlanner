@@ -51,9 +51,6 @@ System.config({
     "github:jspm/nodelibs-util@0.1.0": {
       "util": "npm:util@0.10.3"
     },
-    "github:twbs/bootstrap@3.3.6": {
-      "jquery": "github:components/jquery@2.2.0"
-    },
     "github:twbs/bootstrap@4.0.0-alpha.2": {
       "jquery": "github:components/jquery@2.2.0",
       "tether": "github:HubSpot/tether@1.1.1"
