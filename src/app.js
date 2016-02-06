@@ -4,6 +4,13 @@ export class App {
     config.map([
       {
         route: [''],
+        name: 'overview',
+        moduleId: 'overview',
+        nav: false,
+        title: 'Overview'
+      },
+      {
+        route: ['ideas'],
         name: 'ideas',
         moduleId: 'ideas',
         nav: false,
