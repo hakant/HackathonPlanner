@@ -4,11 +4,11 @@
 
 	<section>
 		<div class="card-columns">
-			<idea-card project.bind="project" repeat.for="project of projects" />
+			<idea-card project.bind="project" repeat.for="project of _projects" />
 		</div>
 	</section>
 
-	<div class="modal fade" id="modal-window-${$index}" tabindex="-1" role="dialog" aria-labelledby="${project.data.title}" aria-hidden="true" repeat.for="project of projects">
+	<div class="modal fade" id="modal-window-${$index}" tabindex="-1" role="dialog" aria-labelledby="${project.data.title}" aria-hidden="true" repeat.for="project of _projects">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
 				<idea-card project.bind="project" />

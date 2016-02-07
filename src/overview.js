@@ -1,11 +1,11 @@
 import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
-import {Project} from './project';
+import {Project} from './models/project';
 import 'fetch';
 
 @inject(HttpClient)
 export class Overview {
-  projects = [];
+  _projects = [];
 
   constructor(http) {
     http.configure(config => {
@@ -25,17 +25,16 @@ export class Overview {
         for (let item of projects){
           items.push(new Project(item));
         }
-        this.projects = items;
+        this._projects = items;
         return items;
-      })
-      .then(_ => console.log(this.projects));
+      });
   }
 
   like(event) {
     let projectId = event.srcElement.dataset.projectid;
 
-    for (let item of this.projects){
-      if (item.data.id == projectId){
+    for (let item of this._projects){
+      if (item._id == projectId){
         item.liked = !item.liked;
       }
     }
@@ -44,15 +43,15 @@ export class Overview {
   join(event){
     let projectId = event.srcElement.dataset.projectid;
 
-    for (let item of this.projects){
+    for (let item of this._projects){
         if (item.joined){
           item.joined = false;
 
-          if (item.data.id == projectId)
+          if (item._id == projectId)
             return;
       }
 
-      if (item.data.id == projectId){
+      if (item._id == projectId){
         if (item.joined){
           item.joined = false;
         } else {

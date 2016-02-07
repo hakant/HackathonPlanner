@@ -5,24 +5,24 @@
   <div class="card">
     <canvas class="header-bg" width="250" height="100" blur-image.bind="image"></canvas>
     <div class="avatar">
-      <img src.bind="project.data.user.avatar_url" crossorigin ref="image" class="img-circle" />
-      <p class="username">${project.user.name ? project.user.name : project.user.login}</p>
+      <img src.bind="project._user.avatar_url" crossorigin ref="image" class="img-circle" />
+      <p class="username">${project._user.name ? project._user.name : project._user.login}</p>
     </div>
     <div class="card-block pointer-container" data-toggle="modal" data-target="#modal-window-${$index}">
-      <h4 class="card-title">${project.title}</h4>
-      <p class="card-text">${project.overview}</p>
+      <h4 class="card-title">${project._title}</h4>
+      <p class="card-text">${project._overview}</p>
     </div>
     <div class="card-block labels">
       <span class="label label-pill label-default" repeat.for="label of project.data.labels">${label}</span>
     </div>
     <div class="card-block controls">
       <div class="col-xs-6 team-controls">
-        <i data-projectid.bind="project.data.id" click.trigger="join($event)" class="fa ${!project.joined ? 'fa-plus-square' : 'fa-check-square'} fa-2x"></i>
-        <span id.bind="project.data.id">${project.teamCount}</span>
+        <i data-projectid.bind="project._id" click.trigger="join($event)" class="fa ${!project.joined ? 'fa-plus-square' : 'fa-check-square'} fa-2x"></i>
+        <span id.bind="project._id">${project.teamCount}</span>
       </div>
       <div class="col-xs-6 text-xs-right like-controls">
-        <i data-projectid.bind="project.data.id" click.trigger="like($event)" class="fa ${project.liked ? 'fa-heart' : 'fa-heart-o'} fa-2x"></i>
-        <span id.bind="project.data.id">${project.likeCount}</span>
+        <i data-projectid.bind="project._id" click.trigger="like($event)" class="fa ${project.liked ? 'fa-heart' : 'fa-heart-o'} fa-2x"></i>
+        <span id.bind="project._id">${project.likeCount}</span>
       </div>
     </div>
     <div class="card-block"></div>
