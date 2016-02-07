@@ -23,6 +23,11 @@ body {
   margin-top: 50px;
 }
 
+.splash .logo {
+  border-radius: 25px;
+  margin-bottom: 25px;
+}
+
 .page-host {
   position: absolute;
   left: 0;
