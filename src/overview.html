@@ -1,5 +1,4 @@
 <template>
-	<require from="components/markdown"></require>
 	<require from="./idea-card"></require>
 
 	<section>
@@ -8,10 +7,10 @@
 		</div>
 	</section>
 
-	<div class="modal fade" id="modal-window-${$index}" tabindex="-1" role="dialog" aria-labelledby="${project.data.title}" aria-hidden="true" repeat.for="project of _projects">
+	<div class="modal" id="modal-window-${$index}" tabindex="-1" role="dialog" aria-labelledby="${project.data.title}" aria-hidden="true" repeat.for="project of _projects">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-				<idea-card project.bind="project" />
+				<compose view="idea-card-detail.html" view-model.bind="project">
 			</div>
 		</div>
 	</div>

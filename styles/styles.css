@@ -119,6 +119,10 @@ nav {
   font-family: 'Open Sans', sans-serif;
 }
 
+.details .card-text{
+  margin-top: 20px;
+}
+
 .card .labels span {
   margin-right: 5px;
 }
@@ -143,6 +147,12 @@ nav {
 .card .like-controls, .modal-header .like-controls {
   color: #B30028;
 }
+
+/*.modal-content{
+  color: #4d4d4d;
+  font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;
+  line-height: 18px
+}*/
 
 /* animation definitions */
 @-webkit-keyframes fadeInRight {
