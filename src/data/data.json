@@ -1,0 +1,17 @@
+[{
+  "id": 1,
+  "user": {
+    "login": "hakant",
+    "id": 1907367,
+    "avatar_url": "https://avatars.githubusercontent.com/u/1907367?v=3",
+    "name": "Hakan Tuncer"
+  },
+  "title": "Hackathon Planner",
+  "overview": "Create a fun & useful environment where hackathon ideas can live and team formation around those ideas",
+  "description": "Create a fun & useful environment where hackathon ideas can live and team formation around those ideas are easier to manage. Ingredients: Open source software components that we don't yet use at NIPO Software. Suggestion: node.js, aurelia, nosql.",
+  "labels": ["hackathon", "aurelia", "node.js"],
+  "like-count": 30,
+  "team-count": 5,
+  "liked": true,
+  "joined": false
+}]

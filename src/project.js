@@ -1,48 +1,66 @@
-
-
 export class Project {
-  raw = undefined;
+  data;
 
-  constructor(raw) {
-    this.raw = raw;
+  constructor(data) {
+    this.data = data;
   }
 
-  get data(){
-    return this.raw;
+  get id(){
+    return this.data.id;
   }
 
-  get liked(){
-    return this.raw.liked;
+  get user(){
+    return this.data.user;
   }
 
-  set liked(value){
-    this.raw.liked = value;
-    if (this.raw.liked)
-      this.raw["like-count"]++;
-    else{
-      this.raw["like-count"]--;
-    }
+  get title(){
+    return this.data.title;
   }
 
-  get joined(){
-    return this.raw.joined;
+  get overview(){
+    return this.data.overview;
   }
 
-  set joined(value){
-    this.raw.joined = value;
+  get description(){
+    return this.data.description;
+  }
 
-    if (this.raw.joined)
-      this.raw["team-count"]++;
-    else{
-      this.raw["team-count"]--;
-    }
+  get labels(){
+    return this.data.labels;
   }
 
   get likeCount(){
-    return this.raw["like-count"];
+    return this.data["like-count"];
+  }
+
+  get liked(){
+    return this.data.liked;
   }
 
   get teamCount(){
-    return this.raw["team-count"];
+    return this.data["team-count"];
+  }
+
+  get joined(){
+    return this.data.joined;
+  }
+
+  set liked(value){
+    this.data.liked = value;
+    if (this.data.liked)
+      this.data["like-count"]++;
+    else{
+      this.data["like-count"]--;
+    }
+  }
+
+  set joined(value){
+    this.data.joined = value;
+
+    if (this.data.joined)
+      this.data["team-count"]++;
+    else{
+      this.data["team-count"]--;
+    }
   }
 }

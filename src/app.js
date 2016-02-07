@@ -15,13 +15,6 @@ export class App {
         moduleId: 'ideas',
         nav: false,
         title: 'Hackathon Ideas'
-      },
-      {
-        route: ['teams'],
-        name: 'teams',
-        moduleId: 'teams',
-        nav: false,
-        title: 'Hackathon Teams'
       }
     ]);
 

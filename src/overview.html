@@ -1,68 +1,17 @@
 <template>
-	<require from="blur-image"></require>
 	<require from="components/markdown"></require>
+	<require from="./idea-card"></require>
 
 	<section>
-
 		<div class="card-columns">
-			<div class="card" repeat.for="project of projects">
-				<canvas class="header-bg" width="250" height="100" blur-image.bind="image"></canvas>
-				<div class="avatar">
-					<img src.bind="project.data.user.avatar_url" crossorigin ref="image" class="img-circle" />
-					<p class="username">${project.data.user.name ? project.data.user.name : project.data.user.login}</p>
-				</div>
-				<div class="card-block pointer-container" data-toggle="modal" data-target="#modal-window-${$index}">
-					<h4 class="card-title">${project.data.title}</h4>
-					<p class="card-text">${project.data.description}</p>
-				</div>
-				<div class="card-block labels">
-					<span class="label label-pill label-default" repeat.for="label of project.data.labels">${label}</span>
-				</div>
-				<div class="card-block controls">
-					<div class="col-xs-6 team-controls">
-						<i data-projectid.bind="project.data.id"
-						click.trigger="join($event)"
-						class="fa ${!project.joined ? 'fa-plus-square' : 'fa-check-square'} fa-2x"></i>
-						<span id.bind="project.data.id">${project.teamCount}</span>
-					</div>
-					<div class="col-xs-6 text-xs-right like-controls">
-						<i data-projectid.bind="project.data.id"
-						click.trigger="like($event)"
-						class="fa ${project.liked ? 'fa-heart' : 'fa-heart-o'} fa-2x"></i>
-						<span id.bind="project.data.id">${project.likeCount}</span>
-				</div>
-			</div>
-			<div class="card-block">
-			</div>
+			<idea-card project.bind="project" repeat.for="project of projects" />
 		</div>
-
 	</section>
 
 	<div class="modal fade" id="modal-window-${$index}" tabindex="-1" role="dialog" aria-labelledby="${project.data.title}" aria-hidden="true" repeat.for="project of projects">
 		<div class="modal-dialog modal-lg" role="document">
 			<div class="modal-content">
-				<div class="modal-header">
-					<div class="col-xs-2 team-controls">
-						<i data-projectid.bind="project.data.id"
-							click.trigger="join($event)"
-							class="fa ${!project.joined ? 'fa-plus-square' : 'fa-check-square'} fa-2x"></i>
-					</div>
-					<div class="col-xs-8">
-						<h4 class="modal-title" id="myModalLabel">${project.data.title}</h4>
-					</div>
-					<div class="col-xs-2 text-xs-right like-controls">
-					<i data-projectid.bind="project.data.id"
-						click.trigger="like($event)"
-						class="fa ${project.liked ? 'fa-heart' : 'fa-heart-o'} fa-2x"></i>
-					</div>
-				</div>
-				<div class="modal-body">
-					<p markdown.bind="project.data.description"></p>
-				</div>
-				<div class="modal-footer">
-					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-					<button type="button" class="btn btn-primary">Edit</button>
-				</div>
+				<idea-card project.bind="project" />
 			</div>
 		</div>
 	</div>

@@ -18,7 +18,7 @@ export class Overview {
   }
 
   activate() {
-    return this.http.fetch('dist/data.json')
+    return this.http.fetch('dist/data/data.json')
       .then(response => response.json())
       .then(projects => {
         let items = [];
@@ -28,7 +28,7 @@ export class Overview {
         this.projects = items;
         return items;
       })
-      .then(_ => console.log(this.projects))
+      .then(_ => console.log(this.projects));
   }
 
   like(event) {
@@ -60,9 +60,5 @@ export class Overview {
         }
       }
     }
-  }
-
-  goToTeams(){
-    window.location = "./teams.html";
   }
 }
