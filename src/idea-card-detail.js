@@ -11,12 +11,15 @@ export class IdeaCardDetail{
     return this._editModeEnabled;
   }
 
-  set EditModeEnabled(value){
-    this._editModeEnabled = value;
-  }
-
   EnableEditMode(){
     this._editModeEnabled = true;
+
+    var selector = `text-${this.project._id}`;
+    setTimeout(function(){
+      let element = document.getElementById(selector);
+      element.style.height = 0;
+      element.style.height = (element.scrollHeight) + "px";
+    }, 100);
   }
 
   Save(){

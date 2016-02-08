@@ -156,6 +156,7 @@ nav {
 .card textarea{
   resize: none;
   width: 100%;
+  min-height: 200px;
   overflow:hidden;
 }
 
