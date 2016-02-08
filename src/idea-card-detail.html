@@ -11,7 +11,14 @@
     </div>
     <div class="card-block pointer-container" data-toggle="modal">
       <h4 class="card-title">${project._title}</h4>
-      <div class="card-text" markdown.bind="project._description"></div>
+      <div if.bind="!EditModeEnabled" class="card-text"
+           markdown.bind="project._description"
+           click.trigger="EnableEditMode()">
+      </div>
+      <textarea if.bind="EditModeEnabled" class="card-text"
+                value.bind="project._description" keyup.trigger="TextAreaAdjust($event)">
+      </textarea>
+      <button if.bind="EditModeEnabled" class="btn btn-success" click.trigger="Save()">Save</button>
     </div>
     <div class="card-block labels">
       <span class="label label-pill label-default" repeat.for="label of project.data.labels">${label}</span>
