@@ -7,12 +7,5 @@
 			<idea-card project.bind="project" repeat.for="project of _projects" />
 		</div>
 	</section>
-
-	<div class="modal" id="modal-window-${$index}" tabindex="-1" role="dialog" aria-labelledby="${project.data.title}" aria-hidden="true" repeat.for="project of _projects">
-		<div class="modal-dialog modal-lg" role="document">
-			<div class="modal-content">
-				<idea-card-detail project.bind="project">
-			</div>
-		</div>
-	</div>
+	
 </template>

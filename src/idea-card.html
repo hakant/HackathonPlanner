@@ -8,7 +8,9 @@
       <img src.bind="project._user.avatar_url" crossorigin ref="image" class="img-circle" />
       <p class="username">${project._user.name ? project._user.name : project._user.login}</p>
     </div>
-    <div class="card-block pointer-container" data-toggle="modal" data-target="#modal-window-${$index}">
+    <!-- <div class="card-block pointer-container" data-toggle="modal" data-target="#modal-window-${$index}"> -->
+    <div class="card-block pointer-container" data-toggle="modal"
+         click.delegate="goToCardDetails()">
       <h4 class="card-title">${project._title}</h4>
       <p class="card-text">${project._overview}</p>
     </div>
