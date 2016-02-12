@@ -3,13 +3,15 @@ import {computedFrom} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import {inject} from 'aurelia-framework';
 import {Project} from './models/project';
+import {Router} from 'aurelia-router';
 
-@inject (HttpClient)
-export class IdeaCardDetail{
+@inject(HttpClient, Router)
+export class IdeaCardDetail {
   _editModeEnabled = false;
   project = null;
+  lastProjectDescription = null;
 
-  constructor(http) {
+  constructor(http, router) {
     http.configure(config => {
       config
         .useStandardConfiguration()
@@ -17,47 +19,87 @@ export class IdeaCardDetail{
     });
 
     this.http = http;
+    this.router = router;
   }
 
-  activate(params){
+  activate(params) {
     return this.http.fetch('dist/data/data.json')
       .then(response => response.json())
       .then(projects => {
-        for (let item of projects){
-          if (item.id == params.id){
+        for (let item of projects) {
+          if (item.id == params.id) {
             this.project = new Project(item);
+            this.lastProjectDescription = this.project._description;
           }
         }
       });
   }
 
-  attached(){
+  attached() {
+    var myRouter = this.router;
     $(".modal").modal('show');
+    $('.modal').on('hidden.bs.modal', function() {
+      myRouter.navigateToRoute('overview');
+    });
   }
 
   @computedFrom('_editModeEnabled')
-  get EditModeEnabled(){
+  get EditModeEnabled() {
     return this._editModeEnabled;
   }
 
-  EnableEditMode(){
-    this._editModeEnabled = true;
+  EnableEditMode(event) {
+    if (event.srcElement.nodeName.toLowerCase() == "a"){
+      return true;
+    }
 
-    var selector = `text-${this.project._id}`;
-    setTimeout(function(){
-      let element = document.getElementById(selector);
-      element.style.height = 0;
-      element.style.height = (element.scrollHeight) + "px";
-    }, 0);
+    var me = this;
+    $("body").on('mouseup mousemove', function handler(evt) {
+      if (evt.type === 'mouseup') {
+        me._editModeEnabled = true;
+
+        var selector = `text-${me.project._id}`;
+        setTimeout(function() {
+          let element = document.getElementById(selector);
+          element.style.height = 0;
+          element.style.height = (element.scrollHeight) + "px";
+          element.select();
+        }, 0);
+      } else {
+        // drag
+      }
+      $("body").off('mouseup mousemove', handler);
+    });
   }
 
-  Save(){
+  Save() {
+    this.lastProjectDescription = this.project._description;
     this._editModeEnabled = false;
   }
 
-  TextAreaAdjust(event){
+  Cancel() {
+    this.project._description = this.lastProjectDescription;
+    this._editModeEnabled = false;
+  }
+
+  TextAreaAdjust(event) {
     let element = event.srcElement;
 
     element.style.height = (element.scrollHeight) + "px";
+  }
+
+  Like() {
+    this.project.liked = !this.project.liked;
+  }
+
+  Join() {
+    if (this.project.joined) {
+      this.project.joined = false;
+      // now unjoin from this through the API
+    } else {
+      // unjoin from whatever you're joined already through the API
+      // and join to this
+      this.project.joined = true;
+    }
   }
 }

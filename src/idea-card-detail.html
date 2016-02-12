@@ -14,22 +14,25 @@
           </div>
           <div class="card-block" data-toggle="modal">
             <h4 class="card-title">${project._title}</h4>
-            <div if.bind="!EditModeEnabled" class="card-text pointer-container" markdown.bind="project._description" click.trigger="EnableEditMode()">
+            <div if.bind="!EditModeEnabled" class="card-text pointer-container" markdown.bind="project._description" click.delegate="EnableEditMode($event)">
             </div>
             <textarea id="text-${project._id}" show.bind="EditModeEnabled" class="card-text" value.bind="project._description" keyup.trigger="TextAreaAdjust($event)">
             </textarea>
             <button show.bind="EditModeEnabled" class="btn btn-success" click.trigger="Save()">Save</button>
+            <button show.bind="EditModeEnabled" class="btn btn-cancel" click.trigger="Cancel()">
+              <i class="fa fa-undo"></i>
+            </button>
           </div>
           <div class="card-block labels">
             <span class="label label-pill label-default" repeat.for="label of project.data.labels">${label}</span>
           </div>
           <div class="card-block controls">
             <div class="col-xs-6 team-controls">
-              <i data-projectid.bind="project._id" click.trigger="join($event)" class="fa ${!project.joined ? 'fa-plus-square' : 'fa-check-square'} fa-2x"></i>
+              <i data-projectid.bind="project._id" click.trigger="Join()" class="fa ${!project.joined ? 'fa-plus-square' : 'fa-check-square'} fa-2x"></i>
               <span id.bind="project._id">${project.teamCount}</span>
             </div>
             <div class="col-xs-6 text-xs-right like-controls">
-              <i data-projectid.bind="project._id" click.trigger="like($event)" class="fa ${project.liked ? 'fa-heart' : 'fa-heart-o'} fa-2x"></i>
+              <i data-projectid.bind="project._id" click.trigger="Like()" class="fa ${project.liked ? 'fa-heart' : 'fa-heart-o'} fa-2x"></i>
               <span id.bind="project._id">${project.likeCount}</span>
             </div>
           </div>
