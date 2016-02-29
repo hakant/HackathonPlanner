@@ -8,6 +8,7 @@
       <div class="modal-content">
         <div id="card-detail-${project._id}" class="card details">
           <canvas class="header-bg" width="250" height="100" blur-image.bind="image"></canvas>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <div class="avatar">
             <img src.bind="project._user.avatar_url" crossorigin ref="image" class="img-circle" />
             <p class="username">${project._user.name ? project._user.name : project._user.login}</p>
