@@ -14,6 +14,9 @@
           </div>
           <div class="card-block" data-toggle="modal">
             <h4 class="card-title">${project._title}</h4>
+            <div if.bind="!EditModeEnabled && IsDescriptionEmpty">
+              <a href="#here" click.trigger="DoEnableEditMode()">Add a description</a>
+            </div>
             <div if.bind="!EditModeEnabled" class="card-text pointer-container" markdown.bind="project._description" click.delegate="EnableEditMode($event)">
             </div>
             <textarea id="text-${project._id}" show.bind="EditModeEnabled" class="card-text" value.bind="project._description" keyup.trigger="TextAreaAdjust($event)">

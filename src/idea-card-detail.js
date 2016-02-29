@@ -48,6 +48,11 @@ export class IdeaCardDetail {
     return this._editModeEnabled;
   }
 
+  get IsDescriptionEmpty(){
+    return this.lastProjectDescription === null ||
+            this.lastProjectDescription === "";
+  }
+
   EnableEditMode(event) {
     if (event.srcElement.nodeName.toLowerCase() == "a"){
       return true;
@@ -56,20 +61,25 @@ export class IdeaCardDetail {
     var me = this;
     $("body").on('mouseup mousemove', function handler(evt) {
       if (evt.type === 'mouseup') {
-        me._editModeEnabled = true;
-
-        var selector = `text-${me.project._id}`;
-        setTimeout(function() {
-          let element = document.getElementById(selector);
-          element.style.height = 0;
-          element.style.height = (element.scrollHeight) + "px";
-          element.select();
-        }, 0);
+        me.DoEnableEditMode();
       } else {
         // drag
       }
       $("body").off('mouseup mousemove', handler);
     });
+  }
+
+  DoEnableEditMode(){
+    this._editModeEnabled = true;
+
+    var selector = `text-${this.project._id}`;
+    setTimeout(function() {
+      let element = document.getElementById(selector);
+      element.style.height = 0;
+      element.style.height = (element.scrollHeight) + "px";
+      element.focus();
+      element.select();
+    }, 0);
   }
 
   Save() {
