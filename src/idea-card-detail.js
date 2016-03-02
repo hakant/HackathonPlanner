@@ -7,9 +7,11 @@ import {Router} from 'aurelia-router';
 
 @inject(HttpClient, Router)
 export class IdeaCardDetail {
-  _editModeEnabled = false;
+  _titleEditEnabled = false;
+  _descrEditEnabled = false;
+  _lastProjectTitle = null;
+  _lastProjectDescription = null;  
   project = null;
-  lastProjectDescription = null;
 
   constructor(http, router) {
     http.configure(config => {
@@ -29,7 +31,8 @@ export class IdeaCardDetail {
         for (let item of projects) {
           if (item.id == params.id) {
             this.project = new Project(item);
-            this.lastProjectDescription = this.project._description;
+            this._lastProjectTitle = this.project._title;
+            this._lastProjectDescription = this.project._description;
           }
         }
       });
@@ -43,17 +46,35 @@ export class IdeaCardDetail {
     });
   }
 
-  @computedFrom('_editModeEnabled')
-  get EditModeEnabled() {
-    return this._editModeEnabled;
+  @computedFrom('_titleEditEnabled')
+  get TitleEditEnabled(){
+    return this._titleEditEnabled;
+  }
+
+  @computedFrom('_descrEditEnabled')
+  get DescrEditEnabled() {
+    return this._descrEditEnabled;
   }
 
   get IsDescriptionEmpty(){
-    return this.lastProjectDescription === null ||
-            this.lastProjectDescription === "";
+    return this._lastProjectDescription === null ||
+            this._lastProjectDescription === "";
+  }
+  
+  EnableTitleEdit(event) {
+    var me = this;
+    var selector = "h2.card-title"
+    $(selector).on('mouseup mousemove', function handler(evt) {
+      if (evt.type === 'mouseup') {
+          me._titleEditEnabled = true;
+      } else {
+        // drag
+      }
+      $(selector).off('mouseup mousemove', handler);
+    });
   }
 
-  EnableEditMode(event) {
+  EnableDescrEdit(event) {
     if (event.srcElement.nodeName.toLowerCase() == "a"){
       return true;
     }
@@ -61,7 +82,7 @@ export class IdeaCardDetail {
     var me = this;
     $("body").on('mouseup mousemove', function handler(evt) {
       if (evt.type === 'mouseup') {
-        me.DoEnableEditMode();
+        me.DoEnableDescrEditMode();
       } else {
         // drag
       }
@@ -69,8 +90,8 @@ export class IdeaCardDetail {
     });
   }
 
-  DoEnableEditMode(){
-    this._editModeEnabled = true;
+  DoEnableDescrEditMode(){
+    this._descrEditEnabled = true;
 
     var selector = `text-${this.project._id}`;
     setTimeout(function() {
@@ -82,19 +103,28 @@ export class IdeaCardDetail {
     }, 0);
   }
 
-  Save() {
-    this.lastProjectDescription = this.project._description;
-    this._editModeEnabled = false;
+  SaveTitle() {
+    this._lastProjectTitle = this.project._title;
+    this._titleEditEnabled = false;
   }
 
-  Cancel() {
-    this.project._description = this.lastProjectDescription;
-    this._editModeEnabled = false;
+  CancelTitle() {
+    this.project._title = this._lastProjectTitle;
+    this._titleEditEnabled = false;
+  }
+
+  SaveDescription() {  
+    this._lastProjectDescription = this.project._description;
+    this._descrEditEnabled = false;
+  }
+
+  CancelDescription() {
+    this.project._description = this._lastProjectDescription;
+    this._descrEditEnabled = false;
   }
 
   TextAreaAdjust(event) {
     let element = event.srcElement;
-
     element.style.height = (element.scrollHeight) + "px";
   }
 

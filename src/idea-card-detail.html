@@ -14,16 +14,23 @@
             <p class="username">${project._user.name ? project._user.name : project._user.login}</p>
           </div>
           <div class="card-block" data-toggle="modal">
-            <h4 class="card-title">${project._title}</h4>
-            <div if.bind="!EditModeEnabled && IsDescriptionEmpty">
-              <a href="#here" click.trigger="DoEnableEditMode()">Add a description</a>
+            <h2 if.bind="!TitleEditEnabled" class="card-title" click.delegate="EnableTitleEdit($event)">${project._title}</h2>
+            <input class="card-title form-control" if.bind="TitleEditEnabled" type="text" value.bind="project._title" />
+            <div>
+                <button show.bind="TitleEditEnabled" class="btn btn-success" click.trigger="SaveTitle()">Save</button>
+                <button show.bind="TitleEditEnabled" class="btn btn-cancel" click.trigger="CancelTitle()">
+                <i class="fa fa-undo"></i>
+                </button>
             </div>
-            <div if.bind="!EditModeEnabled" class="card-text pointer-container" markdown.bind="project._description" click.delegate="EnableEditMode($event)">
+            <div if.bind="!DescrEditEnabled && IsDescriptionEmpty">
+              <a href="#here" click.trigger="DoEnableDescrEdit()">Add a description</a>
             </div>
-            <textarea id="text-${project._id}" show.bind="EditModeEnabled" class="card-text" value.bind="project._description" keyup.trigger="TextAreaAdjust($event)">
+            <div if.bind="!DescrEditEnabled" class="card-text pointer-container" markdown.bind="project._description" click.delegate="EnableDescrEdit($event)">
+            </div>
+            <textarea id="text-${project._id}" show.bind="DescrEditEnabled" class="card-text" value.bind="project._description" keyup.trigger="TextAreaAdjust($event)">
             </textarea>
-            <button show.bind="EditModeEnabled" class="btn btn-success" click.trigger="Save()">Save</button>
-            <button show.bind="EditModeEnabled" class="btn btn-cancel" click.trigger="Cancel()">
+            <button show.bind="DescrEditEnabled" class="btn btn-success" click.trigger="SaveDescription()">Save</button>
+            <button show.bind="DescrEditEnabled" class="btn btn-cancel" click.trigger="CancelDescription()">
               <i class="fa fa-undo"></i>
             </button>
           </div>
