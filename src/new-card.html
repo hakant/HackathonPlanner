@@ -1,0 +1,30 @@
+<template>
+
+  <require from="blur-image"></require>
+
+  <div id="new-card" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-md" role="document">
+      <div class="modal-content">
+        <div class="card details">
+          <canvas class="header-bg" width="250" height="100" blur-image.bind="image"></canvas>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <div class="avatar">
+            <img src.bind="project._user.avatar_url" crossorigin ref="image" class="img-circle" />
+            <p class="username">${project._user.name ? project._user.name : project._user.login}</p>
+          </div>
+          <div class="card-block" data-toggle="modal">
+            <input placeholder="Title" class="card-title form-control" type="text" value.bind="project._title" />
+            <textarea placeholder="Overview" class="form-control card-overview" type="text" value.bind="project._overview"></textarea>
+            <div>
+                <button class="btn btn-success" click.trigger="Save()">Save</button>
+                <button class="btn btn-cancel" click.trigger="Cancel()">
+                <i class="fa fa-times"></i>
+                </button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</template>

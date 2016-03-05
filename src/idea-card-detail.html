@@ -3,7 +3,7 @@
   <require from="blur-image"></require>
   <require from="components/markdown"></require>
 
-  <div class="modal" tabindex="-1" role="dialog">
+  <div id="card-detail" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
         <div id="card-detail-${project._id}" class="card details">
@@ -22,8 +22,16 @@
                 <i class="fa fa-undo"></i>
                 </button>
             </div>
-            <div if.bind="!DescrEditEnabled && IsDescriptionEmpty">
-              <a href="#here" click.trigger="DoEnableDescrEdit()">Add a description</a>
+            <div if.bind="!OverviewEditEnabled" class="card-overview" click.delegate="EnableOverviewEdit($event)">${project._overview}</div>
+            <textarea class="card-overview form-control" if.bind="OverviewEditEnabled" type="text" value.bind="project._overview"></textarea>
+            <div>
+                <button show.bind="OverviewEditEnabled" class="btn btn-success" click.trigger="SaveOverview()">Save</button>
+                <button show.bind="OverviewEditEnabled" class="btn btn-cancel" click.trigger="CancelOverview()">
+                <i class="fa fa-undo"></i>
+                </button>
+            </div>
+            <div if.bind="!DescrEditEnabled && IsDescriptionEmpty" class="add-description-link">
+              <a href="#here" click.trigger="DoEnableDescrEditMode()">Add a description</a>
             </div>
             <div if.bind="!DescrEditEnabled" class="card-text pointer-container" markdown.bind="project._description" click.delegate="EnableDescrEdit($event)">
             </div>

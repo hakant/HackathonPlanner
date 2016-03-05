@@ -1,4 +1,6 @@
 <template bindable="router">
+  <require from="./new-card"></require>  
+    
   <nav class="navbar navbar-fixed-top navbar-light">
     <a class="navbar-brand" href="#">${router.title}</a>
     <ul class="nav navbar-nav">
@@ -9,9 +11,10 @@
     <li class="loader pull-xs-right" if.bind="router.isNavigating">
       <i class="fa fa-spinner fa-spin fa-2x"></i>
     </li>
-    <!-- <form class="form-inline pull-xs-right">
-      <input class="form-control" type="text" placeholder="Search">
-      <button class="btn btn-success-outline" type="submit">Search</button>
-    </form> -->
+    <button type="button" click.trigger="NewCard()" class="btn btn-success navbar-btn">
+        <i class="fa fa-plus"></i>
+    </button>
   </nav>
+  
+  <new-card></new-card>
 </template>
