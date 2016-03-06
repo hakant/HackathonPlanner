@@ -45,6 +45,7 @@ export class App {
             {
                 route: 'ideas/:id',
                 name: 'ideaDetail',
+                nav: false,
                 moduleId: 'idea-card-detail'
             },
             {
