@@ -71,6 +71,9 @@ export class IdeaCardDetail {
         $(selector).on('mouseup mousemove', function handler(evt) {
             if (evt.type === 'mouseup') {
                 me._titleEditEnabled = true;
+                setTimeout(function () {
+                    $("input.card-title").select();
+                }, 0);
             } else {
                 // drag
             }
@@ -84,6 +87,9 @@ export class IdeaCardDetail {
         $(selector).on('mouseup mousemove', function handler(evt) {
             if (evt.type === 'mouseup') {
                 me._overviewEditEnabled = true;
+                setTimeout(function () {
+                    $("textarea.card-overview").select();
+                }, 0);
             } else {
                 // drag
             }
