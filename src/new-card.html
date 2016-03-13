@@ -4,7 +4,7 @@
   <div id="new-card" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-md" role="document">
       <div class="modal-content">
-        <div class="card details" validate.bind="validation">
+        <div class="card details" validate.bind="project.validation">
           <canvas class="header-bg" width="250" height="100" blur-image.bind="image"></canvas>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <div class="avatar">
@@ -13,7 +13,7 @@
           </div>
           <div class="card-block" data-toggle="modal">
             <div class="form-group">
-                <input placeholder="Title" class="card-title form-control" type="text" value.bind="project._title" />
+                <input placeholder="Title" class="card-title form-control" type="text" value.bind="project._title" validate="_title" />
             </div>
             <div class="form-group">
                 <textarea placeholder="Overview" class="form-control card-overview" type="text" value.bind="project._overview"></textarea>

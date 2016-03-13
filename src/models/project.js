@@ -1,9 +1,12 @@
 import {computedFrom} from 'aurelia-framework';
+import {ensure} from 'aurelia-validation';
+
 
 export class Project {
-  data = null;
+  @ensure(function(it) { it.isNotEmpty() })
+  _title = null;
 
-  constructor(data) {
+  constructor(data, validation) {
     this._id = data.id;
     this._user = data.user;
     this._title = data.title;
@@ -14,6 +17,10 @@ export class Project {
     this._joined = data.joined;
     this._likeCount = data["like-count"];
     this._teamCount = data["team-count"];
+    
+    if (validation){
+        this.validation = validation.on(this);
+    }
 
     this._data = data;
   }

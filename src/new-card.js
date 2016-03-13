@@ -17,14 +17,11 @@ export class NewCard {
 
         this.http = http;
         this.router = router;
-        this.project = this.NewProject;
-
-        this.validation = validation.on(this)
-            .ensure('project._title')
-            .isNotEmpty();
+        this.validation = validation;
+        this.project = this.CreateNewProject();
     }
 
-    get NewProject() {
+    CreateNewProject() {
         return new Project({
             id: Math.floor(Math.random() * 10000) + 1,
             user: {
@@ -40,7 +37,7 @@ export class NewCard {
             description: "",
             "like-count": 0,
             "team-count": 0
-        });
+        }, this.validation);
     }
 
     attached() {
@@ -54,7 +51,7 @@ export class NewCard {
     }
 
     Save() {
-        this.validation.validate()
+        this.project.validation.validate()
             .then(() => {
                 $("#new-card").modal('hide');
                 window._projects.push(this.project);
