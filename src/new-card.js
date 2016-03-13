@@ -3,12 +3,12 @@ import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import {Project} from './models/project';
 import {Router} from "aurelia-router";
+import {Validation} from 'aurelia-validation';
 import 'fetch';
 
-@inject(HttpClient, Router)
+@inject(HttpClient, Router, Validation)
 export class NewCard {
-
-    constructor(http, router) {
+    constructor(http, router, validation) {
         http.configure(config => {
             config
                 .useStandardConfiguration()
@@ -18,6 +18,10 @@ export class NewCard {
         this.http = http;
         this.router = router;
         this.project = this.NewProject;
+
+        this.validation = validation.on(this)
+            .ensure('project._title')
+            .isNotEmpty();
     }
 
     get NewProject() {
@@ -38,21 +42,26 @@ export class NewCard {
             "team-count": 0
         });
     }
-    
-    attached(){
+
+    attached() {
         var me = this;
         $("#new-card").modal('show');
-        $('#new-card').on('hidden.bs.modal', function () {
+        $('#new-card').on('hidden.bs.modal', function() {
             me.router.navigateToRoute('overview');
         });
-        
+
         $("input.card-title").focus();
     }
 
     Save() {
-        $("#new-card").modal('hide');
-        window._projects.push(this.project);
-        this.router.navigateToRoute('overview');
+        this.validation.validate()
+            .then(() => {
+                $("#new-card").modal('hide');
+                window._projects.push(this.project);
+                this.router.navigateToRoute('overview');
+            }).catch(error => {
+                
+            });
     }
 
     Cancel() {
