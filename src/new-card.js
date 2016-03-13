@@ -3,12 +3,11 @@ import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import {Project} from './models/project';
 import {Router} from "aurelia-router";
-import {Validation} from 'aurelia-validation';
 import 'fetch';
 
-@inject(HttpClient, Router, Validation)
+@inject(HttpClient, Router)
 export class NewCard {
-    constructor(http, router, validation) {
+    constructor(http, router) {
         http.configure(config => {
             config
                 .useStandardConfiguration()
@@ -17,7 +16,6 @@ export class NewCard {
 
         this.http = http;
         this.router = router;
-        this.validation = validation;
         this.project = this.CreateNewProject();
     }
 
@@ -37,7 +35,7 @@ export class NewCard {
             description: "",
             "like-count": 0,
             "team-count": 0
-        }, this.validation);
+        });
     }
 
     attached() {

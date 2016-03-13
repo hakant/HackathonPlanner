@@ -1,12 +1,14 @@
 import {computedFrom} from 'aurelia-framework';
+import {Container} from 'aurelia-dependency-injection';
 import {ensure} from 'aurelia-validation';
+import {Validation} from 'aurelia-validation';
 
 
 export class Project {
   @ensure(function(it) { it.isNotEmpty() })
   _title = null;
 
-  constructor(data, validation) {
+  constructor(data) {
     this._id = data.id;
     this._user = data.user;
     this._title = data.title;
@@ -18,9 +20,9 @@ export class Project {
     this._likeCount = data["like-count"];
     this._teamCount = data["team-count"];
     
-    if (validation){
-        this.validation = validation.on(this);
-    }
+    // TODO: Taking a direct dependency on the Container. Find an alternative.
+    let validation = Container.instance.get(Validation);
+    this.validation = validation.on(this);
 
     this._data = data;
   }
