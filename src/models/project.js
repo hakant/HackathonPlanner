@@ -7,6 +7,8 @@ import {Validation} from 'aurelia-validation';
 export class Project {
   @ensure(function(it) { it.isNotEmpty() })
   _title = null;
+  @ensure(function(it) { it.isNotEmpty() })
+  _overview = null;
 
   constructor(data) {
     this._id = data.id;

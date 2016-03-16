@@ -127,6 +127,17 @@ export class IdeaCardDetail {
     }
 
     SaveTitle() {
+        this.project.validation.validate()
+            .then(() => {
+                this.DoSaveTitle();
+            }).catch(error => {
+                if(error.properties._title.IsValid){
+                    this.DoSaveTitle();
+                }
+            });
+    }
+    
+    DoSaveTitle(){
         this._lastProjectTitle = this.project._title;
         this._titleEditEnabled = false;
     }
@@ -137,6 +148,17 @@ export class IdeaCardDetail {
     }
     
     SaveOverview() {
+        this.project.validation.validate()
+            .then(() => {
+                this.DoSaveOverview();
+            }).catch(error => {
+                if(error.properties._overview.IsValid){
+                    this.DoSaveOverview();
+                }
+            });
+    }
+    
+    DoSaveOverview(){
         this._lastProjectOverview = this.project._overview;
         this._overviewEditEnabled = false;
     }

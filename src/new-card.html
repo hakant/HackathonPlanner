@@ -16,7 +16,7 @@
                 <input placeholder="Title" class="card-title form-control" type="text" value.bind="project._title" validate="_title" />
             </div>
             <div class="form-group">
-                <textarea placeholder="Overview" class="form-control card-overview" type="text" value.bind="project._overview"></textarea>
+                <textarea placeholder="Overview" class="form-control card-overview" type="text" value.bind="project._overview" validate="_overview"></textarea>
                 <div>
                     <button class="btn btn-success" click.trigger="Save()">Save</button>
                     <button class="btn btn-cancel" click.trigger="Cancel()">

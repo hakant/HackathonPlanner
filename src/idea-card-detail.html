@@ -6,7 +6,7 @@
   <div id="card-detail" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-lg" role="document">
       <div class="modal-content">
-        <div id="card-detail-${project._id}" class="card details">
+        <div id="card-detail-${project._id}" class="card details" validate.bind="project.validation">
           <canvas class="header-bg" width="250" height="100" blur-image.bind="image"></canvas>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
           <div class="avatar">
@@ -15,7 +15,9 @@
           </div>
           <div class="card-block" data-toggle="modal">
             <h2 if.bind="!TitleEditEnabled" class="card-title" click.delegate="EnableTitleEdit($event)">${project._title}</h2>
-            <input class="card-title form-control" if.bind="TitleEditEnabled" type="text" value.bind="project._title" />
+            <div class="form-group">
+                <input class="card-title form-control" show.bind="TitleEditEnabled" type="text" value.bind="project._title" validate="_title" />
+            </div>
             <div>
                 <button show.bind="TitleEditEnabled" class="btn btn-success" click.trigger="SaveTitle()">Save</button>
                 <button show.bind="TitleEditEnabled" class="btn btn-cancel" click.trigger="CancelTitle()">
@@ -23,7 +25,9 @@
                 </button>
             </div>
             <div if.bind="!OverviewEditEnabled" class="card-overview" click.delegate="EnableOverviewEdit($event)">${project._overview}</div>
-            <textarea class="card-overview form-control" if.bind="OverviewEditEnabled" type="text" value.bind="project._overview"></textarea>
+            <div class="form-group">
+                <textarea class="card-overview form-control" show.bind="OverviewEditEnabled" type="text" value.bind="project._overview" validate="_overview"></textarea>
+            </div>
             <div>
                 <button show.bind="OverviewEditEnabled" class="btn btn-success" click.trigger="SaveOverview()">Save</button>
                 <button show.bind="OverviewEditEnabled" class="btn btn-cancel" click.trigger="CancelOverview()">
