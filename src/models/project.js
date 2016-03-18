@@ -5,9 +5,9 @@ import {Validation} from 'aurelia-validation';
 
 
 export class Project {
-  @ensure(function(it) { it.isNotEmpty() })
+  @ensure(function(it) { it.isNotEmpty().hasLengthBetween(3,100) })
   _title = null;
-  @ensure(function(it) { it.isNotEmpty() })
+  @ensure(function(it) { it.isNotEmpty().hasLengthBetween(5,300) })
   _overview = null;
 
   constructor(data) {
