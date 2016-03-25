@@ -1,13 +1,15 @@
 import {inject} from "aurelia-framework";
 import {bindable} from "aurelia-framework";
 import {Router} from 'aurelia-router';
+import {ApplicationState} from './infrastructure/application-state';
 
-@inject(Router)
+@inject(Router, ApplicationState)
 export class IdeaCard {
     @bindable project = null;
 
-    constructor(router) {
+    constructor(router, state) {
         this.router = router;
+        this.state = state;
     }
 
     goToCardDetails(event) {
@@ -17,31 +19,37 @@ export class IdeaCard {
     like(event) {
         let projectId = this.project._id;
 
-        for (let item of window._projects) {
-            if (item._id == projectId) {
-                item.liked = !item.liked;
-            }
-        }
+        this.state.getProjects()
+            .then(projects => {
+                for (let item of projects) {
+                    if (item._id == projectId) {
+                        item.liked = !item.liked;
+                    }
+                }
+            })
     }
 
     join(event) {
         let projectId = this.project._id;
 
-        for (let item of window._projects) {
-            if (item.joined) {
-                item.joined = false;
+        this.state.getProjects()
+            .then(projects => {
+                for (let item of projects) {
+                    if (item.joined) {
+                        item.joined = false;
 
-                if (item._id == projectId)
-                    return;
-            }
+                        if (item._id == projectId)
+                            return;
+                    }
 
-            if (item._id == projectId) {
-                if (item.joined) {
-                    item.joined = false;
-                } else {
-                    item.joined = true;
+                    if (item._id == projectId) {
+                        if (item.joined) {
+                            item.joined = false;
+                        } else {
+                            item.joined = true;
+                        }
+                    }
                 }
-            }
-        }
+            })
     }
 }

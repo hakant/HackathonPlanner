@@ -4,8 +4,9 @@ import {HttpClient} from 'aurelia-fetch-client';
 import {inject} from 'aurelia-framework';
 import {Project} from './models/project';
 import {Router} from 'aurelia-router';
+import {ApplicationState} from './infrastructure/application-state';
 
-@inject(HttpClient, Router)
+@inject(HttpClient, Router, ApplicationState)
 export class IdeaCardDetail {
     _titleEditEnabled = false;
     _overviewEditEnabled = false;
@@ -15,7 +16,7 @@ export class IdeaCardDetail {
     _lastProjectDescription = null;
     project = null;
 
-    constructor(http, router) {
+    constructor(http, router, state) {
         http.configure(config => {
             config
                 .useStandardConfiguration()
@@ -24,23 +25,27 @@ export class IdeaCardDetail {
 
         this.http = http;
         this.router = router;
+        this.state = state;
     }
 
     activate(params) {
-        for (let item of window._projects) {
-            if (item._id == params.id) {
-                this.project = item;
-                this._lastProjectTitle = this.project._title;
-                this._lastProjectOverview = this.project._overview;
-                this._lastProjectDescription = this.project._description;
-            }
-        }
+        this.state.getProjects()
+            .then(projects => {
+                for (let item of projects) {
+                    if (item._id == params.id) {
+                        this.project = item;
+                        this._lastProjectTitle = this.project._title;
+                        this._lastProjectOverview = this.project._overview;
+                        this._lastProjectDescription = this.project._description;
+                    }
+                }
+            });
     }
 
     attached() {
         var myRouter = this.router;
         $("#card-detail").modal('show');
-        $('#card-detail').on('hidden.bs.modal', function () {
+        $('#card-detail').on('hidden.bs.modal', function() {
             myRouter.navigateToRoute('overview');
         });
     }
@@ -49,7 +54,7 @@ export class IdeaCardDetail {
     get TitleEditEnabled() {
         return this._titleEditEnabled;
     }
-    
+
     @computedFrom('_overviewEditEnabled')
     get OverviewEditEnabled() {
         return this._overviewEditEnabled;
@@ -71,7 +76,7 @@ export class IdeaCardDetail {
         $(selector).on('mouseup mousemove', function handler(evt) {
             if (evt.type === 'mouseup') {
                 me._titleEditEnabled = true;
-                setTimeout(function () {
+                setTimeout(function() {
                     $("input.card-title").select();
                 }, 0);
             } else {
@@ -80,14 +85,14 @@ export class IdeaCardDetail {
             $(selector).off('mouseup mousemove', handler);
         });
     }
-    
+
     EnableOverviewEdit(event) {
         var me = this;
         var selector = "div.card-overview"
         $(selector).on('mouseup mousemove', function handler(evt) {
             if (evt.type === 'mouseup') {
                 me._overviewEditEnabled = true;
-                setTimeout(function () {
+                setTimeout(function() {
                     $("textarea.card-overview").select();
                 }, 0);
             } else {
@@ -117,7 +122,7 @@ export class IdeaCardDetail {
         this._descrEditEnabled = true;
 
         var selector = `text-${this.project._id}`;
-        setTimeout(function () {
+        setTimeout(function() {
             let element = document.getElementById(selector);
             element.style.height = "0px";
             element.style.height = (element.scrollHeight) + "px";
@@ -131,13 +136,13 @@ export class IdeaCardDetail {
             .then(() => {
                 this.DoSaveTitle();
             }).catch(error => {
-                if(error.properties._title.IsValid){
+                if (error.properties._title.IsValid) {
                     this.DoSaveTitle();
                 }
             });
     }
-    
-    DoSaveTitle(){
+
+    DoSaveTitle() {
         this._lastProjectTitle = this.project._title;
         this._titleEditEnabled = false;
     }
@@ -146,19 +151,19 @@ export class IdeaCardDetail {
         this.project._title = this._lastProjectTitle;
         this._titleEditEnabled = false;
     }
-    
+
     SaveOverview() {
         this.project.validation.validate()
             .then(() => {
                 this.DoSaveOverview();
             }).catch(error => {
-                if(error.properties._overview.IsValid){
+                if (error.properties._overview.IsValid) {
                     this.DoSaveOverview();
                 }
             });
     }
-    
-    DoSaveOverview(){
+
+    DoSaveOverview() {
         this._lastProjectOverview = this.project._overview;
         this._overviewEditEnabled = false;
     }

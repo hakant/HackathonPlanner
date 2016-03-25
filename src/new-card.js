@@ -58,11 +58,12 @@ export class NewCard {
     }
 
     Save() {
+        let me = this;
         this.project.validation.validate()
             .then(() => {
                 $("#new-card").modal('hide');
-                //this.state.addProject(this.project);
-                this.router.navigateToRoute('overview');
+                me.state.addOrUpdateProject(me.project);
+                me.router.navigateToRoute('overview');
             }).catch(error => {
 
             });

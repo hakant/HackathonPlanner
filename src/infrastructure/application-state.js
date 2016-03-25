@@ -21,29 +21,48 @@ export class ApplicationState {
 
         this.http = http;
     }
-    
-    getProjects(){
+
+    getProjects() {
         var me = this;
-        return new Promise(function(resolve, reject){
+        return new Promise(function(resolve, reject) {
             if (!me._projects) {
-                me.getProjectsFromServerOrStorage.call(me, resolve);   
-            } else{
-                resolve(me._projects);   
+                me.getProjectsFromServerOrStorage.call(me, resolve);
+            } else {
+                resolve(me._projects);
             }
         })
     }
-    
-    // addProject(project){
-    //     let projects = this.projectsJson;
-    //     projects.push(project);
-    //     this._projects = this.convertToProjectModels(JSON.parse(projectsInLocalStorage));
-    // }
-    
-    get projectsJson(){
+
+    addOrUpdateProject(project) {
+        // TODO: Find the project and update it
+        let projects = this.projectsJson;
+        projects.push(
+            {
+                id: project._id,
+                user: {
+                    login: project._user.login,
+                    id: project._user.id,
+                    avatar_url: project._user.avatar_url,
+                    name: project._user.name
+                },
+                title: project._title,
+                liked: project.liked,
+                joined: project.joined,
+                overview: project._overview,
+                description: project._description,
+                "like-count": project.likeCount,
+                "team-count": project.teamCount
+            }
+        );
+        this._projects = this.convertToProjectModels(projects);
+        localStorage[this._token] = JSON.stringify(projects);
+    }
+
+    get projectsJson() {
         return this._projectsJson;
     }
-    
-    set projectsJson(value){
+
+    set projectsJson(value) {
         localStorage[this._token] = JSON.stringify(value);
         this._projectsJson = value;
     }
@@ -51,7 +70,8 @@ export class ApplicationState {
     getProjectsFromServerOrStorage(callback) {
         let projectsInLocalStorage = localStorage[this._token];
         if (projectsInLocalStorage) {
-            this._projects = this.convertToProjectModels(JSON.parse(projectsInLocalStorage));
+            this.projectsJson = JSON.parse(projectsInLocalStorage);
+            this._projects = this.convertToProjectModels(this.projectsJson);
             callback(this._projects);
         } else {
             let me = this;
@@ -61,7 +81,7 @@ export class ApplicationState {
                     me.projectsJson = projects;
                     me._projects = me.convertToProjectModels(
                         me._projectsJson
-                        );
+                    );
                     callback(me._projects);
                 });
         }
@@ -72,7 +92,7 @@ export class ApplicationState {
         for (let item of json) {
             items.push(new Project(item));
         }
-        
+
         return items;
     }
 }
