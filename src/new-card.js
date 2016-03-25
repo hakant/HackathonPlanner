@@ -3,11 +3,13 @@ import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import {Project} from './models/project';
 import {Router} from "aurelia-router";
+import {AuthService} from './infrastructure/auth-service';
+import {ApplicationState} from './infrastructure/application-state';
 import 'fetch';
 
-@inject(HttpClient, Router)
+@inject(HttpClient, Router, AuthService, ApplicationState)
 export class NewCard {
-    constructor(http, router) {
+    constructor(http, router, auth, state) {
         http.configure(config => {
             config
                 .useStandardConfiguration()
@@ -16,26 +18,33 @@ export class NewCard {
 
         this.http = http;
         this.router = router;
-        this.project = this.CreateNewProject();
+        this.auth = auth;
+        this.state = state;
+        
+        this.CreateNewProject();
     }
 
     CreateNewProject() {
-        return new Project({
-            id: Math.floor(Math.random() * 10000) + 1,
-            user: {
-                login: "hakant",
-                id: 1907367,
-                avatar_url: "https://avatars.githubusercontent.com/u/1907367?v=3",
-                name: "Hakan Tuncer"
-            },
-            title: "",
-            liked: false,
-            joined: false,
-            overview: "",
-            description: "",
-            "like-count": 0,
-            "team-count": 0
-        });
+        this.http.fetch(`https://api.github.com/users/${this.auth.Username}`)
+            .then(response => response.json())
+            .then(gitHubUser => {
+                this.project = new Project({
+                    id: Math.floor(Math.random() * 10000) + 1,
+                    user: {
+                        login: gitHubUser.login,
+                        id: gitHubUser.id,
+                        avatar_url: gitHubUser.avatar_url,
+                        name: gitHubUser.name
+                    },
+                    title: "",
+                    liked: false,
+                    joined: false,
+                    overview: "",
+                    description: "",
+                    "like-count": 0,
+                    "team-count": 0
+                });
+            });
     }
 
     attached() {
@@ -52,10 +61,10 @@ export class NewCard {
         this.project.validation.validate()
             .then(() => {
                 $("#new-card").modal('hide');
-                window._projects.push(this.project);
+                //this.state.addProject(this.project);
                 this.router.navigateToRoute('overview');
             }).catch(error => {
-                
+
             });
     }
 

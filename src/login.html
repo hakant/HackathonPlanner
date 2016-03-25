@@ -1,0 +1,14 @@
+<template>
+    <require from="./nav-bar"></require>
+    <require from="bootstrap/css/bootstrap.css"></require>
+
+    <nav-bar router.bind="router"></nav-bar>
+    <div class="page-host">
+        <div class="form-group">
+            <input placeholder="Please type your GitHub Username" 
+                class="form-control" type="text" value.bind="_username" />
+            <button class="btn btn-success" click.trigger="Login()">Sign In</button>
+        </div>
+    </div>
+
+</template>

@@ -1,24 +1,29 @@
 import 'bootstrap';
 import {ValidationConfig} from 'aurelia-validation';
+import {AuthService} from './infrastructure/auth-service';
 import {TWBootstrapViewStrategy} from 'aurelia-validation';
 import {inject} from 'aurelia-framework';
 
 export function configure(aurelia) {
-  aurelia.use
-    .standardConfiguration()
-    .developmentLogging()
-    .plugin('aurelia-validation');
+    aurelia.use
+        .standardConfiguration()
+        .developmentLogging()
+        .plugin('aurelia-validation');
     // .plugin('aurelia-validation', 
     //     (config) => { config.useViewStrategy(TWBootstrapViewStrategy.AppendToInput); }
     //     );
 
-  //Uncomment the line below to enable animation.
-  //aurelia.use.plugin('aurelia-animator-css');
-  //if the css animator is enabled, add swap-order="after" to all router-view elements
+    //Uncomment the line below to enable animation.
+    //aurelia.use.plugin('aurelia-animator-css');
+    //if the css animator is enabled, add swap-order="after" to all router-view elements
 
-  //Anyone wanting to use HTMLImports to load views, will need to install the following plugin.
-  //aurelia.use.plugin('aurelia-html-import-template-loader')
+    //Anyone wanting to use HTMLImports to load views, will need to install the following plugin.
+    //aurelia.use.plugin('aurelia-html-import-template-loader')
 
-  //aurelia.start().then(a => a.setRoot());
-  aurelia.start().then(a => a.setRoot('app', document.body));
+    //aurelia.start().then(a => a.setRoot());
+    aurelia.start().then(() => {
+        var auth = aurelia.container.get(AuthService);
+        let root = auth.isAuthenticated() ? 'app' : 'login';
+        aurelia.setRoot(root);
+    });
 }

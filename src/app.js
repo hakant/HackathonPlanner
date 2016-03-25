@@ -1,29 +1,4 @@
-import {inject} from 'aurelia-framework';
-import {HttpClient} from 'aurelia-fetch-client';
-import {Project} from './models/project';
-import 'fetch';
-
-@inject(HttpClient)
 export class App {
-    constructor(http) {
-        http.configure(config => {
-            config
-                .useStandardConfiguration()
-                .withBaseUrl('/');
-        });
-
-        this.http = http;
-
-        this.http.fetch('dist/data/data.json')
-            .then(response => response.json())
-            .then(projects => {
-                let items = [];
-                for (let item of projects) {
-                    items.push(new Project(item));
-                }
-                window._projects = items;
-            });
-    }
 
     configureRouter(config, router) {
         config.title = 'Hackathon Planner';

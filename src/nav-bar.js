@@ -1,10 +1,12 @@
 import {Router} from "aurelia-router";
 import {inject} from 'aurelia-framework';
+import {AuthService} from './infrastructure/auth-service'; 
 
-@inject(Router)
+@inject(Router, AuthService)
 export class NavBar {
-    constructor(router) {
+    constructor(router, auth) {
         this.router = router;
+        this.auth = auth;
     }
 
     NewCard() {
