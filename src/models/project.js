@@ -5,69 +5,88 @@ import {Validation} from 'aurelia-validation';
 
 
 export class Project {
-  @ensure(function(it) { it.isNotEmpty().hasLengthBetween(3,100) })
-  _title = null;
-  @ensure(function(it) { it.isNotEmpty().hasLengthBetween(5,300) })
-  _overview = null;
+    @ensure(function(it) { it.isNotEmpty().hasLengthBetween(3, 100) })
+    _title = null;
+    @ensure(function(it) { it.isNotEmpty().hasLengthBetween(5, 300) })
+    _overview = null;
 
-  constructor(data) {
-    this._id = data.id;
-    this._user = data.user;
-    this._title = data.title;
-    this._overview = data.overview;
-    this._description = data.description;
-    this._labels = data.labels;
-    this._liked = data.liked;
-    this._joined = data.joined;
-    this._likeCount = data["like-count"];
-    this._teamCount = data["team-count"];
-    
-    // TODO: Taking a direct dependency on the Container. Find an alternative.
-    let validation = Container.instance.get(Validation);
-    this.validation = validation.on(this);
+    constructor(data) {
+        this._id = data.id;
+        this._user = data.user;
+        this._title = data.title;
+        this._overview = data.overview;
+        this._description = data.description;
+        this._labels = data.labels;
+        this._liked = data.liked;
+        this._joined = data.joined;
+        this._likeCount = data["like-count"];
+        this._teamCount = data["team-count"];
 
-    this._data = data;
-  }
+        // TODO: Taking a direct dependency on the Container. Find an alternative.
+        let validation = Container.instance.get(Validation);
+        this.validation = validation.on(this);
 
-  @computedFrom('_likeCount')
-  get likeCount(){
-    return this._likeCount;
-  }
-
-  @computedFrom('_liked')
-  get liked(){
-    return this._liked;
-  }
-
-  @computedFrom('_teamCount')
-  get teamCount(){
-    return this._teamCount;
-  }
-
-  @computedFrom('_joined')
-  get joined(){
-    return this._joined;
-  }
-
-  @computedFrom('_liked')
-  set liked(value){
-    this._liked = value;
-
-    if (this._liked)
-      this._likeCount++;
-    else{
-      this._likeCount--;
+        this._data = data;
     }
-  }
 
-  @computedFrom('_joined')
-  set joined(value){
-    this._joined = value;
-
-    if (this._joined)
-      this._teamCount++;
-    else{
-      this._teamCount--;
+    @computedFrom('_likeCount')
+    get likeCount() {
+        return this._likeCount;
     }
-  }
+
+    @computedFrom('_liked')
+    get liked() {
+        return this._liked;
+    }
+
+    @computedFrom('_teamCount')
+    get teamCount() {
+        return this._teamCount;
+    }
+
+    @computedFrom('_joined')
+    get joined() {
+        return this._joined;
+    }
+
+    @computedFrom('_liked')
+    set liked(value) {
+        this._liked = value;
+
+        if (this._liked)
+            this._likeCount++;
+        else {
+            this._likeCount--;
+        }
+    }
+
+    @computedFrom('_joined')
+    set joined(value) {
+        this._joined = value;
+
+        if (this._joined)
+            this._teamCount++;
+        else {
+            this._teamCount--;
+        }
+    }
+
+    convertToSimpleModel() {
+        return {
+            id: this._id,
+            user: {
+                login: this._user.login,
+                id: this._user.id,
+                avatar_url: this._user.avatar_url,
+                name: this._user.name
+            },
+            title: this._title,
+            liked: this.liked,
+            joined: this.joined,
+            overview: this._overview,
+            description: this._description,
+            "like-count": this.likeCount,
+            "team-count": this.teamCount
+        };
+    }
 }

@@ -37,22 +37,7 @@ export class ApplicationState {
         // TODO: Find the project and update it
         let projects = this.projectsJson;
         projects.push(
-            {
-                id: project._id,
-                user: {
-                    login: project._user.login,
-                    id: project._user.id,
-                    avatar_url: project._user.avatar_url,
-                    name: project._user.name
-                },
-                title: project._title,
-                liked: project.liked,
-                joined: project.joined,
-                overview: project._overview,
-                description: project._description,
-                "like-count": project.likeCount,
-                "team-count": project.teamCount
-            }
+            project.convertToSimpleModel()
         );
         this._projects = this.convertToProjectModels(projects);
         localStorage[this._token] = JSON.stringify(projects);
