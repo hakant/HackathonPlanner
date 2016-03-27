@@ -5,6 +5,7 @@ import {inject} from 'aurelia-framework';
 import {Project} from './models/project';
 import {Router} from 'aurelia-router';
 import {ApplicationState} from './infrastructure/application-state';
+import {_} from 'lodash';
 
 @inject(HttpClient, Router, ApplicationState)
 export class IdeaCardDetail {
@@ -31,14 +32,11 @@ export class IdeaCardDetail {
     activate(params) {
         this.state.getProjects()
             .then(projects => {
-                for (let item of projects) {
-                    if (item._id == params.id) {
-                        this.project = item;
-                        this._lastProjectTitle = this.project._title;
-                        this._lastProjectOverview = this.project._overview;
-                        this._lastProjectDescription = this.project._description;
-                    }
-                }
+                this.project = _.find(projects, { _id: parseInt(params.id) })
+                
+                this._lastProjectTitle = this.project._title;
+                this._lastProjectOverview = this.project._overview;
+                this._lastProjectDescription = this.project._description;
             });
     }
 

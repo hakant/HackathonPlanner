@@ -2,6 +2,7 @@ import {inject} from "aurelia-framework";
 import {bindable} from "aurelia-framework";
 import {Router} from 'aurelia-router';
 import {ApplicationState} from './infrastructure/application-state';
+import {_} from 'lodash';
 
 @inject(Router, ApplicationState)
 export class IdeaCard {
@@ -19,14 +20,13 @@ export class IdeaCard {
     like(event) {
         let projectId = this.project._id;
         let state = this.state;
-        
+
         this.state.getProjects()
             .then(projects => {
-                for (let item of projects) {
-                    if (item._id == projectId) {
-                        item.liked = !item.liked;
-                        state.addOrUpdateProject(item);
-                    }
+                let item = _.find(projects, { _id: projectId });
+                if (item) {
+                    item.liked = !item.liked;
+                    state.addOrUpdateProject(item);
                 }
             })
     }

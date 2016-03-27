@@ -45,7 +45,7 @@ export class ApplicationState {
             );
             this._projects = this.convertToProjectModels(projects);
         }
-        
+
         localStorage[this._token] = JSON.stringify(projects);
     }
 
@@ -54,8 +54,8 @@ export class ApplicationState {
     }
 
     set projectsJson(value) {
-        localStorage[this._token] = JSON.stringify(value);
         this._projectsJson = value;
+        localStorage[this._token] = JSON.stringify(value);
     }
 
     getProjectsFromServerOrStorage(callback) {
