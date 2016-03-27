@@ -135,6 +135,7 @@ export class IdeaCardDetail {
         this.project.validation.validate()
             .then(() => {
                 this.DoSaveTitle();
+                this.state.addOrUpdateProject(this.project);
             }).catch(error => {
                 if (error.properties._title.IsValid) {
                     this.DoSaveTitle();
@@ -156,6 +157,7 @@ export class IdeaCardDetail {
         this.project.validation.validate()
             .then(() => {
                 this.DoSaveOverview();
+                this.state.addOrUpdateProject(this.project);
             }).catch(error => {
                 if (error.properties._overview.IsValid) {
                     this.DoSaveOverview();
@@ -176,6 +178,7 @@ export class IdeaCardDetail {
     SaveDescription() {
         this._lastProjectDescription = this.project._description;
         this._descrEditEnabled = false;
+        this.state.addOrUpdateProject(this.project);
     }
 
     CancelDescription() {
@@ -190,16 +193,29 @@ export class IdeaCardDetail {
 
     Like() {
         this.project.liked = !this.project.liked;
+        this.state.addOrUpdateProject(this.project);
     }
 
     Join() {
-        if (this.project.joined) {
-            this.project.joined = false;
-            // now unjoin from this through the API
-        } else {
-            // unjoin from whatever you're joined already through the API
-            // and join to this
-            this.project.joined = true;
-        }
+        let projectId = this.project._id;
+        let state = this.state;
+
+        this.state.getProjects()
+            .then(projects => {
+                for (let item of projects) {
+                    if (item.joined) {
+                        item.joined = false;
+                        state.addOrUpdateProject(item);
+
+                        if (item._id == projectId)
+                            return;
+                    }
+
+                    if (item._id == projectId) {
+                        item.joined = !item.joined;
+                        state.addOrUpdateProject(item);
+                    }
+                }
+            })
     }
 }

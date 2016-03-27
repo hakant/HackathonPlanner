@@ -18,12 +18,14 @@ export class IdeaCard {
 
     like(event) {
         let projectId = this.project._id;
-
+        let state = this.state;
+        
         this.state.getProjects()
             .then(projects => {
                 for (let item of projects) {
                     if (item._id == projectId) {
                         item.liked = !item.liked;
+                        state.addOrUpdateProject(item);
                     }
                 }
             })
@@ -31,23 +33,22 @@ export class IdeaCard {
 
     join(event) {
         let projectId = this.project._id;
+        let state = this.state;
 
         this.state.getProjects()
             .then(projects => {
                 for (let item of projects) {
                     if (item.joined) {
                         item.joined = false;
+                        state.addOrUpdateProject(item);
 
                         if (item._id == projectId)
                             return;
                     }
 
                     if (item._id == projectId) {
-                        if (item.joined) {
-                            item.joined = false;
-                        } else {
-                            item.joined = true;
-                        }
+                        item.joined = !item.joined;
+                        state.addOrUpdateProject(item);
                     }
                 }
             })

@@ -2,6 +2,7 @@ import {AuthService} from './auth-service';
 import {HttpClient} from 'aurelia-fetch-client';
 import {Project} from '../models/project';
 import {inject} from 'aurelia-framework';
+import {_} from "lodash";
 import 'fetch';
 
 @inject(AuthService, HttpClient)
@@ -34,12 +35,17 @@ export class ApplicationState {
     }
 
     addOrUpdateProject(project) {
-        // TODO: Find the project and update it
         let projects = this.projectsJson;
-        projects.push(
-            project.convertToSimpleModel()
-        );
-        this._projects = this.convertToProjectModels(projects);
+        let index = _.findIndex(projects, { 'id': project._id });
+        if (index > -1) {
+            projects.splice(index, 1, project.convertToSimpleModel());
+        } else {
+            projects.push(
+                project.convertToSimpleModel()
+            );
+            this._projects = this.convertToProjectModels(projects);
+        }
+        
         localStorage[this._token] = JSON.stringify(projects);
     }
 
