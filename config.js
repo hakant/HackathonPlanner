@@ -33,6 +33,7 @@ System.config({
     "fetch": "github:github/fetch@0.10.1",
     "font-awesome": "npm:font-awesome@4.5.0",
     "gooy/aurelia-markdown": "github:gooy/aurelia-markdown@0.0.3",
+    "lipis/bootstrap-social": "github:lipis/bootstrap-social@4.12.0",
     "lodash": "npm:lodash@4.6.1",
     "showdown": "github:showdownjs/showdown@1.3.0",
     "text": "github:systemjs/plugin-text@0.0.3",

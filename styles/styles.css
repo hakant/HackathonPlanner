@@ -76,8 +76,17 @@ div.au-stagger {
   animation-delay: 50ms;
 }
 
+#login-modal{
+    text-align: center;
+}
 
+#login-modal section{
+    margin-bottom: 30px;
+}
 
+#login-modal .message{
+    font-size: 2em;
+}
 
 nav {
   background-color: #EFEFEF;

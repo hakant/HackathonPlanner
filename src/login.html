@@ -2,13 +2,47 @@
     <require from="./nav-bar"></require>
     <require from="bootstrap/css/bootstrap.css"></require>
 
-    <nav-bar router.bind="router"></nav-bar>
     <div class="page-host">
-        <div class="form-group">
-            <input placeholder="Please type your GitHub Username" 
-                class="form-control" type="text" value.bind="_username" />
-            <button class="btn btn-success" click.trigger="Login()">Sign In</button>
+        <div id="login-modal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-md" role="document">
+                <div class="modal-content">
+                    <div>
+                        <div class="card-block" data-toggle="modal">
+                            <section class="login-logo">
+                                <img class="logo img-circle" src="/logo.png" width="120px" alt="Hackathon Planner">
+                            </section>
+                            <section class="message">Welcome to Hackathon Planner</section>
+                            <section if.bind="!SignInClicked">
+                                <a class="btn btn-block btn-social btn-lg btn-github" click.trigger="SignIn()">
+                                    <i class="fa fa-github"></i>Sign in with GitHub
+                                </a>
+                            </section>
+                            <section if.bind="SignInClicked">
+                                <section>
+                                    <div class="alert alert-info" role="alert">
+                                        <strong>Heads up!</strong>
+                                        <br>
+                                        This is a high-fidelity prototype of the Hackathon Planner. The client-side is real, but
+                                        there's no back-end. Everything you do will be saved in your browser's local storage and
+                                        nowhere else!
+                                        <br><br>
+                                        So just be who you wanna be on GitHub. Just type your or someone else's GitHub username 
+                                        and we'll pretend that you've signed in as that user.
+                                    </div>
+                                </section>
+                                <section class="form-content">
+                                    <input placeholder="Please type your GitHub Username" class="form-control" type="text" value.bind="_username" />
+                                </section>
+                                <section class="form-content">
+                                    <button class="btn btn-success" click.trigger="Login()">Sign In</button>
+                                </section>
+                            </section>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
+    </div>
     </div>
 
 </template>

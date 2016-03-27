@@ -33,7 +33,7 @@ export class IdeaCardDetail {
         this.state.getProjects()
             .then(projects => {
                 this.project = _.find(projects, { _id: parseInt(params.id) })
-                
+
                 this._lastProjectTitle = this.project._title;
                 this._lastProjectOverview = this.project._overview;
                 this._lastProjectDescription = this.project._description;
