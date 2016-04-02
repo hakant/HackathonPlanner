@@ -3,6 +3,7 @@ import {ValidationConfig} from 'aurelia-validation';
 import {AuthService} from './infrastructure/auth-service';
 import {TWBootstrapViewStrategy} from 'aurelia-validation';
 import {inject} from 'aurelia-framework';
+import 'fetch';
 
 export function configure(aurelia) {
     aurelia.use
