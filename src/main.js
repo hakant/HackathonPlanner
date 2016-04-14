@@ -1,6 +1,6 @@
 import 'bootstrap';
 import {ValidationConfig} from 'aurelia-validation';
-import {AuthService} from './infrastructure/auth-service';
+import {AuthService} from './services/auth-service';
 import {TWBootstrapViewStrategy} from 'aurelia-validation';
 import {inject} from 'aurelia-framework';
 import 'fetch';

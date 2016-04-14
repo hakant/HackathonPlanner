@@ -1,6 +1,6 @@
 import {inject} from 'aurelia-framework';
 import {computedFrom} from 'aurelia-framework';
-import {AuthService} from './infrastructure/auth-service';
+import {AuthService} from './services/auth-service';
 import {ensure} from 'aurelia-validation';
 import {Validation} from 'aurelia-validation';
 import {Router} from "aurelia-router";

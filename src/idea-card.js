@@ -1,16 +1,16 @@
 import {inject} from "aurelia-framework";
 import {bindable} from "aurelia-framework";
 import {Router} from 'aurelia-router';
-import {ApplicationState} from './infrastructure/application-state';
+import {ProjectService} from './services/project-service';
 import {_} from 'lodash';
 
-@inject(Router, ApplicationState)
+@inject(Router, ProjectService)
 export class IdeaCard {
     @bindable project = null;
 
-    constructor(router, state) {
+    constructor(router, projectService) {
         this.router = router;
-        this.state = state;
+        this.projectService = projectService;
     }
 
     goToCardDetails(event) {
@@ -19,28 +19,28 @@ export class IdeaCard {
 
     like(event) {
         let projectId = this.project._id;
-        let state = this.state;
+        let projectService = this.projectService;
 
-        this.state.getProjects()
+        this.projectService.getProjects()
             .then(projects => {
                 let item = _.find(projects, { _id: projectId });
                 if (item) {
                     item.liked = !item.liked;
-                    state.addOrUpdateProject(item);
+                    projectService.addOrUpdateProject(item);
                 }
             })
     }
 
     join(event) {
         let projectId = this.project._id;
-        let state = this.state;
+        let projectService = this.projectService;
 
-        this.state.getProjects()
+        this.projectService.getProjects()
             .then(projects => {
                 for (let item of projects) {
                     if (item.joined) {
                         item.joined = false;
-                        state.addOrUpdateProject(item);
+                        projectService.addOrUpdateProject(item);
 
                         if (item._id == projectId)
                             return;
@@ -48,7 +48,7 @@ export class IdeaCard {
 
                     if (item._id == projectId) {
                         item.joined = !item.joined;
-                        state.addOrUpdateProject(item);
+                        projectService.addOrUpdateProject(item);
                     }
                 }
             })

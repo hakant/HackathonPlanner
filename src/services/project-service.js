@@ -1,19 +1,16 @@
-import {AuthService} from './auth-service';
 import {HttpClient} from 'aurelia-fetch-client';
 import {Project} from '../models/project';
 import {inject} from 'aurelia-framework';
 import {_} from "lodash";
 import 'fetch';
 
-@inject(AuthService, HttpClient)
-export class ApplicationState {
+@inject(HttpClient)
+export class ProjectService {
     _projects;
     _projectsJson;
     _token = "HackathonPlanner_Projects";
 
-    constructor(auth, http) {
-        this.authService = auth;
-
+    constructor(http) {
         http.configure(config => {
             config
                 .useStandardConfiguration()

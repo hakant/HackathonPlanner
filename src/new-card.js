@@ -3,13 +3,13 @@ import {inject} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import {Project} from './models/project';
 import {Router} from "aurelia-router";
-import {AuthService} from './infrastructure/auth-service';
-import {ApplicationState} from './infrastructure/application-state';
+import {AuthService} from './services/auth-service';
+import {ProjectService} from './services/project-service';
 import 'fetch';
 
-@inject(HttpClient, Router, AuthService, ApplicationState)
+@inject(HttpClient, Router, AuthService, ProjectService)
 export class NewCard {
-    constructor(http, router, auth, state) {
+    constructor(http, router, auth, projectService) {
         http.configure(config => {
             config
                 .useStandardConfiguration()
@@ -19,7 +19,7 @@ export class NewCard {
         this.http = http;
         this.router = router;
         this.auth = auth;
-        this.state = state;
+        this.projectService = projectService;
         
         this.CreateNewProject();
     }
@@ -62,7 +62,7 @@ export class NewCard {
         this.project.validation.validate()
             .then(() => {
                 $("#new-card").modal('hide');
-                me.state.addOrUpdateProject(me.project);
+                me.projectService.addOrUpdateProject(me.project);
                 me.router.navigateToRoute('overview');
             }).catch(error => {
 

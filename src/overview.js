@@ -1,15 +1,15 @@
 import {inject} from 'aurelia-framework';
 import {computedFrom} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
-import {ApplicationState} from './infrastructure/application-state';
+import {ProjectService} from './services/project-service';
 
 import 'fetch';
 
-@inject(HttpClient, ApplicationState)
+@inject(HttpClient, ProjectService)
 export class Overview {
     _projects = [];
 
-    constructor(http, state) {
+    constructor(http, projectService) {
         http.configure(config => {
             config
                 .useStandardConfiguration()
@@ -18,7 +18,7 @@ export class Overview {
 
         this.http = http;
 
-        state.getProjects()
+        projectService.getProjects()
             .then(p => this._projects = p);
     }
 

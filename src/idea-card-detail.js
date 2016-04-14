@@ -4,10 +4,10 @@ import {HttpClient} from 'aurelia-fetch-client';
 import {inject} from 'aurelia-framework';
 import {Project} from './models/project';
 import {Router} from 'aurelia-router';
-import {ApplicationState} from './infrastructure/application-state';
+import {ProjectService} from './services/project-service';
 import {_} from 'lodash';
 
-@inject(HttpClient, Router, ApplicationState)
+@inject(HttpClient, Router, ProjectService)
 export class IdeaCardDetail {
     _titleEditEnabled = false;
     _overviewEditEnabled = false;
@@ -17,7 +17,7 @@ export class IdeaCardDetail {
     _lastProjectDescription = null;
     project = null;
 
-    constructor(http, router, state) {
+    constructor(http, router, projectService) {
         http.configure(config => {
             config
                 .useStandardConfiguration()
@@ -26,11 +26,11 @@ export class IdeaCardDetail {
 
         this.http = http;
         this.router = router;
-        this.state = state;
+        this.projectService = projectService;
     }
 
     activate(params) {
-        this.state.getProjects()
+        this.projectService.getProjects()
             .then(projects => {
                 this.project = _.find(projects, { _id: parseInt(params.id) })
 
@@ -133,7 +133,7 @@ export class IdeaCardDetail {
         this.project.validation.validate()
             .then(() => {
                 this.DoSaveTitle();
-                this.state.addOrUpdateProject(this.project);
+                this.projectService.addOrUpdateProject(this.project);
             }).catch(error => {
                 if (error.properties._title.IsValid) {
                     this.DoSaveTitle();
@@ -155,7 +155,7 @@ export class IdeaCardDetail {
         this.project.validation.validate()
             .then(() => {
                 this.DoSaveOverview();
-                this.state.addOrUpdateProject(this.project);
+                this.projectService.addOrUpdateProject(this.project);
             }).catch(error => {
                 if (error.properties._overview.IsValid) {
                     this.DoSaveOverview();
@@ -176,7 +176,7 @@ export class IdeaCardDetail {
     SaveDescription() {
         this._lastProjectDescription = this.project._description;
         this._descrEditEnabled = false;
-        this.state.addOrUpdateProject(this.project);
+        this.projectService.addOrUpdateProject(this.project);
     }
 
     CancelDescription() {
@@ -191,19 +191,19 @@ export class IdeaCardDetail {
 
     Like() {
         this.project.liked = !this.project.liked;
-        this.state.addOrUpdateProject(this.project);
+        this.projectService.addOrUpdateProject(this.project);
     }
 
     Join() {
         let projectId = this.project._id;
-        let state = this.state;
+        let projectService = this.projectService;
 
-        this.state.getProjects()
+        this.projectService.getProjects()
             .then(projects => {
                 for (let item of projects) {
                     if (item.joined) {
                         item.joined = false;
-                        state.addOrUpdateProject(item);
+                        projectService.addOrUpdateProject(item);
 
                         if (item._id == projectId)
                             return;
@@ -211,7 +211,7 @@ export class IdeaCardDetail {
 
                     if (item._id == projectId) {
                         item.joined = !item.joined;
-                        state.addOrUpdateProject(item);
+                        projectService.addOrUpdateProject(item);
                     }
                 }
             })
