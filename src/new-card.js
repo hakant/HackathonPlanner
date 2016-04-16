@@ -5,11 +5,12 @@ import {Project} from './models/project';
 import {Router} from "aurelia-router";
 import {AuthService} from './services/auth-service';
 import {ProjectService} from './services/project-service';
+import {TooltipService} from './services/tooltip-service';
 import 'fetch';
 
-@inject(HttpClient, Router, AuthService, ProjectService)
+@inject(HttpClient, Router, AuthService, ProjectService, TooltipService)
 export class NewCard {
-    constructor(http, router, auth, projectService) {
+    constructor(http, router, auth, projectService, tooltipService) {
         http.configure(config => {
             config
                 .useStandardConfiguration()
@@ -20,6 +21,7 @@ export class NewCard {
         this.router = router;
         this.auth = auth;
         this.projectService = projectService;
+        this.tooltipService = tooltipService;
         
         this.CreateNewProject();
     }
@@ -55,6 +57,8 @@ export class NewCard {
         });
 
         $("input.card-title").focus();
+        
+        this.tooltipService.DisplayForPage("NewCard");
     }
 
     Save() {

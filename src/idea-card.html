@@ -19,11 +19,11 @@
     <div class="card-block controls">
       <div class="col-xs-6 team-controls">
         <i data-projectid.bind="project._id" click.trigger="join($event)" class="fa ${!project.joined ? 'fa-plus-square' : 'fa-check-square'} fa-2x"></i>
-        <span id.bind="project._id">${project.teamCount}</span>
+        <span class="team-count" id.bind="project._id">${project.teamCount}</span>
       </div>
       <div class="col-xs-6 text-xs-right like-controls">
         <i data-projectid.bind="project._id" click.trigger="like($event)" class="fa ${project.liked ? 'fa-heart' : 'fa-heart-o'} fa-2x"></i>
-        <span id.bind="project._id">${project.likeCount}</span>
+        <span class="like-count" id.bind="project._id">${project.likeCount}</span>
       </div>
     </div>
     <div class="card-block"></div>

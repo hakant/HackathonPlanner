@@ -8,7 +8,7 @@ import 'fetch';
 export class ProjectService {
     _projects;
     _projectsJson;
-    _token = "HackathonPlanner_Projects";
+    _storageToken = "HackathonPlanner_Projects";
 
     constructor(http) {
         http.configure(config => {
@@ -43,7 +43,7 @@ export class ProjectService {
             this._projects = this.convertToProjectModels(projects);
         }
 
-        localStorage[this._token] = JSON.stringify(projects);
+        localStorage[this._storageToken] = JSON.stringify(projects);
     }
 
     get projectsJson() {
@@ -52,11 +52,11 @@ export class ProjectService {
 
     set projectsJson(value) {
         this._projectsJson = value;
-        localStorage[this._token] = JSON.stringify(value);
+        localStorage[this._storageToken] = JSON.stringify(value);
     }
 
     getProjectsFromServerOrStorage(callback) {
-        let projectsInLocalStorage = localStorage[this._token];
+        let projectsInLocalStorage = localStorage[this._storageToken];
         if (projectsInLocalStorage) {
             this.projectsJson = JSON.parse(projectsInLocalStorage);
             this._projects = this.convertToProjectModels(this.projectsJson);
