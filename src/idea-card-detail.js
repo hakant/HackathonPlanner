@@ -5,9 +5,10 @@ import {inject} from 'aurelia-framework';
 import {Project} from './models/project';
 import {Router} from 'aurelia-router';
 import {ProjectService} from './services/project-service';
+import {TooltipService} from './services/tooltip-service';
 import {_} from 'lodash';
 
-@inject(HttpClient, Router, ProjectService)
+@inject(HttpClient, Router, ProjectService, TooltipService)
 export class IdeaCardDetail {
     _titleEditEnabled = false;
     _overviewEditEnabled = false;
@@ -17,7 +18,7 @@ export class IdeaCardDetail {
     _lastProjectDescription = null;
     project = null;
 
-    constructor(http, router, projectService) {
+    constructor(http, router, projectService, tooltipService) {
         http.configure(config => {
             config
                 .useStandardConfiguration()
@@ -27,6 +28,7 @@ export class IdeaCardDetail {
         this.http = http;
         this.router = router;
         this.projectService = projectService;
+        this.tooltipService = tooltipService;
     }
 
     activate(params) {
@@ -46,6 +48,7 @@ export class IdeaCardDetail {
         $('#card-detail').on('hidden.bs.modal', function() {
             myRouter.navigateToRoute('overview');
         });
+        this.tooltipService.DisplayForPage("IdeaCardDetail");
     }
 
     @computedFrom('_titleEditEnabled')
