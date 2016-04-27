@@ -5,7 +5,7 @@ import {HttpClient} from 'aurelia-fetch-client';
 @inject(Aurelia, HttpClient)
 export class AuthService {
     _tokenName = "HackathonPlanner";
-    
+
     // As soon as the AuthService is created, we query local storage to
     // see if the login information has been stored. If so, we immediately
     // load it into the session object on the AuthService.
@@ -19,7 +19,7 @@ export class AuthService {
         this.app = Aurelia;
 
         //this.session = JSON.parse(localStorage[this._tokenName] || null);
-        this.session = localStorage[this._tokenName] || null;
+        this._session = localStorage[this._tokenName] || null;
     }
 
     // The login function needs to abstract away all of the details about
@@ -35,9 +35,10 @@ export class AuthService {
         //         this.session = session;
         //         this.app.setRoot('app');
         //     });
-        
+
         localStorage[this._tokenName] = username;
-        this.session = username;
+        this._session = username;
+
         this.app.setRoot('app')
     }
 
@@ -46,16 +47,43 @@ export class AuthService {
     // return a promise if there were a need.
     logout() {
         localStorage.removeItem(this._tokenName);
-        this.session = null;
+        this._session = null;
+        this._gitHubUser = null;
         this.app.setRoot('login')
     }
 
     // A basic method for exposing information to other modules.  
     isAuthenticated() {
-        return this.session !== null;
+        return this._session !== null;
     }
-    
-    get Username(){
-        return this.session;
+
+    get username() {
+        return this._session;
+    }
+
+    get getGitHubUser() {
+        var me = this;
+        return new Promise(function(resolve, reject){
+            if (me._gitHubUser){
+                resolve(me._gitHubUser);
+            }
+            if (me.isAuthenticated()) {
+                try{
+                    me.http.fetch(`https://api.github.com/users/${me.username}`)
+                    .then(response => response.json())
+                    .then(gitHubUser => { 
+                        me._gitHubUser = gitHubUser;
+                        resolve(me._gitHubUser);
+                    });    
+                } catch(err){
+                    reject(err);
+                }
+                
+            } else{
+                reject({
+                    message: "Unauthenticated request."
+                });
+            }
+        });
     }
 }

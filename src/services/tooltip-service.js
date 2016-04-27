@@ -51,6 +51,7 @@ export class TooltipService {
             });
 
             this.UpdateStorage();
+            
             return;
         }
 
@@ -66,6 +67,7 @@ export class TooltipService {
         //     '</div>';
 
         $(current.select).popover(current);
+        
         if (this._tooltipIndex == 0) {
             setTimeout(function () {
                 $(current.select).popover("show");
@@ -73,25 +75,28 @@ export class TooltipService {
         } else {
             $(current.select).popover("show");
         }
-
-        let me = this;
-
-        $(current.select).on('shown.bs.popover', function () {
+        
+        this._tooltipIndex++;
+        this.SetEventHandlersForTooltip(current, page);
+    }
+    
+    SetEventHandlersForTooltip(tooltip, page){
+        $(tooltip.select).on('shown.bs.popover', function () {
             $("div.popover").click(function () {
-                $(current.select).popover("hide");
+                $(tooltip.select).popover("hide");
             });
+            
             $("#stop-tutorial").click(function () {
-                alert("this will also stop the tutorial");
-                $(current.select).popover("hide");
+                $(tooltip.select).popover("hide");
             });
         });
-
-        $(current.select).on('hidden.bs.popover', function () {
-            $(current.select).popover('dispose');
+        
+        let me = this;
+        
+        $(tooltip.select).on('hidden.bs.popover', function () {
+            $(tooltip.select).popover('dispose');
             me.DisplayForPage(page);
         });
-
-        this._tooltipIndex++;
     }
 
     UpdateStorage() {

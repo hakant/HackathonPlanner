@@ -195,6 +195,22 @@ textarea.card-overview{
     border-color: red !important;
 }
 
+.navbar .dropdown.profile{
+  float:right;
+}
+  .navbar .dropdown.profile button, 
+  .navbar .dropdown.profile button:focus {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+    outline: none;
+  }
+
+.navbar .dropdown-menu.profile{
+    right: 0;
+    left: auto;
+}
+
 /*.modal-content{
   color: #4d4d4d;
   font: 16px "Helvetica Neue", Arial, Helvetica, sans-serif;

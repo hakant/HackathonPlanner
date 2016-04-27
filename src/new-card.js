@@ -27,16 +27,15 @@ export class NewCard {
     }
 
     CreateNewProject() {
-        this.http.fetch(`https://api.github.com/users/${this.auth.Username}`)
-            .then(response => response.json())
-            .then(gitHubUser => {
-                this.project = new Project({
+        let me = this;
+        this.auth.getGitHubUser.then(function(user){
+            me.project = new Project({
                     id: Math.floor(Math.random() * 10000) + 1,
                     user: {
-                        login: gitHubUser.login,
-                        id: gitHubUser.id,
-                        avatar_url: gitHubUser.avatar_url,
-                        name: gitHubUser.name
+                        login: user.login,
+                        id: user.id,
+                        avatar_url: user.avatar_url,
+                        name: user.name
                     },
                     title: "",
                     liked: false,
@@ -45,8 +44,8 @@ export class NewCard {
                     description: "",
                     "like-count": 0,
                     "team-count": 0
-                });
-            });
+                }); 
+        });
     }
 
     attached() {
