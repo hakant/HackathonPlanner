@@ -8,7 +8,7 @@ export class Tooltips {
             content: "These tips are designed to help you get up and running in seconds and then they'll get out of the way. Click or tap on a tooltip to move forward.",
             placement: "bottom"
         }, {
-                select: "button",
+                select: "button.btn-success",
                 title: "Add new Hackathon Idea",
                 content: "Click this button to add a new idea of your own. You can add as many ideas as you like.",
                 placement: "bottom"
