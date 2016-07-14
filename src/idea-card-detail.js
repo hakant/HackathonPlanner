@@ -16,7 +16,10 @@ export class IdeaCardDetail {
     _lastProjectTitle = null;
     _lastProjectOverview = null;
     _lastProjectDescription = null;
-    project = null;
+
+    project = {
+        description : ''  // Markdown component doesn't like null values!
+    };
 
     constructor(http, router, projectService, tooltipService) {
         http.configure(config => {
@@ -34,7 +37,7 @@ export class IdeaCardDetail {
     activate(params) {
         this.projectService.getProjects()
             .then(projects => {
-                this.project = _.find(projects, { _id: parseInt(params.id) })
+                this.project = _.find(projects, { _id: params.id })
 
                 this._lastProjectTitle = this.project._title;
                 this._lastProjectOverview = this.project._overview;
@@ -201,22 +204,9 @@ export class IdeaCardDetail {
         let projectId = this.project._id;
         let projectService = this.projectService;
 
-        this.projectService.getProjects()
-            .then(projects => {
-                for (let item of projects) {
-                    if (item.joined) {
-                        item.joined = false;
-                        projectService.addOrUpdateProject(item);
+        this.project.joined = !this.project.joined;
+        projectService.addOrUpdateProject(this.project);
 
-                        if (item._id == projectId)
-                            return;
-                    }
-
-                    if (item._id == projectId) {
-                        item.joined = !item.joined;
-                        projectService.addOrUpdateProject(item);
-                    }
-                }
-            })
+        // join operation should deactivate the other possible project that I've joined!
     }
 }

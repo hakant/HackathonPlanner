@@ -12,12 +12,6 @@ export class ProjectService {
     _storageToken = "HackathonPlanner_Projects";
 
     constructor(http) {
-        // http.configure(config => {
-        //     config
-        //         .useStandardConfiguration()
-        //         .withBaseUrl('/');
-        // });
-
         this.http = http;
     }
 
@@ -29,6 +23,7 @@ export class ProjectService {
     }
 
     addOrUpdateProject(project) {
+        var me = this;
         var model = project.convertToSimpleModel();
         this.http.createRequest('http://localhost:3000/ideas')
                  .asPost()
@@ -37,6 +32,7 @@ export class ProjectService {
                  .send()
                  .then(response => {
                     console.log(response);
+                    me.getProjectsFromServer();
                 })
                 .catch(function (error) {
                     console.log(error.content);
@@ -54,14 +50,6 @@ export class ProjectService {
 
     getProjectsFromServer(callback) {
         let me = this;
-        // this.http.get('http://localhost:3000/ideas')
-        //     .then(projects => {
-        //         me.projectsJson = projects;
-        //         me._projects = me.convertToProjectModels(
-        //             me._projectsJson
-        //         );
-        //         callback(me._projects);
-        //     });
 
         this.http.createRequest('http://localhost:3000/ideas')
             .asGet()
