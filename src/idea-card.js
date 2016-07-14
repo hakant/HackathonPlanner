@@ -21,36 +21,17 @@ export class IdeaCard {
         let projectId = this.project._id;
         let projectService = this.projectService;
 
-        this.projectService.getProjects()
-            .then(projects => {
-                let item = _.find(projects, { _id: projectId });
-                if (item) {
-                    item.liked = !item.liked;
-                    projectService.addOrUpdateProject(item);
-                }
-            })
+        this.project.liked = !this.project.liked;
+        projectService.addOrUpdateProject(this.project);
     }
 
     join(event) {
         let projectId = this.project._id;
         let projectService = this.projectService;
 
-        this.projectService.getProjects()
-            .then(projects => {
-                for (let item of projects) {
-                    if (item.joined) {
-                        item.joined = false;
-                        projectService.addOrUpdateProject(item);
+        this.project.joined = !this.project.joined;
+        projectService.addOrUpdateProject(this.project);
 
-                        if (item._id == projectId)
-                            return;
-                    }
-
-                    if (item._id == projectId) {
-                        item.joined = !item.joined;
-                        projectService.addOrUpdateProject(item);
-                    }
-                }
-            })
+        // join operation should deactivate the other possible project that I've joined!
     }
 }

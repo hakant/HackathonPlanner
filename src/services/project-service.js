@@ -1,8 +1,9 @@
-import {HttpClient} from 'aurelia-fetch-client';
+import {HttpClient} from 'aurelia-http-client';
 import {Project} from '../models/project';
 import {inject} from 'aurelia-framework';
 import {_} from "lodash";
 import 'fetch';
+
 
 @inject(HttpClient)
 export class ProjectService {
@@ -11,39 +12,31 @@ export class ProjectService {
     _storageToken = "HackathonPlanner_Projects";
 
     constructor(http) {
-        http.configure(config => {
-            config
-                .useStandardConfiguration()
-                .withBaseUrl('/');
-        });
-
         this.http = http;
     }
 
     getProjects() {
         var me = this;
         return new Promise(function(resolve, reject) {
-            if (!me._projects) {
-                me.getProjectsFromServerOrStorage.call(me, resolve);
-            } else {
-                resolve(me._projects);
-            }
+            me.getProjectsFromServer.call(me, resolve);
         })
     }
 
     addOrUpdateProject(project) {
-        let projects = this.projectsJson;
-        let index = _.findIndex(projects, { 'id': project._id });
-        if (index > -1) {
-            projects.splice(index, 1, project.convertToSimpleModel());
-        } else {
-            projects.push(
-                project.convertToSimpleModel()
-            );
-            this._projects = this.convertToProjectModels(projects);
-        }
-
-        localStorage[this._storageToken] = JSON.stringify(projects);
+        var me = this;
+        var model = project.convertToSimpleModel();
+        this.http.createRequest('http://localhost:3000/ideas')
+                 .asPost()
+                 .withHeader('Content-Type', 'application/json; charset=utf-8')
+                 .withContent(JSON.stringify(model))
+                 .send()
+                 .then(response => {
+                    console.log(response);
+                    me.getProjectsFromServer();
+                })
+                .catch(function (error) {
+                    console.log(error.content);
+                });
     }
 
     get projectsJson() {
@@ -55,24 +48,23 @@ export class ProjectService {
         localStorage[this._storageToken] = JSON.stringify(value);
     }
 
-    getProjectsFromServerOrStorage(callback) {
-        let projectsInLocalStorage = localStorage[this._storageToken];
-        if (projectsInLocalStorage) {
-            this.projectsJson = JSON.parse(projectsInLocalStorage);
-            this._projects = this.convertToProjectModels(this.projectsJson);
-            callback(this._projects);
-        } else {
-            let me = this;
-            this.http.fetch('dist/data/data.json')
-                .then(response => response.json())
-                .then(projects => {
-                    me.projectsJson = projects;
-                    me._projects = me.convertToProjectModels(
-                        me._projectsJson
-                    );
-                    callback(me._projects);
-                });
-        }
+    getProjectsFromServer(callback) {
+        let me = this;
+
+        this.http.createRequest('http://localhost:3000/ideas')
+            .asGet()
+            .send()
+            .then(response => {
+                me.projectsJson = response.content;
+                me._projects = me.convertToProjectModels(
+                    me._projectsJson
+                );
+                callback(me._projects);
+            })
+            .catch(function (error) {
+            // Handle failed request...
+                console.error(error.content);
+            });
     }
 
     convertToProjectModels(json) {

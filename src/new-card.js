@@ -30,18 +30,18 @@ export class NewCard {
         let me = this;
         this.auth.getGitHubUser.then(function(user){
             me.project = new Project({
-                    id: Math.floor(Math.random() * 10000) + 1,
+                    id: String(Math.floor(Math.random() * 10000) + 1),
                     user: {
                         login: user.login,
                         id: user.id,
                         avatar_url: user.avatar_url,
                         name: user.name
                     },
-                    title: "",
+                    title: null,
                     liked: false,
                     joined: false,
-                    overview: "",
-                    description: "",
+                    overview: null,
+                    description: null,
                     "like-count": 0,
                     "team-count": 0
                 }); 
