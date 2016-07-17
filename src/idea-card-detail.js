@@ -139,8 +139,9 @@ export class IdeaCardDetail {
         this.project.validation.validate()
             .then(() => {
                 this.DoSaveTitle();
-                this.projectService.addOrUpdateProject(this.project);
+                this.projectService.editProjectTitle(this.project);
             }).catch(error => {
+                console.error(error);
                 if (error.properties._title.IsValid) {
                     this.DoSaveTitle();
                 }
@@ -161,7 +162,7 @@ export class IdeaCardDetail {
         this.project.validation.validate()
             .then(() => {
                 this.DoSaveOverview();
-                this.projectService.addOrUpdateProject(this.project);
+                this.projectService.editProjectOverview(this.project);
             }).catch(error => {
                 if (error.properties._overview.IsValid) {
                     this.DoSaveOverview();
@@ -182,7 +183,7 @@ export class IdeaCardDetail {
     SaveDescription() {
         this._lastProjectDescription = this.project._description;
         this._descrEditEnabled = false;
-        this.projectService.addOrUpdateProject(this.project);
+        this.projectService.editProjectDescription(this.project);
     }
 
     CancelDescription() {

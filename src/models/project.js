@@ -21,6 +21,8 @@ export class Project {
         this._joined = data.joined;
         this._likeCount = data["like-count"];
         this._teamCount = data["team-count"];
+        this._likedList = data["liked-list"];
+        this._joinedList = data["joined-list"];
 
         // TODO: Taking a direct dependency on the Container. Find an alternative.
         let validation = Container.instance.get(Validation);
@@ -86,7 +88,9 @@ export class Project {
             overview: this._overview,
             description: this._description,
             "like-count": this.likeCount,
-            "team-count": this.teamCount
+            "team-count": this.teamCount,
+            "liked-list": this._likedList,
+            "joined-list": this._joinedList
         };
     }
 }

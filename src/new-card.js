@@ -42,6 +42,8 @@ export class NewCard {
                     joined: false,
                     overview: null,
                     description: null,
+                    "liked-list": [],
+                    "joined-list": [],
                     "like-count": 0,
                     "team-count": 0
                 }); 
@@ -63,7 +65,7 @@ export class NewCard {
     Save() {
         this.project.validation.validate()
             .then(() => {
-                return this.projectService.addOrUpdateProject(this.project);
+                return this.projectService.addProject(this.project);
             })
             .then(() => {
                 $("#new-card").modal('hide');
