@@ -29,6 +29,7 @@ System.config({
     "aurelia-validation": "npm:aurelia-validation@0.6.8",
     "babel": "npm:babel-core@5.8.38",
     "babel-runtime": "npm:babel-runtime@5.8.38",
+    "bluebird": "npm:bluebird@3.4.1",
     "bootstrap": "github:twbs/bootstrap@4.0.0-alpha.2",
     "clean-css": "npm:clean-css@3.4.18",
     "core-js": "npm:core-js@1.2.6",
@@ -233,6 +234,9 @@ System.config({
       "aurelia-templating": "npm:aurelia-templating@1.0.0-rc.1.0.0"
     },
     "npm:babel-runtime@5.8.38": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
+    },
+    "npm:bluebird@3.4.1": {
       "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:buffer@3.6.0": {

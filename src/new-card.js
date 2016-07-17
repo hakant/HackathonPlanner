@@ -61,14 +61,16 @@ export class NewCard {
     }
 
     Save() {
-        let me = this;
         this.project.validation.validate()
             .then(() => {
+                return this.projectService.addOrUpdateProject(this.project);
+            })
+            .then(() => {
                 $("#new-card").modal('hide');
-                me.projectService.addOrUpdateProject(me.project);
-                me.router.navigateToRoute('overview');
-            }).catch(error => {
-
+                this.router.navigateToRoute('overview');
+            })
+            .catch(error => {
+                console.log(error);
             });
     }
 
