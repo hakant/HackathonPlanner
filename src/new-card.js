@@ -42,10 +42,10 @@ export class NewCard {
                     joined: false,
                     overview: null,
                     description: null,
-                    "liked-list": [],
-                    "joined-list": [],
-                    "like-count": 0,
-                    "team-count": 0
+                    likedList: [],
+                    joinedList: [],
+                    likeCount: 0,
+                    teamCount: 0
                 }); 
         });
     }

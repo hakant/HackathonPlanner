@@ -1,23 +1,30 @@
 import {HttpClient} from 'aurelia-http-client';
 import {Project} from '../models/project';
+import {AuthService} from './auth-service';
 import {inject} from 'aurelia-framework';
 import {_} from "lodash";
 import 'fetch';
 
 
-@inject(HttpClient)
+@inject(HttpClient, AuthService)
 export class ProjectService {
     _projectsJson;
 
-    constructor(http) {
+    constructor(http, auth) {
         this.http = http;
+        this.auth = auth;
+
+        this.http.configure(conf=>{
+            conf.withBaseUrl("http://hackathonplanner.u42cijea3t.eu-central-1.elasticbeanstalk.com");    
+        });
     }
 
     getProjects() {
-        return this.http.createRequest('http://localhost:3000/ideas')
+        return this.http.createRequest('/ideas')
             .asGet()
             .send()
             .then(response => {
+                console.log(response.content);
                 return this.convertToProjectModels(response.content);
             })
             .catch(
@@ -28,7 +35,7 @@ export class ProjectService {
     addProject(project) {
         var model = project.convertToSimpleModel();
 
-        return this.http.createRequest('http://localhost:3000/ideas/add')
+        return this.http.createRequest('/ideas/add')
             .asPost()
             .withHeader('Content-Type', 'application/json; charset=utf-8')
             .withContent(JSON.stringify(model))
@@ -42,7 +49,7 @@ export class ProjectService {
     }
 
     editProjectTitle(project){
-        return this.http.createRequest('http://localhost:3000/ideas/edit-title')
+        return this.http.createRequest('/ideas/edit-title')
             .asPost()
             .withHeader('Content-Type', 'application/json; charset=utf-8')
             .withContent(JSON.stringify({
@@ -59,7 +66,7 @@ export class ProjectService {
     }
 
     editProjectOverview(project){
-        return this.http.createRequest('http://localhost:3000/ideas/edit-overview')
+        return this.http.createRequest('/ideas/edit-overview')
             .asPost()
             .withHeader('Content-Type', 'application/json; charset=utf-8')
             .withContent(JSON.stringify({
@@ -76,7 +83,7 @@ export class ProjectService {
     }
 
     editProjectDescription(project){
-        return this.http.createRequest('http://localhost:3000/ideas/edit-description')
+        return this.http.createRequest('/ideas/edit-description')
             .asPost()
             .withHeader('Content-Type', 'application/json; charset=utf-8')
             .withContent(JSON.stringify({
@@ -89,6 +96,44 @@ export class ProjectService {
             })
             .catch(
                 error => console.log(error)
+            );
+    }
+
+    like(project){
+        return this.auth.getGitHubUser
+            .then(user => {
+                return this.http.createRequest('/ideas/like')
+                    .asPost()
+                    .withHeader('Content-Type', 'application/json; charset=utf-8')
+                    .withContent(JSON.stringify({
+                        ideaId: project._id,
+                        userId: user.id
+                    }))
+                    .send();
+            }).then(response => {
+                return this.getProjects();
+            })
+            .catch(
+            error => console.log(error)
+            );
+    }
+
+    join(project){
+        return this.auth.getGitHubUser
+            .then(user => {
+                return this.http.createRequest('/ideas/join')
+                    .asPost()
+                    .withHeader('Content-Type', 'application/json; charset=utf-8')
+                    .withContent(JSON.stringify({
+                        ideaId: project._id,
+                        userId: user.id
+                    }))
+                    .send();
+            }).then(response => {
+                return this.getProjects();
+            })
+            .catch(
+            error => console.log(error)
             );
     }
 
