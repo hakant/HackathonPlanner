@@ -1,11 +1,89 @@
 <template>
 	<require from="./idea-card"></require>
 	<require from="./idea-card-detail"></require>
+	<require from="./footer"></require>
 
 	<section>
-		<div class="card-columns">
-			<idea-card project.bind="project" repeat.for="project of projects" />
+		<div id="index-banner" class="parallax-container">
+			<div class="section no-pad-bot">
+				<div class="container">
+					<br>
+					<br>
+					<h1 class="header center white-text">31 days to go</h1>
+					<div class="row center">
+						<h5 class="header col s12 light">Welcome to the planner tool for the 4th NIPO Software Hackathon.</h5> </div>
+					<div class="row center"> <a class="waves-effect waves-light btn modal-trigger light-blue" href="#modal1">Add project</a> </div>
+					<br>
+					<br> </div>
+			</div>
+			<div class="parallax"><img src="img/picture-0.jpg" alt="NIPO Software Hackathon"></div>
 		</div>
 	</section>
-	
+
+	<section>
+		<div class="container">
+			<div class="section">
+				<div class="row projects">
+					<idea-card project.bind="project" repeat.for="project of projects" />
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<section>
+		<div class="parallax-container valign-wrapper">
+			<div class="section no-pad-bot">
+				<div class="container">
+					<div class="row center">
+						<h5 class="header col s12 light">Eat a muz at 15:00h</h5> </div>
+				</div>
+			</div>
+			<div class="parallax"><img src="img/picture-4.jpg" alt="Inspiring random quote"></div>
+		</div>
+	</section>
+
+	<section>
+		<div class="container">
+        <div class="section">
+            <!--   Icon Section   -->
+            <div class="row">
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center"><i class="material-icons light-blue-text">done</i></h2>
+                        <h5 class="center white-text">You have uploaded at least 1 project</h5>
+                        <p class="white-text light">Apparently you have ideas. Good to know.</p>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center"><i class="material-icons light-blue-text">assessment</i></h2>
+                        <h5 class="center white-text">combined your projects have 6 likes</h5>
+                        <p class="white-text light">All your ideas combined get 6 likes in total. Awesome!</p>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="icon-block">
+                        <h2 class="center"><i class="material-icons light-blue-text">trending_up</i></h2>
+                        <h5 class="center white-text">There are 4 projects available in total</h5>
+                        <p class="white-text light">Currently there are 4 projects available.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+	</section>
+
+	<section>
+		<div class="parallax-container valign-wrapper">
+			<div class="section no-pad-bot">
+				<div class="container">
+					<div class="row center">
+						<h5 class="header col s12 light"></h5> </div>
+					</div>
+				</div>
+				<div class="parallax"><img src="img/picture-3.jpg" alt="La"></div>
+			</div>
+	</section>
+
+<FooterContainer></FooterContainer>
 </template>

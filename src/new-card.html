@@ -1,7 +1,33 @@
 <template>
 
   <require from="blur-image"></require>
-  <div id="new-card" class="modal" tabindex="-1" role="dialog">
+
+  <div id="modal1" class="modal">
+      <div class="modal-content" validate.bind="project.validation">
+          <h4 class="light-blue-text">Add new project</h4>
+          <div class="row">
+            <img src.bind="project._user.avatar_url" crossorigin ref="image" class="circle" />
+            <p class="username">${project._user.name ? project._user.name : project._user.login}</p>
+          </div>
+          <div class="row">
+              <div class="input-field col s12">
+                  <input id="title" type="text" class="validate" value.bind="project._title" validate="_title">
+                  <label for="title">Project title</label>
+              </div>
+              <form class="col s12">
+                  <div class="row">
+                      <div class="input-field col s12"> <i class="material-icons prefix">mode_edit</i>
+                          <textarea id="overview" class="materialize-textarea" value.bind="project._overview" validate="_overview"></textarea>
+                          <label for="overview">Overview</label>
+                      </div>
+                  </div>
+              </form>
+          </div>
+      </div>
+      <div class="modal-footer"> <button class="modal-action modal-close waves-effect waves-light-blue btn-flat light-blue-text left" click.trigger="Save()">Save</button> <button class="modal-action modal-close waves-effect waves-light-blue btn-flat grey-text right" click.trigger="Cancel()">Cancel</button> </div>
+  </div>
+
+  <!-- <div id="new-card" class="modal" tabindex="-1" role="dialog">
     <div class="modal-dialog modal-md" role="document">
       <div class="modal-content">
         <div class="card details" validate.bind="project.validation">
@@ -28,6 +54,6 @@
         </div>
       </div>
     </div>
-  </div>
-  
+  </div> -->
+
 </template>

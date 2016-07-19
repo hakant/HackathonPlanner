@@ -1,29 +1,22 @@
 <template bindable="router">
-  <require from="./new-card"></require>  
-    
-  <nav class="navbar navbar-fixed-top navbar-light">
-    <a class="navbar-brand" href="#">${router.title}</a>
-    <ul class="nav navbar-nav navbar-left">
-      <li repeat.for="row of router.navigation" class="${row.isActive ? 'nav-item active' : 'nav-item'}">
-        <a class="nav-link" href.bind="row.href">${row.title}</a>
-      </li>
-    </ul>
-    <button type="button" if.bind="auth.isAuthenticated()" click.trigger="NewCard()" 
-        class="btn btn-success navbar-btn">
-        <i class="fa fa-plus"></i>
-    </button>
-    <div class="dropdown profile" if.bind="auth.isAuthenticated()">
-      <button type="button" id="dropdownMenu1" data-toggle="dropdown">
-        <img src.bind="avatarUrl" crossorigin ref="image" class="img-circle" width="40px" />
-      </button>
-      <div class="dropdown-menu profile" aria-labelledby="dropdownMenu1">
-        <a href="#" class="dropdown-item" click.delegate="auth.logout()">Log Out</a>
-      </div>
-    </div>
-    <ul class="nav navbar-nav" style="float:right;">
-        <li class="loader nav-item" if.bind="router.isNavigating">
-            <i class="fa fa-spinner fa-spin fa-2x"></i>
-        </li>
-    </ul>
-  </nav>
+  <require from="./new-card"></require>
+  <div class="navbar-fixed">
+    <nav class="white" role="navigation">
+      <div class="nav-wrapper container"> <a id="logo-container" href="#" class="brand-logo center light-blue-text">${router.title}</a>
+        <ul class="right hide-on-med-and-down">
+          <li><a href="#modal1" class="modal-trigger"><i class="material-icons light-blue-text">add</i></a></li>
+          <li><a class="active-update"><i class="material-icons light-blue-text">shuffle</i></a></li>
+          <li><a href="show-fav-only.html"><i class="material-icons red-text">star</i></a></li>
+          <li>
+            <div class="chip blue-grey lighten-4 white-text right" if.bind="auth.isAuthenticated()"><img src.bind="avatarUrl" crossorigin ref="image" class="circle" />Log out</div>
+          </li>
+        </ul>
+        <ul id="nav-mobile" class="side-nav">
+          <li><a href="#modal1" class="modal-trigger">Add project</a></li>
+          <li><a class="#">Enable live update</a></li>
+          <li><a href="#">Show favorites only</a></li>
+          <li><a href="#">Log out</a></li>
+        </ul> <a href="#" data-activates="nav-mobile" class="button-collapse light-blue-text"><i class="material-icons">menu</i></a> </div>
+    </nav>
+  </div>
 </template>
