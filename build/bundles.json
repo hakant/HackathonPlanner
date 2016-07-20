@@ -2,6 +2,8 @@
     "bundles": {
         "dist/app-build": {
             "includes": [
+                "[*.jpg]",
+                "[*/**/*.jpg]",
                 "[*.js]",
                 "[*/**/*.js]",
                 "*.html!text",
