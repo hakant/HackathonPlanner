@@ -47,6 +47,14 @@ gulp.task('build-json', function() {
     .pipe(browserSync.stream());
 });
 
+// copies changed image files to the output directory
+gulp.task('build-images', function() {
+  return gulp.src(paths.image)
+    .pipe(changed(paths.output, {extension: '.jpg'}))
+    .pipe(gulp.dest(paths.output))
+    .pipe(browserSync.stream());
+});
+
 // this task calls the clean task (located
 // in ./clean.js), then runs the build-system
 // and build-html tasks in parallel
@@ -54,7 +62,7 @@ gulp.task('build-json', function() {
 gulp.task('build', function(callback) {
   return runSequence(
     'clean',
-    ['build-system', 'build-html', 'build-css', 'build-json'],
+    ['build-system', 'build-html', 'build-css', 'build-json', 'build-images'],
     callback
   );
 });
