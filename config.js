@@ -38,6 +38,7 @@ System.config({
     "gooy/aurelia-markdown": "github:gooy/aurelia-markdown@0.0.3",
     "lipis/bootstrap-social": "github:lipis/bootstrap-social@4.12.0",
     "lodash": "npm:lodash@4.13.1",
+    "materialize-css": "npm:materialize-css@0.97.6",
     "showdown": "github:showdownjs/showdown@1.4.2",
     "text": "github:systemjs/plugin-text@0.0.3",
     "twbs/bootstrap": "github:twbs/bootstrap@4.0.0-alpha.2",
@@ -288,6 +289,10 @@ System.config({
     },
     "npm:inherits@2.0.1": {
       "util": "github:jspm/nodelibs-util@0.1.0"
+    },
+    "npm:materialize-css@0.97.6": {
+      "css": "github:systemjs/plugin-css@0.1.23",
+      "jquery": "github:components/jquery@3.1.0"
     },
     "npm:os-browserify@0.1.2": {
       "os": "github:jspm/nodelibs-os@0.1.0"

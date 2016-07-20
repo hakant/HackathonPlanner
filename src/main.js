@@ -1,4 +1,4 @@
-import 'bootstrap';
+import materialize from 'materialize-css'
 import {ValidationConfig} from 'aurelia-validation';
 import {AuthService} from './services/auth-service';
 import {TWBootstrapViewStrategy} from 'aurelia-validation';
@@ -9,8 +9,9 @@ export function configure(aurelia) {
     aurelia.use
         .standardConfiguration()
         .developmentLogging()
+        .plugin("materialize-css")
         .plugin('aurelia-validation');
-    // .plugin('aurelia-validation', 
+    // .plugin('aurelia-validation',
     //     (config) => { config.useViewStrategy(TWBootstrapViewStrategy.AppendToInput); }
     //     );
 
