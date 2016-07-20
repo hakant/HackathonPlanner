@@ -3,7 +3,6 @@
 	<require from="./idea-card-detail"></require>
 	<require from="./footer"></require>
 
-	<section>
 		<div id="index-banner" class="parallax-container">
 			<div class="section no-pad-bot">
 				<div class="container">
@@ -16,9 +15,8 @@
 					<br>
 					<br> </div>
 			</div>
-			<div class="parallax"><img src="img/picture-0.jpg" alt="NIPO Software Hackathon"></div>
+			<div class="parallax"><img src="dist/img/picture-0.jpg" alt="NIPO Software Hackathon"></div>
 		</div>
-	</section>
 
 	<section>
 		<div class="container">
@@ -38,7 +36,7 @@
 						<h5 class="header col s12 light">Eat a muz at 15:00h</h5> </div>
 				</div>
 			</div>
-			<div class="parallax"><img src="img/picture-4.jpg" alt="Inspiring random quote"></div>
+			<div class="parallax"><img src="dist/img/picture-4.jpg" alt="Inspiring random quote"></div>
 		</div>
 	</section>
 
@@ -81,9 +79,24 @@
 						<h5 class="header col s12 light"></h5> </div>
 					</div>
 				</div>
-				<div class="parallax"><img src="img/picture-3.jpg" alt="La"></div>
+				<div class="parallax"><img src="dist/img/picture-3.jpg" alt="La"></div>
 			</div>
 	</section>
 
-<FooterContainer></FooterContainer>
+	<script>
+	(function($) {
+	    $(function() {
+
+				console.log("muz");
+
+	        $('.button-collapse').sideNav();
+	        $('.parallax').parallax();
+
+	        $('.modal-trigger').leanModal();
+
+	    });
+	})(jQuery);
+	</script>
+
+<footer></footer>
 </template>
