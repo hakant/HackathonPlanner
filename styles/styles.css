@@ -1,5 +1,5 @@
 body {
-  background: url(../img/background.png) fixed;
+  background: url(../dist/img/background.jpg) fixed;
 }
 p {
   line-height: 2rem;
