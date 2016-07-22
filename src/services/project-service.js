@@ -15,7 +15,7 @@ export class ProjectService {
         this.auth = auth;
 
         this.http.configure(conf=>{
-            conf.withBaseUrl("http://hackathonplanner.u42cijea3t.eu-central-1.elasticbeanstalk.com");    
+            conf.withBaseUrl("http://localhost:3000");    
         });
     }
 
