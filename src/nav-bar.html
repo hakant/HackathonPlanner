@@ -11,8 +11,8 @@
             <div class="chip blue-grey lighten-4 white-text right" if.bind="auth.isAuthenticated()"><img src.bind="avatarUrl" crossorigin ref="image" class="circle" />Log out</div>
           </li>
         </ul>
-        <ul id="nav-mobile" class="side-nav">
-          <li><a href="#modal1" class="modal-trigger">Add project</a></li>
+        <ul id="nav-mobile" class="side-nav" data-sitenav>
+          <li><a md-modal-trigger href="#modal1">Add project</a></li>
           <li><a class="#">Enable live update</a></li>
           <li><a href="#">Show favorites only</a></li>
           <li><a href="#">Log out</a></li>

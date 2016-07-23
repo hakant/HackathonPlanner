@@ -1,7 +1,6 @@
 <template>
 	<require from="./idea-card"></require>
 	<require from="./idea-card-detail"></require>
-	<require from="./footer"></require>
 
 		<div id="index-banner" class="parallax-container">
 			<div class="section no-pad-bot">
@@ -11,11 +10,11 @@
 					<h1 class="header center white-text">31 days to go</h1>
 					<div class="row center">
 						<h5 class="header col s12 light">Welcome to the planner tool for the 4th NIPO Software Hackathon.</h5> </div>
-					<div class="row center"> <a class="waves-effect waves-light btn modal-trigger light-blue" href="#modal1">Add project</a> </div>
+					<div class="row center"> <a md-button md-modal-trigger class="light-blue" href="#modal1">Add project</a> </div>
 					<br>
 					<br> </div>
 			</div>
-			<div class="parallax"><img src="dist/img/picture-0.jpg" alt="NIPO Software Hackathon"></div>
+			<div md-parallax><img src="dist/img/picture-0.jpg" alt="NIPO Software Hackathon"></div>
 		</div>
 
 	<section>
@@ -36,7 +35,7 @@
 						<h5 class="header col s12 light">Eat a muz at 15:00h</h5> </div>
 				</div>
 			</div>
-			<div class="parallax"><img src="dist/img/picture-4.jpg" alt="Inspiring random quote"></div>
+			<div md-parallax><img src="dist/img/picture-4.jpg" alt="Inspiring random quote"></div>
 		</div>
 	</section>
 
@@ -79,24 +78,8 @@
 						<h5 class="header col s12 light"></h5> </div>
 					</div>
 				</div>
-				<div class="parallax"><img src="dist/img/picture-3.jpg" alt="La"></div>
+				<div md-parallax><img src="dist/img/picture-3.jpg" alt="La"></div>
 			</div>
 	</section>
 
-	<script>
-	(function($) {
-	    $(function() {
-
-				console.log("muz");
-
-	        $('.button-collapse').sideNav();
-	        $('.parallax').parallax();
-
-	        $('.modal-trigger').leanModal();
-
-	    });
-	})(jQuery);
-	</script>
-
-<footer></footer>
 </template>

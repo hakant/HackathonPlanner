@@ -22,7 +22,7 @@ export class NewCard {
         this.auth = auth;
         this.projectService = projectService;
         this.tooltipService = tooltipService;
-        
+
         this.CreateNewProject();
     }
 
@@ -46,20 +46,17 @@ export class NewCard {
                     joinedList: [],
                     likeCount: 0,
                     teamCount: 0
-                }); 
+                });
         });
     }
 
     attached() {
-        var me = this;
-        $("#new-card").modal('show');
-        $('#new-card').on('hidden.bs.modal', function() {
-            me.router.navigateToRoute('overview');
-        });
+        // var me = this;
+        //
+        // $("input.card-title").focus();
+        //
+        // this.tooltipService.DisplayForPage("NewCard");
 
-        $("input.card-title").focus();
-        
-        this.tooltipService.DisplayForPage("NewCard");
     }
 
     Save() {
@@ -68,7 +65,7 @@ export class NewCard {
                 return this.projectService.addProject(this.project);
             })
             .then(() => {
-                $("#new-card").modal('hide');
+                //$("#new-card").modal('hide');
                 this.router.navigateToRoute('overview');
             })
             .catch(error => {
@@ -77,7 +74,7 @@ export class NewCard {
     }
 
     Cancel() {
-        $("#new-card").modal('hide');
+        //$("#new-card").modal('hide');
         this.router.navigateToRoute('overview');
     }
 }

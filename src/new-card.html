@@ -3,57 +3,37 @@
   <require from="blur-image"></require>
 
   <div id="modal1" class="modal">
-      <div class="modal-content" validate.bind="project.validation">
+    <div class="modal-content" validate.bind="project.validation">
+      <div class="row">
+        <div class="col s8">
           <h4 class="light-blue-text">Add new project</h4>
-          <div class="row">
-            <img src.bind="project._user.avatar_url" crossorigin ref="image" class="circle" />
-            <p class="username">${project._user.name ? project._user.name : project._user.login}</p>
-          </div>
-          <div class="row">
-              <div class="input-field col s12">
-                  <input id="title" type="text" class="validate" value.bind="project._title" validate="_title">
-                  <label for="title">Project title</label>
-              </div>
-              <form class="col s12">
-                  <div class="row">
-                      <div class="input-field col s12"> <i class="material-icons prefix">mode_edit</i>
-                          <textarea id="overview" class="materialize-textarea" value.bind="project._overview" validate="_overview"></textarea>
-                          <label for="overview">Overview</label>
-                      </div>
-                  </div>
-              </form>
-          </div>
-      </div>
-      <div class="modal-footer"> <button class="modal-action modal-close waves-effect waves-light-blue btn-flat light-blue-text left" click.trigger="Save()">Save</button> <button class="modal-action modal-close waves-effect waves-light-blue btn-flat grey-text right" click.trigger="Cancel()">Cancel</button> </div>
-  </div>
-
-  <!-- <div id="new-card" class="modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-md" role="document">
-      <div class="modal-content">
-        <div class="card details" validate.bind="project.validation">
-          <canvas class="header-bg" width="250" height="100" blur-image.bind="image"></canvas>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-          <div class="avatar">
-            <img src.bind="project._user.avatar_url" crossorigin ref="image" class="img-circle" />
-            <p class="username">${project._user.name ? project._user.name : project._user.login}</p>
-          </div>
-          <div class="card-block" data-toggle="modal">
-            <div class="form-group">
-                <input placeholder="Title" class="card-title form-control" type="text" value.bind="project._title" validate="_title" />
-            </div>
-            <div class="form-group">
-                <textarea placeholder="Overview" class="form-control card-overview" type="text" value.bind="project._overview" validate="_overview"></textarea>
-                <div>
-                    <button class="btn btn-success" click.trigger="Save()">Save</button>
-                    <button class="btn btn-cancel" click.trigger="Cancel()">
-                        <i class="fa fa-times"></i>
-                    </button>
-                </div>
-            </div>
-          </div>
+        </div>
+        <div class="col s4">
+          <md-chip md-close="false" class="right">
+            <img src.bind="project._user.avatar_url" crossorigin ref="image" alt="Contact Person"> ${project._user.name ? project._user.name : project._user.login}
+          </md-chip>
         </div>
       </div>
+      <div class="row">
+        <div class="input-field col s12">
+          <input id="title" type="text" class="validate" value.bind="project._title" validate="_title">
+          <label for="title">Project title</label>
+        </div>
+        <form class="col s12">
+          <div class="row">
+            <div class="input-field col s12"> <i class="material-icons prefix">mode_edit</i>
+              <textarea id="overview" class="materialize-textarea" value.bind="project._overview" validate="_overview"></textarea>
+              <label for="overview">Overview</label>
+            </div>
+          </div>
+        </form>
+      </div>
     </div>
-  </div> -->
+    <div class="modal-footer">
+      <button class="modal-action modal-close waves-effect waves-light-blue btn-flat light-blue-text left" click.trigger="Save()">Save</button>
+      <button class="modal-action modal-close waves-effect waves-light-blue btn-flat grey-text right" click.trigger="Cancel()">Cancel</button>
+    </div>
+  </div>
+
 
 </template>
