@@ -4,7 +4,7 @@ import {computedFrom} from 'aurelia-framework';
 import {AuthService} from './services/auth-service';
 
 @inject(Router, AuthService)
-export class FooterContainer {
+export class PageFooter {
 
     constructor(router, auth) {
         this.router = router;
