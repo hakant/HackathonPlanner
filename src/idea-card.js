@@ -29,9 +29,10 @@ export class IdeaCard {
         let projectId = this.project._id;
         let projectService = this.projectService;
 
-        projectService.join(this.project)
-        .then(() => this.project.joined = !this.project.joined);
-
-        // join operation should deactivate the other possible project that I've joined!
+        if (this.project.joined){
+            projectService.unjoin(this.project);
+        } else{
+            projectService.join(this.project);
+        }
     }
 }

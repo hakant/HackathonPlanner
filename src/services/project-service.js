@@ -114,7 +114,7 @@ export class ProjectService {
                 return this.getProjects();
             })
             .catch(
-            error => console.log(error)
+                error => console.log(error)
             );
     }
 
@@ -133,7 +133,26 @@ export class ProjectService {
                 return this.getProjects();
             })
             .catch(
-            error => console.log(error)
+                error => console.log(error)
+            );
+    }
+
+    unjoin(project){
+        return this.auth.getGitHubUser
+            .then(user => {
+                return this.http.createRequest('/ideas/unjoin')
+                    .asPost()
+                    .withHeader('Content-Type', 'application/json; charset=utf-8')
+                    .withContent(JSON.stringify({
+                        ideaId: project._id,
+                        userId: user.id
+                    }))
+                    .send();
+            }).then(response => {
+                return this.getProjects();
+            })
+            .catch(
+                error => console.log(error)
             );
     }
 
