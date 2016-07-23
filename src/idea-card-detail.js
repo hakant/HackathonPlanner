@@ -139,8 +139,9 @@ export class IdeaCardDetail {
         this.project.validation.validate()
             .then(() => {
                 this.DoSaveTitle();
-                this.projectService.addOrUpdateProject(this.project);
+                this.projectService.editProjectTitle(this.project);
             }).catch(error => {
+                console.error(error);
                 if (error.properties._title.IsValid) {
                     this.DoSaveTitle();
                 }
@@ -161,7 +162,7 @@ export class IdeaCardDetail {
         this.project.validation.validate()
             .then(() => {
                 this.DoSaveOverview();
-                this.projectService.addOrUpdateProject(this.project);
+                this.projectService.editProjectOverview(this.project);
             }).catch(error => {
                 if (error.properties._overview.IsValid) {
                     this.DoSaveOverview();
@@ -182,7 +183,7 @@ export class IdeaCardDetail {
     SaveDescription() {
         this._lastProjectDescription = this.project._description;
         this._descrEditEnabled = false;
-        this.projectService.addOrUpdateProject(this.project);
+        this.projectService.editProjectDescription(this.project);
     }
 
     CancelDescription() {
@@ -196,17 +197,23 @@ export class IdeaCardDetail {
     }
 
     Like() {
-        this.project.liked = !this.project.liked;
-        this.projectService.addOrUpdateProject(this.project);
+        let projectId = this.project._id;
+        let projectService = this.projectService;
+
+        projectService.like(this.project)
+        .then(() => this.project.liked = !this.project.liked);
     }
 
     Join() {
         let projectId = this.project._id;
         let projectService = this.projectService;
 
-        this.project.joined = !this.project.joined;
-        projectService.addOrUpdateProject(this.project);
-
-        // join operation should deactivate the other possible project that I've joined!
+        if (this.project.joined){
+            projectService.unjoin(this.project);
+        } else{
+            projectService.join(this.project);
+        }
+        
+        //.then(() => this.project.joined = !this.project.joined);
     }
 }
