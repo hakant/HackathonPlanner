@@ -28,8 +28,8 @@ export class Overview {
     get projects() {
         return this._projects;
     }
-    
+
     attached(){
-        this.tooltipService.DisplayForPage("Overview");    
+        //this.tooltipService.DisplayForPage("Overview");
     }
 }
