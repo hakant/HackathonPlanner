@@ -24,17 +24,17 @@ export class Login {
 
     attached() {
         let me = this;
-        $('#login-modal').on('hidden.bs.modal', function () {
+        $('#loginscreen').on('click', '.modal-footer a', function () {
             me.auth.login(me._username);
         });
-        
-        $("#login-modal").modal('show');
+
+        $('#loginscreen').openModal();
     }
-    
+
     SignIn(){
         this._signinClicked = true;
     }
-    
+
     @computedFrom("_signinClicked")
     get SignInClicked(){
         return this._signinClicked;
@@ -43,7 +43,7 @@ export class Login {
     Login() {
         this.validation.validate()
             .then(() => {
-                $("#login-modal").modal('hide');
+                $('#loginscreen').closeModal();
             }).catch(error => {
                 // do nothing for now
             });

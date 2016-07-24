@@ -1,47 +1,14 @@
 <template>
-    <require from="./nav-bar"></require>
-    <require from="bootstrap/css/bootstrap.css"></require>
-
-    <div class="page-host">
-        <div id="login-modal" class="modal fade" data-backdrop="static" data-keyboard="false" tabindex="-1" role="dialog">
-            <div class="modal-dialog modal-md" role="document">
-                <div class="modal-content">
-                    <div>
-                        <div class="card-block" data-toggle="modal">
-                            <section class="login-logo">
-                                <img class="logo img-circle" src="/logo.png" width="120px" alt="Hackathon Planner">
-                            </section>
-                            <section class="message">Welcome to Hackathon Planner</section>
-                            <section if.bind="!SignInClicked">
-                                <a class="btn btn-block btn-social btn-lg btn-github" click.trigger="SignIn()">
-                                    <i class="fa fa-github"></i>Sign in with GitHub
-                                </a>
-                            </section>
-                            <section if.bind="SignInClicked">
-                                <section>
-                                    <div class="alert alert-info" role="alert">
-                                        <strong>Heads up!</strong>
-                                        <br>
-                                        This is an early preview of the Hackathon Planner. The client-side is real, but
-                                        there's no back-end. Everything you do will be saved in your browser's local storage and
-                                        nowhere else!
-                                        <br><br>
-                                        Just type a GitHub username below and sign in.
-                                    </div>
-                                </section>
-                                <section class="form-content">
-                                    <input placeholder="Please type your GitHub username" class="form-control" type="text" value.bind="_username" />
-                                </section>
-                                <section class="form-content">
-                                    <button class="btn btn-success" click.trigger="Login()">Sign In</button>
-                                </section>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
+  <div>
+    <div id="loginscreen" class="modal">
+      <div class="modal-content">
+        <h4>Welcome to Hackathon Planner</h4>
+        <p>This is an early preview of the Hackathon Planner. The client-side is real and now the back-end also works. That means everything you do will be saved! Kudos for Hakan!<br/>Soon we will enable Github authentication, for now just type a GitHub username below to sign in.</p>
+        <md-input md-label="Please type your GitHub username" md-value.bind="_username" value.bind="_username"></md-input>
+      </div>
+      <div class="modal-footer">
+        <a click.delegate="Login()" md-button="flat: true;" md-waves class="modal-action modal-close light-blue-text">Login</a>
+      </div>
     </div>
-    </div>
-
+  </div>
 </template>
