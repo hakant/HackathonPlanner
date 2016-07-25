@@ -1,19 +1,19 @@
 <template>
 
+	<require from="./components/markdown"></require>
   <require from="blur-image"></require>
 
   <div class="col s12 m6 l3 project">
     <div class="card large">
-      <div class="card-image"><canvas class="header-bg" width="250" height="100" blur-image.bind="image"></canvas> </div>
-      <div class="card-owner"> <span class="helper"></span> <img src.bind="project._user.avatar_url" crossorigin ref="image" class="circle">
+      <div class="card-image" click.delegate="goToCardDetails()"><canvas class="header-bg" width="250" height="100" blur-image.bind="image"></canvas> </div>
+      <div class="card-owner" click.delegate="goToCardDetails()"> <span class="helper"></span> <img src.bind="project._user.avatar_url" crossorigin ref="image" class="circle">
         <!-- <div class="editable">
           <a class="btn-floating btn-small waves-effect waves-light deep-orange"> <i class="material-icons">mode_edit</i></a>
         </div> -->
       </div>
-      <div class="card-content"> <span class="card-title">
-
-                            ${project._title}
-                          </span>
+      <div class="card-content" click.delegate="goToCardDetails()">
+        <span class="card-title">${project._title}</span>
+        <!-- <p markdown.bind="project._overview"></p> -->
         <p>${project._overview}</p>
         <!-- <div class="card-block labels">
           <span class="label label-pill label-default" repeat.for="label of project.data.labels">${label}</span>

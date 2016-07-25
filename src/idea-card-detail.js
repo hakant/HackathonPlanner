@@ -42,16 +42,20 @@ export class IdeaCardDetail {
                 this._lastProjectTitle = this.project._title;
                 this._lastProjectOverview = this.project._overview;
                 this._lastProjectDescription = this.project._description;
+
             });
     }
 
     attached() {
+
+        //this.tooltipService.DisplayForPage("IdeaCardDetail");
+
         var myRouter = this.router;
-        $("#card-detail").modal('show');
-        $('#card-detail').on('hidden.bs.modal', function() {
-            myRouter.navigateToRoute('overview');
+        $("#card-detail").openModal({
+            complete: function() {
+              myRouter.navigateToRoute('overview');
+            }
         });
-        this.tooltipService.DisplayForPage("IdeaCardDetail");
     }
 
     @computedFrom('_titleEditEnabled')
@@ -76,9 +80,10 @@ export class IdeaCardDetail {
 
     EnableTitleEdit(event) {
         var me = this;
-        var selector = "h2.card-title"
-        $(selector).on('mouseup mousemove', function handler(evt) {
-            if (evt.type === 'mouseup') {
+        var selector = "h4.card-title";
+
+        $(selector).on('mouseup mousemove dblclick', function handler(evt) {
+            if (evt.type === 'dblclick') {
                 me._titleEditEnabled = true;
                 setTimeout(function() {
                     $("input.card-title").select();
@@ -93,11 +98,11 @@ export class IdeaCardDetail {
     EnableOverviewEdit(event) {
         var me = this;
         var selector = "div.card-overview"
-        $(selector).on('mouseup mousemove', function handler(evt) {
-            if (evt.type === 'mouseup') {
+        $(selector).on('mouseup dblclick', function handler(evt) {
+            if (evt.type === 'dblclick') {
                 me._overviewEditEnabled = true;
                 setTimeout(function() {
-                    $("textarea.card-overview").select();
+                    $("textarea").select();
                 }, 0);
             } else {
                 // drag
