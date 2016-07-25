@@ -37,8 +37,6 @@
         },
         "dist/thirdparty": {
             "includes": [
-                "bootstrap",
-                "bootstrap/css/bootstrap.css!text",
                 "lodash",
                 "font-awesome",
                 "fetch",
