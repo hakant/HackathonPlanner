@@ -31,5 +31,6 @@ export class Overview {
 
     attached(){
         //this.tooltipService.DisplayForPage("Overview");
+  
     }
 }

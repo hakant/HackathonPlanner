@@ -10,6 +10,7 @@ export function configure(aurelia) {
         .standardConfiguration()
         .developmentLogging()
         .plugin('aurelia-materialize-bridge', bridge => bridge.useAll() )
+        .plugin('aurelia-dialog')
         .plugin('aurelia-validation');
     // .plugin('aurelia-validation',
     //     (config) => { config.useViewStrategy(TWBootstrapViewStrategy.AppendToInput); }

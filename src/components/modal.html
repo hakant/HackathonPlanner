@@ -1,0 +1,31 @@
+<template>
+
+  <require from="../blur-image"></require>
+  <require from="./markdown"></require>
+
+   <div class="modal modal-fixed-footer" id="card-detail" validate.bind="project.validation">
+     <div class="modal-content">
+       <h4 if.bind="!TitleEditEnabled" class="card-title" click.delegate="EnableTitleEdit($event)">${project._title}</h4>
+       <div>
+         <md-input show.bind="TitleEditEnabled" md-label="${project._title}" md-value.bind="project._title" md-disabled.bind="disabledValue" validate="_title"></md-input>
+       </div>
+       <div show.bind="TitleEditEnabled">
+         <button md-button="flat: true;" md-waves class="accent-text" click.delegate="SaveTitle()">Save</button>
+       </div>
+       <div if.bind="!OverviewEditEnabled" class="card-overview" click.delegate="EnableOverviewEdit($event)"><p markdown.bind="project._overview"></p></div>
+       <div class="input-field col s12">
+           <textarea class="card-overview" class="materialize-textarea" show.bind="OverviewEditEnabled" type="text" value.bind="project._overview" validate="_overview"></textarea>
+       </div>
+       <div>
+           <button show.bind="OverviewEditEnabled" class="btn btn-success" click.trigger="SaveOverview()">Save</button>
+           <button show.bind="OverviewEditEnabled" class="btn btn-cancel" click.trigger="CancelOverview()">Cancel</button>
+       </div>
+       <div class="chip left  ${!project.liked ? 'light-blue' : 'green'} white-text" data-projectid.bind="project._id" click.trigger="like($event)"> ${project.likeCount} <i class="material-icons">${!project.liked ? 'favorite_border' : 'favorite'} </i> </div>
+       <div class="chip right ${!project.joined ? 'light-blue' : 'green'} white-text" data-projectid.bind="project._id" click.trigger="join($event)"> ${project.teamCount} <i class="material-icons">${!project.joined ? 'person_outline' : 'person'}</i> </div>
+     </div>
+     <div class="modal-footer">
+       <a md-button="flat: true;" md-waves="color: accent;" class="modal-action modal-close" click.trigger="controller.cancel()">Back to overview</a>
+     </div>
+   </div>
+
+</template>
