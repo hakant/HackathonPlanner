@@ -11,6 +11,12 @@ export class App {
                 title: 'Overview'
             },
             {
+                route: 'detail/:id',
+                name: 'overviewDetail',
+                nav: false,
+                moduleId: 'overview-detail'
+            },
+            {
                 route: ['ideas'],
                 name: 'ideas',
                 moduleId: 'ideas',

@@ -27,17 +27,19 @@ export class Prompt {
       this.controller = controller;
 
       this.projectService = projectService;
-      this.answer = null;
+      this.projectId = null;
 
       controller.settings.centerHorizontalOnly = true;
       controller.settings.lock = false;
    }
 
    activate(projectId) {
+
+      this.projectId = projectId;
+
        this.projectService.getProjects()
            .then(projects => {
-              console.log("ProjectId: " + projectId);
-              console.log(projects);
+
                  this.project = _.find(projects, { _id: projectId });
 
                this._lastProjectTitle = this.project._title;
@@ -48,8 +50,13 @@ export class Prompt {
    }
 
    attached() {
+
+     window.history.pushState("string", "Modal!", "/#/detail/" + this.projectId);
      $("#card-detail").detach().appendTo("body").openModal({
-          dismissible: false
+          dismissible: false,
+          complete: function() {
+            window.history.pushState("string", "Modal!", "/#");
+          }
      });
 
    }
