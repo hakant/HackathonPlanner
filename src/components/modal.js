@@ -83,7 +83,7 @@ export class Prompt {
 
    EnableTitleEdit(event) {
        var me = this;
-       var selector = "h4.card-title";
+       var selector = ".modal-title h5";
 
        $(selector).on('mouseup mousemove dblclick', function handler(evt) {
            if (evt.type === 'dblclick') {

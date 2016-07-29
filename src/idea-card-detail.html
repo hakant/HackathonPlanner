@@ -21,8 +21,10 @@
               <button show.bind="OverviewEditEnabled" class="btn btn-success" click.trigger="SaveOverview()">Save</button>
               <button show.bind="OverviewEditEnabled" class="btn btn-cancel" click.trigger="CancelOverview()">Cancel</button>
           </div>
-          <div class="chip left  ${!project.liked ? 'light-blue' : 'green'} white-text" data-projectid.bind="project._id" click.trigger="like($event)"> ${project.likeCount} <i class="material-icons">${!project.liked ? 'favorite_border' : 'favorite'} </i> </div>
-          <div class="chip right ${!project.joined ? 'light-blue' : 'green'} white-text" data-projectid.bind="project._id" click.trigger="join($event)"> ${project.teamCount} <i class="material-icons">${!project.joined ? 'person_outline' : 'person'}</i> </div>
+          <div class="modal-actions">
+            <div class="chip left  ${!project.liked ? 'light-blue' : 'green'} white-text" data-projectid.bind="project._id" click.trigger="like($event)"> ${project.likeCount} <i class="material-icons">${!project.liked ? 'favorite_border' : 'favorite'} </i> </div>
+            <div class="chip right ${!project.joined ? 'light-blue' : 'green'} white-text" data-projectid.bind="project._id" click.trigger="join($event)"> ${project.teamCount} <i class="material-icons">${!project.joined ? 'person_outline' : 'person'}</i> </div>
+          </div>
         </div>
         <div class="modal-footer">
           <a md-button="flat: true;" md-waves="color: accent;" class="modal-action modal-close">Back to overview</a>
