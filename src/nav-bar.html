@@ -8,15 +8,18 @@
           <li><a class="active-update"><i class="material-icons light-blue-text">shuffle</i></a></li>
           <li><a href="show-fav-only.html"><i class="material-icons red-text">star</i></a></li>
           <li>
-            <div class="chip blue-grey lighten-4 white-text right" if.bind="auth.isAuthenticated()"><img src.bind="avatarUrl" crossorigin ref="image" class="circle" />Log out</div>
+            <div class="chip blue-grey lighten-4 white-text right" if.bind="auth.isAuthenticated()" click.delegate="auth.logout()"><img src.bind="avatarUrl" crossorigin ref="image" class="circle" />Log out</div>
           </li>
         </ul>
-        <ul id="nav-mobile" class="side-nav" data-sitenav>
-          <li><a md-modal-trigger href="#addproject">Add project</a></li>
-          <li><a class="#">Enable live update</a></li>
-          <li><a href="#">Show favorites only</a></li>
-          <li><a href="#">Log out</a></li>
-        </ul> <a href="#" data-activates="nav-mobile" class="button-collapse light-blue-text"><i class="material-icons">menu</i></a> </div>
+        <md-sidenav view-model.ref="sideNav">
+          <ul>
+            <li md-waves><a md-modal-trigger href="#addproject">Add project</a></li>
+            <li md-waves><a href="#">Enable live update</a></li>
+            <li md-waves><a href="#">Show favorites only</a></li>
+            <li md-waves><a href="#">Log out</a></li>
+          </ul>
+        </md-sidenav>
+        <a md-sidenav-collapse="ref.bind: sideNav;" class="light-blue-text"><i class="material-icons">menu</i></a> </div>
     </nav>
   </div>
 </template>
