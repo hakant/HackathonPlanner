@@ -43,6 +43,7 @@ System.config({
     "lodash": "npm:lodash@4.14.0",
     "materialize": "github:Dogfalo/materialize@0.97.7",
     "materialize-css": "npm:materialize-css@0.97.7",
+    "moment": "npm:moment@2.14.1",
     "showdown": "github:showdownjs/showdown@1.4.2",
     "text": "github:systemjs/plugin-text@0.0.3",
     "twbs/bootstrap": "github:twbs/bootstrap@4.0.0-alpha.2",

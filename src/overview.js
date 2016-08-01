@@ -3,6 +3,7 @@ import {computedFrom} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import {ProjectService} from './services/project-service';
 import {TooltipService} from './services/tooltip-service';
+import moment from 'moment';
 
 import 'fetch';
 
@@ -22,6 +23,8 @@ export class Overview {
 
         projectService.getProjects()
             .then(p => this._projects = p);
+
+        this.countdown = moment([2016, 7, 25, 9, 0, 0]).fromNow();
     }
 
     @computedFrom('_projects')
@@ -31,6 +34,6 @@ export class Overview {
 
     attached(){
         //this.tooltipService.DisplayForPage("Overview");
-  
+
     }
 }
