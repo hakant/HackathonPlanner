@@ -14,13 +14,21 @@ export class ProjectService {
         this.http = http;
         this.auth = auth;
 
-        this.http.configure(conf=>{
-            conf.withBaseUrl("http://localhost:3000");    
+        this.http.configure(conf => {
+            conf.withBaseUrl("http://localhost:3000");
+            conf.withInterceptor({
+                responseError: data => {
+                    if (data.statusCode === 401) {
+                        document.location = "http://localhost:3000/auth/github";
+                    }
+                }
+            })
         });
     }
 
     getProjects() {
         return this.http.createRequest('/ideas')
+            .withCredentials(true)
             .asGet()
             .send()
             .then(response => {
@@ -28,7 +36,7 @@ export class ProjectService {
                 return this.convertToProjectModels(response.content);
             })
             .catch(
-                error => console.error(error)
+            error => console.error(error)
             );
     }
 
@@ -36,6 +44,7 @@ export class ProjectService {
         var model = project.convertToSimpleModel();
 
         return this.http.createRequest('/ideas/add')
+            .withCredentials(true)
             .asPost()
             .withHeader('Content-Type', 'application/json; charset=utf-8')
             .withContent(JSON.stringify(model))
@@ -44,12 +53,13 @@ export class ProjectService {
                 return this.getProjects();
             })
             .catch(
-                error => console.log(error)
+            error => console.log(error)
             );
     }
 
-    editProjectTitle(project){
+    editProjectTitle(project) {
         return this.http.createRequest('/ideas/edit-title')
+            .withCredentials(true)
             .asPost()
             .withHeader('Content-Type', 'application/json; charset=utf-8')
             .withContent(JSON.stringify({
@@ -61,12 +71,13 @@ export class ProjectService {
                 return this.getProjects();
             })
             .catch(
-                error => console.log(error)
+            error => console.log(error)
             );
     }
 
-    editProjectOverview(project){
+    editProjectOverview(project) {
         return this.http.createRequest('/ideas/edit-overview')
+            .withCredentials(true)
             .asPost()
             .withHeader('Content-Type', 'application/json; charset=utf-8')
             .withContent(JSON.stringify({
@@ -78,12 +89,13 @@ export class ProjectService {
                 return this.getProjects();
             })
             .catch(
-                error => console.log(error)
+            error => console.log(error)
             );
     }
 
-    editProjectDescription(project){
+    editProjectDescription(project) {
         return this.http.createRequest('/ideas/edit-description')
+            .withCredentials(true)
             .asPost()
             .withHeader('Content-Type', 'application/json; charset=utf-8')
             .withContent(JSON.stringify({
@@ -95,14 +107,15 @@ export class ProjectService {
                 return this.getProjects();
             })
             .catch(
-                error => console.log(error)
+            error => console.log(error)
             );
     }
 
-    like(project){
+    like(project) {
         return this.auth.getGitHubUser
             .then(user => {
                 return this.http.createRequest('/ideas/like')
+                    .withCredentials(true)
                     .asPost()
                     .withHeader('Content-Type', 'application/json; charset=utf-8')
                     .withContent(JSON.stringify({
@@ -114,14 +127,15 @@ export class ProjectService {
                 return this.getProjects();
             })
             .catch(
-                error => console.log(error)
+            error => console.log(error)
             );
     }
 
-    join(project){
+    join(project) {
         return this.auth.getGitHubUser
             .then(user => {
                 return this.http.createRequest('/ideas/join')
+                    .withCredentials(true)
                     .asPost()
                     .withHeader('Content-Type', 'application/json; charset=utf-8')
                     .withContent(JSON.stringify({
@@ -133,14 +147,15 @@ export class ProjectService {
                 return this.getProjects();
             })
             .catch(
-                error => console.log(error)
+            error => console.log(error)
             );
     }
 
-    unjoin(project){
+    unjoin(project) {
         return this.auth.getGitHubUser
             .then(user => {
                 return this.http.createRequest('/ideas/unjoin')
+                    .withCredentials(true)
                     .asPost()
                     .withHeader('Content-Type', 'application/json; charset=utf-8')
                     .withContent(JSON.stringify({
@@ -152,7 +167,7 @@ export class ProjectService {
                 return this.getProjects();
             })
             .catch(
-                error => console.log(error)
+            error => console.log(error)
             );
     }
 
