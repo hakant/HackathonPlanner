@@ -11,7 +11,7 @@
       </div>
       <div class="row">
         <div class="col s5">
-            <h5 class="light-blue-text">${project._user.name ? project._user.name : project._user.login}</h5>
+          <h5 class="light-blue-text">${project._user.name ? project._user.name : project._user.login}</h5>
         </div>
         <div class="col s2"></div>
         <div class="col s5">
@@ -29,14 +29,26 @@
         <button md-button="flat: true;" md-waves class="red white-text" click.delegate="CancelTitle()">Cancel</button>
       </div>
       <div if.bind="!OverviewEditEnabled" class="card-overview" click.delegate="EnableOverviewEdit($event)">
-        <p markdown.bind="project._overview" class="flow-text"></p>
+        <p class="flow-text">${project._overview}</p>
       </div>
       <div class="input-field col s12">
         <textarea class="materialize-textarea" show.bind="OverviewEditEnabled" type="text" value.bind="project._overview" validate="_overview"></textarea>
       </div>
       <div>
-        <button show.bind="OverviewEditEnabled"md-button="flat: true;" md-waves class="light-blue white-text" click.delegate="SaveOverview()">Save</button>
-        <button show.bind="OverviewEditEnabled"md-button="flat: true;" md-waves class="red white-text" click.delegate="CancelOverview()">Cancel</button>
+        <button show.bind="OverviewEditEnabled" md-button="flat: true;" md-waves class="light-blue white-text" click.delegate="SaveOverview()">Save</button>
+        <button show.bind="OverviewEditEnabled" md-button="flat: true;" md-waves class="red white-text" click.delegate="CancelOverview()">Cancel</button>
+      </div>
+      <div class="divider">
+      </div>
+      <div if.bind="!DescrEditEnabled" class="card-overview" click.delegate="EnableDescrEdit($event)">
+        <p markdown.bind="project._description" class="flow-text"></p>
+      </div>
+      <div class="input-field col s12">
+        <textarea class="materialize-textarea" id="text-${project._id}" show.bind="DescrEditEnabled" type="text" value.bind="project._description" validate="_description"></textarea>
+      </div>
+      <div>
+        <button show.bind="DescrEditEnabled" md-button="flat: true;" md-waves class="light-blue white-text" click.delegate="SaveDescription()">Save</button>
+        <button show.bind="DescrEditEnabled" md-button="flat: true;" md-waves class="red white-text" click.delegate="CancelDescription()">Cancel</button>
       </div>
     </div>
     <div class="modal-footer">

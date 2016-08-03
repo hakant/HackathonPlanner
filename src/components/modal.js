@@ -120,8 +120,8 @@ export class Prompt {
        }
 
        var me = this;
-       $("body").on('mouseup mousemove', function handler(evt) {
-           if (evt.type === 'mouseup') {
+       $("body").on('mouseup mousemove dblclick doubletap', function handler(evt) {
+           if (evt.type === 'dblclick') {
                me.DoEnableDescrEditMode();
            } else {
                // drag
@@ -139,7 +139,7 @@ export class Prompt {
            element.style.height = "0px";
            element.style.height = (element.scrollHeight) + "px";
            element.focus();
-           element.select();
+           //element.select();
        }, 0);
    }
 
