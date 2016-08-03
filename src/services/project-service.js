@@ -1,3 +1,4 @@
+import {Aurelia} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-http-client';
 import {Project} from '../models/project';
 import {AuthService} from './auth-service';
@@ -6,13 +7,15 @@ import {_} from "lodash";
 import 'fetch';
 
 
-@inject(HttpClient, AuthService)
+@inject(HttpClient, AuthService, Aurelia)
 export class ProjectService {
     _projectsJson;
 
-    constructor(http, auth) {
+    constructor(http, auth, app) {
         this.http = http;
         this.auth = auth;
+        this.app = app;
+
 
         this.http.configure(conf => {
             conf.withBaseUrl("http://localhost:3000");
@@ -34,10 +37,7 @@ export class ProjectService {
             .then(response => {
                 console.log(response.content);
                 return this.convertToProjectModels(response.content);
-            })
-            .catch(
-            error => console.error(error)
-            );
+            });
     }
 
     addProject(project) {
@@ -48,13 +48,7 @@ export class ProjectService {
             .asPost()
             .withHeader('Content-Type', 'application/json; charset=utf-8')
             .withContent(JSON.stringify(model))
-            .send()
-            .then(response => {
-                return this.getProjects();
-            })
-            .catch(
-            error => console.log(error)
-            );
+            .send();
     }
 
     editProjectTitle(project) {
@@ -66,13 +60,7 @@ export class ProjectService {
                 id: project._id,
                 title: project._title
             }))
-            .send()
-            .then(response => {
-                return this.getProjects();
-            })
-            .catch(
-            error => console.log(error)
-            );
+            .send();
     }
 
     editProjectOverview(project) {
@@ -84,13 +72,7 @@ export class ProjectService {
                 id: project._id,
                 overview: project._overview
             }))
-            .send()
-            .then(response => {
-                return this.getProjects();
-            })
-            .catch(
-            error => console.log(error)
-            );
+            .send();
     }
 
     editProjectDescription(project) {
@@ -102,73 +84,40 @@ export class ProjectService {
                 id: project._id,
                 description: project._description
             }))
-            .send()
-            .then(response => {
-                return this.getProjects();
-            })
-            .catch(
-            error => console.log(error)
-            );
+            .send();
     }
 
     like(project) {
-        return this.auth.getGitHubUser
-            .then(user => {
-                return this.http.createRequest('/ideas/like')
-                    .withCredentials(true)
-                    .asPost()
-                    .withHeader('Content-Type', 'application/json; charset=utf-8')
-                    .withContent(JSON.stringify({
-                        ideaId: project._id,
-                        userId: user.id
-                    }))
-                    .send();
-            }).then(response => {
-                return this.getProjects();
-            })
-            .catch(
-            error => console.log(error)
-            );
+        return this.http.createRequest('/ideas/like')
+            .withCredentials(true)
+            .asPost()
+            .withHeader('Content-Type', 'application/json; charset=utf-8')
+            .withContent(JSON.stringify({
+                ideaId: project._id
+            }))
+            .send();
     }
 
     join(project) {
-        return this.auth.getGitHubUser
-            .then(user => {
-                return this.http.createRequest('/ideas/join')
-                    .withCredentials(true)
-                    .asPost()
-                    .withHeader('Content-Type', 'application/json; charset=utf-8')
-                    .withContent(JSON.stringify({
-                        ideaId: project._id,
-                        userId: user.id
-                    }))
-                    .send();
-            }).then(response => {
-                return this.getProjects();
-            })
-            .catch(
-            error => console.log(error)
-            );
+        return this.http.createRequest('/ideas/join')
+            .withCredentials(true)
+            .asPost()
+            .withHeader('Content-Type', 'application/json; charset=utf-8')
+            .withContent(JSON.stringify({
+                ideaId: project._id
+            }))
+            .send();
     }
 
     unjoin(project) {
-        return this.auth.getGitHubUser
-            .then(user => {
-                return this.http.createRequest('/ideas/unjoin')
-                    .withCredentials(true)
-                    .asPost()
-                    .withHeader('Content-Type', 'application/json; charset=utf-8')
-                    .withContent(JSON.stringify({
-                        ideaId: project._id,
-                        userId: user.id
-                    }))
-                    .send();
-            }).then(response => {
-                return this.getProjects();
-            })
-            .catch(
-            error => console.log(error)
-            );
+        return this.http.createRequest('/ideas/unjoin')
+            .withCredentials(true)
+            .asPost()
+            .withHeader('Content-Type', 'application/json; charset=utf-8')
+            .withContent(JSON.stringify({
+                ideaId: project._id
+            }))
+            .send();
     }
 
     convertToProjectModels(json) {

@@ -209,11 +209,11 @@ export class IdeaCardDetail {
         let projectService = this.projectService;
 
         if (this.project.joined){
-            projectService.unjoin(this.project);
+            projectService.unjoin(this.project)
+            .then(() => this.project.joined = !this.project.joined);
         } else{
-            projectService.join(this.project);
+            projectService.join(this.project)
+            .then(() => this.project.joined = !this.project.joined);
         }
-        
-        //.then(() => this.project.joined = !this.project.joined);
     }
 }

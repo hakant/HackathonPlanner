@@ -29,10 +29,12 @@ export class IdeaCard {
         let projectId = this.project._id;
         let projectService = this.projectService;
 
-        if (this.project.joined){
-            projectService.unjoin(this.project);
+        if (this.project.joined){   
+            projectService.unjoin(this.project)
+            .then(() => this.project.joined = !this.project.joined);
         } else{
-            projectService.join(this.project);
+            projectService.join(this.project)
+            .then(() => this.project.joined = !this.project.joined);
         }
     }
 }

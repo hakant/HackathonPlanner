@@ -32,10 +32,10 @@ export class NewCard {
             me.project = new Project({
                     id: String(Math.floor(Math.random() * 10000) + 1),
                     user: {
-                        login: user.login,
+                        login: user.username,
                         id: user.id,
-                        avatar_url: user.avatar_url,
-                        name: user.name
+                        avatar_url: user._json.avatar_url,
+                        name: user.displayName
                     },
                     title: null,
                     liked: false,
