@@ -16,23 +16,24 @@
         <div class="col s2"></div>
         <div class="col s5">
           <div class="modal-title">
-            <h5 class="light-blue-text right" if.bind="!TitleEditEnabled" click.delegate="EnableTitleEdit($event)">${project._title}</h5>
+            <h5 class="light-blue-text right" if.bind="!TitleEditEnabled" dblclick.trigger="TitleEdit($event)" hammer-hold.call="TitleEdit($event)">${project._title}</h5>
           </div>
         </div>
       </div>
       <div class="divider"></div>
       <div>
-        <md-input show.bind="TitleEditEnabled" md-label="Title" md-value.bind="project._title" md-disabled.bind="disabledValue" validate="_title"></md-input>
+        <md-input show.bind="TitleEditEnabled" md-label="Title" md-value.bind="project._title" md-disabled.bind="disabledValue" validate="_title" class="title"></md-input>
       </div>
       <div show.bind="TitleEditEnabled">
         <button md-button="flat: true;" md-waves class="light-blue white-text" click.delegate="SaveTitle()">Save</button>
         <button md-button="flat: true;" md-waves class="red white-text" click.delegate="CancelTitle()">Cancel</button>
       </div>
-      <div if.bind="!OverviewEditEnabled" class="card-overview" click.delegate="EnableOverviewEdit($event)">
+      <div if.bind="!OverviewEditEnabled" class="card-overview" dblclick.trigger="OverviewEdit($event)" hammer-hold.call="OverviewEdit($event)">
         <p class="flow-text">${project._overview}</p>
       </div>
       <div class="input-field col s12">
-        <textarea class="materialize-textarea" show.bind="OverviewEditEnabled" type="text" value.bind="project._overview" validate="_overview"></textarea>
+        <label for="overview-${project._id}">Overview text</label>
+        <textarea class="materialize-textarea overview" show.bind="OverviewEditEnabled" type="text" value.bind="project._overview" validate="_overview" id="overview-${project._id}"></textarea>
       </div>
       <div>
         <button show.bind="OverviewEditEnabled" md-button="flat: true;" md-waves class="light-blue white-text" click.delegate="SaveOverview()">Save</button>
@@ -40,11 +41,12 @@
       </div>
       <div class="divider">
       </div>
-      <div if.bind="!DescrEditEnabled" class="card-overview" click.delegate="EnableDescrEdit($event)">
+      <div if.bind="!DescrEditEnabled" class="card-overview" dblclick.trigger="DescriptionEdit($event)" hammer-hold.call="DescriptionEdit($event)">
         <p markdown.bind="project._description" class="flow-text"></p>
       </div>
       <div class="input-field col s12">
-        <textarea class="materialize-textarea" id="text-${project._id}" show.bind="DescrEditEnabled" type="text" value.bind="project._description" validate="_description"></textarea>
+        <label for="overview-${project._id}">Description text</label>
+        <textarea class="materialize-textarea description" id="text-${project._id}" show.bind="DescrEditEnabled" type="text" value.bind="project._description" validate="_description"></textarea>
       </div>
       <div>
         <button show.bind="DescrEditEnabled" md-button="flat: true;" md-waves class="light-blue white-text" click.delegate="SaveDescription()">Save</button>

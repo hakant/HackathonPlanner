@@ -1,11 +1,25 @@
-import {inject} from 'aurelia-framework';
-import {ProjectService} from '../services/project-service';
-import {DialogController} from 'aurelia-dialog';
-import {Project} from '../models/project';
-import {_} from 'lodash';
+import {
+  inject
+} from 'aurelia-framework';
+import {
+  ProjectService
+} from '../services/project-service';
+import {
+  DialogController
+} from 'aurelia-dialog';
+import {
+  Project
+} from '../models/project';
+import {
+  _
+} from 'lodash';
 
-import {bindable} from "aurelia-framework";
-import {computedFrom} from 'aurelia-framework';
+import {
+  bindable
+} from "aurelia-framework";
+import {
+  computedFrom
+} from 'aurelia-framework';
 
 
 @inject(DialogController, ProjectService)
@@ -20,204 +34,168 @@ export class Prompt {
   _lastProjectDescription = null;
 
   project = {
-      description : ''  // Markdown component doesn't like null values!
+    description: '' // Markdown component doesn't like null values!
   };
 
-   constructor(controller, projectService){
-      this.controller = controller;
+  constructor(controller, projectService) {
+    this.controller = controller;
 
-      this.projectService = projectService;
-      this.projectId = null;
+    this.projectService = projectService;
+    this.projectId = null;
 
-      controller.settings.centerHorizontalOnly = true;
-      controller.settings.lock = false;
-   }
+    controller.settings.centerHorizontalOnly = true;
+    controller.settings.lock = false;
+  }
 
-   activate(projectId) {
+  activate(projectId) {
 
-      this.projectId = projectId;
+    this.projectId = projectId;
 
-       this.projectService.getProjects()
-           .then(projects => {
+    this.projectService.getProjects()
+      .then(projects => {
 
-                 this.project = _.find(projects, { _id: projectId });
+        this.project = _.find(projects, {
+          _id: projectId
+        });
 
-               this._lastProjectTitle = this.project._title;
-               this._lastProjectOverview = this.project._overview;
-               this._lastProjectDescription = this.project._description;
+        this._lastProjectTitle = this.project._title;
+        this._lastProjectOverview = this.project._overview;
+        this._lastProjectDescription = this.project._description;
 
-           });
-   }
+      });
+  }
 
-   attached() {
+  attached() {
 
-     window.history.pushState("string", "Modal!", "/#/detail/" + this.projectId);
-     $("#card-detail").detach().appendTo("body").openModal({
-          dismissible: false,
-          complete: function() {
-            window.history.pushState("string", "Modal!", "/#");
-          }
-     });
+    window.history.pushState("string", "Modal!", "/#/detail/" + this.projectId);
+    $("#card-detail").detach().appendTo("body").openModal({
+      dismissible: false,
+      complete: function() {
+        window.history.pushState("string", "Modal!", "/#");
+      }
+    });
 
-   }
+  }
 
-   @computedFrom('_titleEditEnabled')
-   get TitleEditEnabled() {
-       return this._titleEditEnabled;
-   }
+  @computedFrom('_titleEditEnabled')
+  get TitleEditEnabled() {
+    return this._titleEditEnabled;
+  }
 
-   @computedFrom('_overviewEditEnabled')
-   get OverviewEditEnabled() {
-       return this._overviewEditEnabled;
-   }
+  @computedFrom('_overviewEditEnabled')
+  get OverviewEditEnabled() {
+    return this._overviewEditEnabled;
+  }
 
-   @computedFrom('_descrEditEnabled')
-   get DescrEditEnabled() {
-       return this._descrEditEnabled;
-   }
+  @computedFrom('_descrEditEnabled')
+  get DescrEditEnabled() {
+    return this._descrEditEnabled;
+  }
 
-   get IsDescriptionEmpty() {
-       return this._lastProjectDescription === null ||
-           this._lastProjectDescription === "";
-   }
+  get IsDescriptionEmpty() {
+    return this._lastProjectDescription === null ||
+      this._lastProjectDescription === "";
+  }
 
-   EnableTitleEdit(event) {
-       var me = this;
-       var selector = ".modal-title h5";
+  TitleEdit(event) {
+    var me = this;
+    me._titleEditEnabled = true;
+    setTimeout(function() {
+      $("input.title").focus();
+    }, 0);
+  }
 
-       $(selector).on('mouseup mousemove dblclick', function handler(evt) {
-           if (evt.type === 'dblclick') {
-               me._titleEditEnabled = true;
-               setTimeout(function() {
-                   $("input.card-title").select();
-               }, 0);
-           } else {
-               // drag
-           }
-           $(selector).off('mouseup mousemove', handler);
-       });
-   }
+  OverviewEdit(event) {
+    var me = this;
+    me._overviewEditEnabled = true;
+    setTimeout(function() {
+      $("textarea.overview").focus();
+    }, 0);
+  }
 
-   EnableOverviewEdit(event) {
-       var me = this;
-       var selector = "div.card-overview"
-       $(selector).on('mouseup dblclick', function handler(evt) {
-           if (evt.type === 'dblclick') {
-               me._overviewEditEnabled = true;
-               setTimeout(function() {
-                   $("textarea").select();
-               }, 0);
-           } else {
-               // drag
-           }
-           $(selector).off('mouseup mousemove', handler);
-       });
-   }
+  DescriptionEdit(event) {
+    var me = this;
+    me._descrEditEnabled = true;
+    setTimeout(function() {
+      $("textarea.description").focus();
+    }, 0);
+  }
 
-   EnableDescrEdit(event) {
-       if (event.srcElement.nodeName.toLowerCase() == "a") {
-           return true;
-       }
+  SaveTitle() {
+    this.project.validation.validate()
+      .then(() => {
+        this.DoSaveTitle();
+        this.projectService.editProjectTitle(this.project);
+      }).catch(error => {
+        console.error(error);
+        if (error.properties._title.IsValid) {
+          this.DoSaveTitle();
+        }
+      });
+  }
 
-       var me = this;
-       $("body").on('mouseup mousemove dblclick doubletap', function handler(evt) {
-           if (evt.type === 'dblclick') {
-               me.DoEnableDescrEditMode();
-           } else {
-               // drag
-           }
-           $("body").off('mouseup mousemove', handler);
-       });
-   }
+  DoSaveTitle() {
+    this._lastProjectTitle = this.project._title;
+    this._titleEditEnabled = false;
+  }
 
-   DoEnableDescrEditMode() {
-       this._descrEditEnabled = true;
+  CancelTitle() {
+    this.project._title = this._lastProjectTitle;
+    this._titleEditEnabled = false;
+  }
 
-       var selector = `text-${this.project._id}`;
-       setTimeout(function() {
-           let element = document.getElementById(selector);
-           element.style.height = "0px";
-           element.style.height = (element.scrollHeight) + "px";
-           element.focus();
-           //element.select();
-       }, 0);
-   }
+  SaveOverview() {
+    this.project.validation.validate()
+      .then(() => {
+        this.DoSaveOverview();
+        this.projectService.editProjectOverview(this.project);
+      }).catch(error => {
+        if (error.properties._overview.IsValid) {
+          this.DoSaveOverview();
+        }
+      });
+  }
 
-   SaveTitle() {
-       this.project.validation.validate()
-           .then(() => {
-               this.DoSaveTitle();
-               this.projectService.editProjectTitle(this.project);
-           }).catch(error => {
-               console.error(error);
-               if (error.properties._title.IsValid) {
-                   this.DoSaveTitle();
-               }
-           });
-   }
+  DoSaveOverview() {
+    this._lastProjectOverview = this.project._overview;
+    this._overviewEditEnabled = false;
+  }
 
-   DoSaveTitle() {
-       this._lastProjectTitle = this.project._title;
-       this._titleEditEnabled = false;
-   }
+  CancelOverview() {
+    this.project._overview = this._lastProjectOverview;
+    this._overviewEditEnabled = false;
+  }
 
-   CancelTitle() {
-       this.project._title = this._lastProjectTitle;
-       this._titleEditEnabled = false;
-   }
+  SaveDescription() {
+    this._lastProjectDescription = this.project._description;
+    this._descrEditEnabled = false;
+    this.projectService.editProjectDescription(this.project);
+  }
 
-   SaveOverview() {
-       this.project.validation.validate()
-           .then(() => {
-               this.DoSaveOverview();
-               this.projectService.editProjectOverview(this.project);
-           }).catch(error => {
-               if (error.properties._overview.IsValid) {
-                   this.DoSaveOverview();
-               }
-           });
-   }
+  CancelDescription() {
+    this.project._description = this._lastProjectDescription;
+    this._descrEditEnabled = false;
+  }
 
-   DoSaveOverview() {
-       this._lastProjectOverview = this.project._overview;
-       this._overviewEditEnabled = false;
-   }
+  TextAreaAdjust(event) {
+    let element = event.srcElement;
+    element.style.height = (element.scrollHeight) + "px";
+  }
 
-   CancelOverview() {
-       this.project._overview = this._lastProjectOverview;
-       this._overviewEditEnabled = false;
-   }
+  Like() {
+    this.project.liked = !this.project.liked;
+    this.projectService.addOrUpdateProject(this.project);
+  }
 
-   SaveDescription() {
-       this._lastProjectDescription = this.project._description;
-       this._descrEditEnabled = false;
-       this.projectService.editProjectDescription(this.project);
-   }
+  Join() {
+    let projectId = this.project._id;
+    let projectService = this.projectService;
 
-   CancelDescription() {
-       this.project._description = this._lastProjectDescription;
-       this._descrEditEnabled = false;
-   }
+    this.project.joined = !this.project.joined;
+    projectService.addOrUpdateProject(this.project);
 
-   TextAreaAdjust(event) {
-       let element = event.srcElement;
-       element.style.height = (element.scrollHeight) + "px";
-   }
-
-   Like() {
-       this.project.liked = !this.project.liked;
-       this.projectService.addOrUpdateProject(this.project);
-   }
-
-   Join() {
-       let projectId = this.project._id;
-       let projectService = this.projectService;
-
-       this.project.joined = !this.project.joined;
-       projectService.addOrUpdateProject(this.project);
-
-       // join operation should deactivate the other possible project that I've joined!
-   }
+    // join operation should deactivate the other possible project that I've joined!
+  }
 
 
 }

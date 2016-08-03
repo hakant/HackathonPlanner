@@ -31,6 +31,7 @@ System.config({
     "aurelia-validation": "npm:aurelia-validation@0.6.8",
     "babel": "npm:babel-core@5.8.38",
     "babel-runtime": "npm:babel-runtime@5.8.38",
+    "benib/aurelia-hammer": "github:benib/aurelia-hammer@0.1.0",
     "bluebird": "npm:bluebird@3.4.1",
     "bootstrap": "github:twbs/bootstrap@4.0.0-alpha.2",
     "clean-css": "npm:clean-css@3.4.19",
@@ -50,6 +51,10 @@ System.config({
     "github:Dogfalo/materialize@0.97.7": {
       "css": "github:systemjs/plugin-css@0.1.26",
       "jquery": "npm:jquery@2.2.4"
+    },
+    "github:benib/aurelia-hammer@0.1.0": {
+      "aurelia-framework": "npm:aurelia-framework@1.0.1",
+      "hammerjs": "npm:hammerjs@2.0.8"
     },
     "github:gooy/aurelia-markdown@0.0.3": {
       "prism": "github:PrismJS/prism@master",
@@ -309,6 +314,9 @@ System.config({
     },
     "npm:graceful-readlink@1.0.1": {
       "fs": "github:jspm/nodelibs-fs@0.1.2"
+    },
+    "npm:hammerjs@2.0.8": {
+      "process": "github:jspm/nodelibs-process@0.1.2"
     },
     "npm:https-browserify@0.0.0": {
       "http": "github:jspm/nodelibs-http@1.7.1"

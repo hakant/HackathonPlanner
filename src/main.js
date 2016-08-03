@@ -11,6 +11,7 @@ export function configure(aurelia) {
         .developmentLogging()
         .plugin('aurelia-materialize-bridge', bridge => bridge.useAll() )
         .plugin('aurelia-dialog')
+        .plugin('benib/aurelia-hammer')
         .plugin('aurelia-validation');
     // .plugin('aurelia-validation',
     //     (config) => { config.useViewStrategy(TWBootstrapViewStrategy.AppendToInput); }
