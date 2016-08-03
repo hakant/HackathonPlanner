@@ -99,11 +99,9 @@ nav .chip {
   width: 100%;
   text-align: center;
 }
-.modal-actions div {
-
-}
+.modal-actions div {}
 .modal-header {
-    margin-bottom: -100px;
+  margin-bottom: -100px;
 }
 .modal-header canvas {
   width: 100%;
@@ -118,12 +116,12 @@ nav .chip {
   top: -60px;
   margin-bottom: -60px;
 }
-
-
 .card-overview ul, .card-overview ul li {
   list-style-type: disc;
 }
-
 .card-overview ul {
   padding-left: 1em;
+}
+.chip > i {
+  vertical-align: middle !important;
 }
