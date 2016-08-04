@@ -16,30 +16,10 @@ export class AuthService {
         });
     }
 
-    // The login function needs to abstract away all of the details about
-    // how we track and expose login information. A more advanced app might
-    // want the login function to pass back a promise so it can perform
-    // additional tasks on login, but we keep things simple here.
     login() {
-        return this.http.createRequest('/auth/account')
-            .withCredentials(true)
-            .asGet()
-            .send()
-            .then(response => {
-                if (response.statusCode === 200) {
-                    this.app.setRoot('app');
-                } else {
-                    this.app.setRoot('login');
-                }
-            })
-            .catch(
-                error => console.error(error)
-            );
+        document.location = "http://localhost:3000/auth/github";
     }
 
-    // The logout function reverses the actions of the login function. 
-    // It is less common for logout to be async, but logout could also
-    // return a promise if there were a need.
     logout() {
         return this.http.createRequest('/auth/logout')
             .withCredentials(true)
@@ -55,7 +35,6 @@ export class AuthService {
             );
     }
 
-    // A basic method for exposing information to other modules.
     isAuthenticated() {
         return this.http.createRequest('/auth/account')
             .withCredentials(true)
