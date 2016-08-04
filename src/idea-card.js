@@ -7,6 +7,7 @@ import {_} from 'lodash';
 @inject(Router, ProjectService)
 export class IdeaCard {
     @bindable project = null;
+    @bindable joined;
 
     constructor(router, projectService) {
         this.router = router;
@@ -22,19 +23,25 @@ export class IdeaCard {
         let projectService = this.projectService;
 
         projectService.like(this.project)
-        .then(() => this.project.liked = !this.project.liked);
+            .then(() => this.project.liked = !this.project.liked);
     }
 
     join(event) {
         let projectId = this.project._id;
         let projectService = this.projectService;
 
-        if (this.project.joined){   
+        if (this.project.joined) {
             projectService.unjoin(this.project)
-            .then(() => this.project.joined = !this.project.joined);
-        } else{
+                .then(() => {
+                    this.project.joined = !this.project.joined
+                    this.joined();
+                });
+        } else {
             projectService.join(this.project)
-            .then(() => this.project.joined = !this.project.joined);
+                .then(() => {
+                    this.project.joined = !this.project.joined
+                    this.joined();
+                });
         }
     }
 }

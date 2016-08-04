@@ -19,8 +19,9 @@ export class Overview {
 
         this.http = http;
         this.tooltipService = tooltipService;
+        this.projectService = projectService;
 
-        projectService.getProjects()
+        this.projectService.getProjects()
             .then(p => this._projects = p);
     }
 
@@ -31,5 +32,10 @@ export class Overview {
     
     attached(){
         this.tooltipService.DisplayForPage("Overview");    
+    }
+
+    refresh(){
+        this.projectService.getProjects()
+            .then(p => this._projects = p);
     }
 }
