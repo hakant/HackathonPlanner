@@ -17,10 +17,10 @@ export class NavBar {
     }
     
     loadProfilePictureUrl(){
-        let me = this;
-        this.auth.getGitHubUser.then(function(user){
-            me._avatarUrl = user.avatar_url;        
-        });
+        this.auth.getGitHubUser.then(content => {
+                this._avatarUrl = content._json.avatar_url;
+            }         
+        );
     }
     
     @computedFrom('_avatarUrl')

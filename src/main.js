@@ -22,9 +22,13 @@ export function configure(aurelia) {
     //aurelia.use.plugin('aurelia-html-import-template-loader')
 
     //aurelia.start().then(a => a.setRoot());
-    aurelia.start().then(() => {
+    aurelia.start()
+    .then(() => {
         var auth = aurelia.container.get(AuthService);
-        let root = auth.isAuthenticated() ? 'app' : 'login';
+        return auth.isAuthenticated();
+    })
+    .then((isAuthenticated) => {
+        let root = isAuthenticated ? 'app' : 'login';
         aurelia.setRoot(root);
-    });
+    })
 }
