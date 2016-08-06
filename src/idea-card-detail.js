@@ -6,6 +6,8 @@ import {Project} from './models/project';
 import {Router} from 'aurelia-router';
 import {ProjectService} from './services/project-service';
 import {TooltipService} from './services/tooltip-service';
+import {jQuery} from "jquery";
+import {Finger} from "jquery.finger";
 import {_} from 'lodash';
 
 @inject(HttpClient, Router, ProjectService, TooltipService)
@@ -77,7 +79,7 @@ export class IdeaCardDetail {
     EnableTitleEdit(event) {
         var me = this;
         var selector = "h2.card-title"
-        $(selector).dblclick(function () {
+        $(selector).on('doubletap', function () {
             me._titleEditEnabled = true;
             setTimeout(function () {
                 $("input.card-title").select();
@@ -88,12 +90,15 @@ export class IdeaCardDetail {
     EnableOverviewEdit(event) {
         var me = this;
         var selector = "div.card-overview"
-        $(selector).dblclick(function () {
+        $(selector).on('doubletap', function() {
             me._overviewEditEnabled = true;
             setTimeout(function () {
                 $("textarea.card-overview").select();
             }, 0);
         });
+        // $(selector).dblclick(function () {
+            
+        // });
     }
 
     EnableDescrEdit(event) {
@@ -102,7 +107,8 @@ export class IdeaCardDetail {
         }
 
         var me = this;
-        $("body").dblclick(function() {
+        var selector = "div.card-text"
+        $(selector).on('doubletap', function() {
             me.DoEnableDescrEditMode();
         });
     }

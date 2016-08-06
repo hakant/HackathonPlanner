@@ -40,7 +40,9 @@
                 "lodash",
                 "font-awesome",
                 "fetch",
-                "showdown"
+                "showdown",
+                "jquery",
+                "jquery.finger"
             ],
             "options": {
                 "inject": true,
