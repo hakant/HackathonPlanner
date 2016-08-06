@@ -71,7 +71,7 @@
       "aurelia-templating-router": "npm:aurelia-templating-router@^1.0.0-beta.1.0.1",
       "aurelia-validation": "npm:aurelia-validation@^0.6.3",
       "bluebird": "npm:bluebird@^3.4.1",
-      "bootstrap": "github:twbs/bootstrap@4.0.0-alpha.2",
+      "bootstrap": "github:twbs/bootstrap@4.0.0-alpha.3",
       "fetch": "github:github/fetch@^0.11.0",
       "font-awesome": "npm:font-awesome@^4.5.0",
       "gooy/aurelia-markdown": "github:gooy/aurelia-markdown@^0.0.3",

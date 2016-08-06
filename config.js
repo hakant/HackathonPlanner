@@ -12,6 +12,7 @@ System.config({
     "github:*": "jspm_packages/github/*",
     "npm:*": "jspm_packages/npm/*"
   },
+
   map: {
     "aurelia-animator-css": "npm:aurelia-animator-css@1.0.0-rc.1.0.0",
     "aurelia-bootstrapper": "npm:aurelia-bootstrapper@1.0.0-rc.1.0.1",
@@ -29,7 +30,7 @@ System.config({
     "babel": "npm:babel-core@5.8.38",
     "babel-runtime": "npm:babel-runtime@5.8.38",
     "bluebird": "npm:bluebird@3.4.1",
-    "bootstrap": "github:twbs/bootstrap@4.0.0-alpha.2",
+    "bootstrap": "github:twbs/bootstrap@4.0.0-alpha.3",
     "clean-css": "npm:clean-css@3.4.18",
     "core-js": "npm:core-js@1.2.6",
     "fetch": "github:github/fetch@0.11.1",
@@ -96,9 +97,9 @@ System.config({
     "github:jspm/nodelibs-vm@0.1.0": {
       "vm-browserify": "npm:vm-browserify@0.0.4"
     },
-    "github:twbs/bootstrap@4.0.0-alpha.2": {
+    "github:twbs/bootstrap@4.0.0-alpha.3": {
       "jquery": "npm:jquery@2.2.4",
-      "tether": "github:HubSpot/tether@1.3.2"
+      "tether": "github:HubSpot/tether@1.3.4"
     },
     "npm:amdefine@1.0.0": {
       "fs": "github:jspm/nodelibs-fs@0.1.2",
