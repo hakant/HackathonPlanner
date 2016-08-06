@@ -29,6 +29,12 @@ export class App {
                 nav: false,
                 title: 'New Idea',
                 moduleId: 'new-card'
+            },
+            {
+                route: 'new-idea-admin',
+                name: 'newIdeaAdmin',
+                nav: false,
+                moduleId: 'new-card-admin'
             }
             ]);
 

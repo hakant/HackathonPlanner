@@ -34,6 +34,7 @@
                 <i class="fa fa-undo"></i>
                 </button>
             </div>
+            <hr>
             <div if.bind="!DescrEditEnabled && IsDescriptionEmpty" class="add-description-link">
               <a href="#here" click.trigger="DoEnableDescrEditMode()">Add a description</a>
             </div>
@@ -59,7 +60,6 @@
               <span id.bind="project._id">${project.likeCount}</span>
             </div>
           </div>
-          <div class="card-block"></div>
         </div>
       </div>
     </div>

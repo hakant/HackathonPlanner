@@ -6,6 +6,8 @@ import {Project} from './models/project';
 import {Router} from 'aurelia-router';
 import {ProjectService} from './services/project-service';
 import {TooltipService} from './services/tooltip-service';
+import {jQuery} from "jquery";
+import {Finger} from "jquery.finger";
 import {_} from 'lodash';
 
 @inject(HttpClient, Router, ProjectService, TooltipService)
@@ -18,7 +20,7 @@ export class IdeaCardDetail {
     _lastProjectDescription = null;
 
     project = {
-        description : ''  // Markdown component doesn't like null values!
+        description: ''  // Markdown component doesn't like null values!
     };
 
     constructor(http, router, projectService, tooltipService) {
@@ -48,7 +50,7 @@ export class IdeaCardDetail {
     attached() {
         var myRouter = this.router;
         $("#card-detail").modal('show');
-        $('#card-detail').on('hidden.bs.modal', function() {
+        $('#card-detail').on('hidden.bs.modal', function () {
             myRouter.navigateToRoute('overview');
         });
         this.tooltipService.DisplayForPage("IdeaCardDetail");
@@ -77,33 +79,26 @@ export class IdeaCardDetail {
     EnableTitleEdit(event) {
         var me = this;
         var selector = "h2.card-title"
-        $(selector).on('mouseup mousemove', function handler(evt) {
-            if (evt.type === 'mouseup') {
-                me._titleEditEnabled = true;
-                setTimeout(function() {
-                    $("input.card-title").select();
-                }, 0);
-            } else {
-                // drag
-            }
-            $(selector).off('mouseup mousemove', handler);
+        $(selector).on('doubletap', function () {
+            me._titleEditEnabled = true;
+            setTimeout(function () {
+                $("input.card-title").select();
+            }, 0);
         });
     }
 
     EnableOverviewEdit(event) {
         var me = this;
         var selector = "div.card-overview"
-        $(selector).on('mouseup mousemove', function handler(evt) {
-            if (evt.type === 'mouseup') {
-                me._overviewEditEnabled = true;
-                setTimeout(function() {
-                    $("textarea.card-overview").select();
-                }, 0);
-            } else {
-                // drag
-            }
-            $(selector).off('mouseup mousemove', handler);
+        $(selector).on('doubletap', function() {
+            me._overviewEditEnabled = true;
+            setTimeout(function () {
+                $("textarea.card-overview").select();
+            }, 0);
         });
+        // $(selector).dblclick(function () {
+            
+        // });
     }
 
     EnableDescrEdit(event) {
@@ -112,13 +107,9 @@ export class IdeaCardDetail {
         }
 
         var me = this;
-        $("body").on('mouseup mousemove', function handler(evt) {
-            if (evt.type === 'mouseup') {
-                me.DoEnableDescrEditMode();
-            } else {
-                // drag
-            }
-            $("body").off('mouseup mousemove', handler);
+        var selector = "div.card-text"
+        $(selector).on('doubletap', function() {
+            me.DoEnableDescrEditMode();
         });
     }
 
@@ -126,7 +117,7 @@ export class IdeaCardDetail {
         this._descrEditEnabled = true;
 
         var selector = `text-${this.project._id}`;
-        setTimeout(function() {
+        setTimeout(function () {
             let element = document.getElementById(selector);
             element.style.height = "0px";
             element.style.height = (element.scrollHeight) + "px";
@@ -201,19 +192,19 @@ export class IdeaCardDetail {
         let projectService = this.projectService;
 
         projectService.like(this.project)
-        .then(() => this.project.liked = !this.project.liked);
+            .then(() => this.project.liked = !this.project.liked);
     }
 
     Join() {
         let projectId = this.project._id;
         let projectService = this.projectService;
 
-        if (this.project.joined){
+        if (this.project.joined) {
             projectService.unjoin(this.project)
-            .then(() => this.project.joined = !this.project.joined);
-        } else{
+                .then(() => this.project.joined = !this.project.joined);
+        } else {
             projectService.join(this.project)
-            .then(() => this.project.joined = !this.project.joined);
+                .then(() => this.project.joined = !this.project.joined);
         }
     }
 }

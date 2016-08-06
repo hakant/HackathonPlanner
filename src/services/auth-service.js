@@ -71,4 +71,15 @@ export class AuthService {
             }
         );
     }
+
+    getAnotherGitHubUser(username){
+        return this.http.createRequest(`https://api.github.com/users/${username}`)
+            .asGet()
+            .send()
+            .then(response => {
+                console.log(response);
+                return response.content;
+            }
+        );
+    }
 }
