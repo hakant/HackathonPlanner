@@ -66,10 +66,10 @@ export class NewCardAdmin {
             .then(function(user){
                 console.log(user);
                 me.project._user = {
-                            login: user.username,
+                            login: user.login,
                             id: user.id,
                             avatar_url: user.avatar_url,
-                            name: user.displayName
+                            name: user.name
                         };
                     })
             });
