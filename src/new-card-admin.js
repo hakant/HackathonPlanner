@@ -2,10 +2,10 @@ import {bindable} from "aurelia-framework";
 import {inject} from 'aurelia-framework';
 import {ObserverLocator} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
-import {Project} from '../models/project';
+import {Project} from './models/project';
 import {Router} from "aurelia-router";
-import {AuthService} from '../services/auth-service';
-import {ProjectService} from '../services/project-service';
+import {AuthService} from './services/auth-service';
+import {ProjectService} from './services/project-service';
 import 'fetch';
 
 @inject(HttpClient, Router, AuthService, ProjectService, ObserverLocator)

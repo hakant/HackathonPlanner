@@ -34,7 +34,7 @@ export class App {
                 route: 'new-idea-admin',
                 name: 'newIdeaAdmin',
                 nav: false,
-                moduleId: 'admin/new-card-admin'
+                moduleId: 'new-card-admin'
             }
             ]);
 
