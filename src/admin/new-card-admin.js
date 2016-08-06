@@ -1,16 +1,16 @@
 import {bindable} from "aurelia-framework";
 import {inject} from 'aurelia-framework';
+import {ObserverLocator} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
-import {Project} from './models/project';
+import {Project} from '../models/project';
 import {Router} from "aurelia-router";
-import {AuthService} from './services/auth-service';
-import {ProjectService} from './services/project-service';
-import {TooltipService} from './services/tooltip-service';
+import {AuthService} from '../services/auth-service';
+import {ProjectService} from '../services/project-service';
 import 'fetch';
 
-@inject(HttpClient, Router, AuthService, ProjectService, TooltipService)
-export class NewCard {
-    constructor(http, router, auth, projectService, tooltipService) {
+@inject(HttpClient, Router, AuthService, ProjectService, ObserverLocator)
+export class NewCardAdmin {
+    constructor(http, router, auth, projectService, observerLocator) {
         http.configure(config => {
             config
                 .useStandardConfiguration()
@@ -21,7 +21,7 @@ export class NewCard {
         this.router = router;
         this.auth = auth;
         this.projectService = projectService;
-        this.tooltipService = tooltipService;
+        this.userName = '';
         
         this.CreateNewProject();
     }
@@ -57,15 +57,28 @@ export class NewCard {
             me.router.navigateToRoute('overview');
         });
 
-        $("input.card-title").focus();
-        
-        this.tooltipService.DisplayForPage("NewCard");
+        $("input.card-user").focus();
+
+        $("input.card-user").blur(function(){
+            if (typeof me.userName === "undefined") return;
+
+            me.auth.getAnotherGitHubUser(me.userName)
+            .then(function(user){
+                console.log(user);
+                me.project._user = {
+                            login: user.username,
+                            id: user.id,
+                            avatar_url: user.avatar_url,
+                            name: user.displayName
+                        };
+                    })
+            });
     }
 
     detached(){
         $("#new-card").modal('hide');
     }
-
+    
     Save() {
         this.project.validation.validate()
             .then(() => {
@@ -77,6 +90,8 @@ export class NewCard {
             })
             .catch(error => {
                 console.log(error);
+                $("#new-card").modal('hide');
+                this.router.navigateToRoute('overview');
             });
     }
 
