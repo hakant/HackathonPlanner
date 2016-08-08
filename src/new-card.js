@@ -75,9 +75,6 @@ export class NewCard {
             .then(() => {
                 $("#new-card").modal('hide');
                 this.router.navigateToRoute('overview');
-            })
-            .catch(error => {
-                console.log(error);
             });
     }
 

@@ -66,7 +66,6 @@ export class AuthService {
             .asGet()
             .send()
             .then(response => {
-                console.log(response);
                 return response.content
             }
         );
@@ -77,7 +76,6 @@ export class AuthService {
             .asGet()
             .send()
             .then(response => {
-                console.log(response);
                 return response.content;
             }
         );

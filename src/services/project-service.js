@@ -35,7 +35,6 @@ export class ProjectService {
             .asGet()
             .send()
             .then(response => {
-                console.log(response.content);
                 return this.convertToProjectModels(response.content);
             });
     }
