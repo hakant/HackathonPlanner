@@ -59,7 +59,8 @@ export class NewCard {
 
         $("input.card-title").focus();
         
-        this.tooltipService.DisplayForPage("NewCard");
+        // tooltips still need a bit of polishing.
+        //this.tooltipService.DisplayForPage("NewCard");
     }
 
     detached(){
