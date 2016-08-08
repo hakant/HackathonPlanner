@@ -60,7 +60,7 @@ export class NewCardAdmin {
         $("input.card-user").focus();
 
         $("input.card-user").blur(function(){
-            if (typeof me.userName === "undefined") return;
+            if (me.userName === "") return;
 
             me.auth.getAnotherGitHubUser(me.userName)
             .then(function(user){
