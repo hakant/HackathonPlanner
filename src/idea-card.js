@@ -36,7 +36,7 @@ export class IdeaCard {
                     this.project.joined = !this.project.joined
                     this.joined();
                 });
-        } else {
+        } else if (this.project.teamCount < 5) {
             projectService.join(this.project)
                 .then(() => {
                     this.project.joined = !this.project.joined
