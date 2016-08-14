@@ -30,18 +30,20 @@ export class IdeaCard {
         let projectId = this.project._id;
         let projectService = this.projectService;
 
+        let promise;
         if (this.project.joined) {
-            projectService.unjoin(this.project)
-                .then(() => {
-                    this.project.joined = !this.project.joined
-                    this.joined();
-                });
+            promise = projectService.unjoin(this.project);
         } else {
-            projectService.join(this.project)
-                .then(() => {
-                    this.project.joined = !this.project.joined
-                    this.joined();
-                });
+            promise = projectService.join(this.project);
         }
+
+        promise
+        .then((res) => {
+            if (typeof res !== "undefined" && res.statusCode === "200") {
+                this.project.joined = !this.project.joined;
+            }
+
+            this.joined();
+        });
     }
 }
