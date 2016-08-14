@@ -9,6 +9,7 @@ export class Project {
     _title = null;
     @ensure(function(it) { it.isNotEmpty().hasLengthBetween(5, 300) })
     _overview = null;
+    _maxTeamSize = 5;
 
     constructor(data) {
         this._id = data.id;
@@ -44,6 +45,11 @@ export class Project {
     @computedFrom('_teamCount')
     get teamCount() {
         return this._teamCount;
+    }
+
+    @computedFrom('_teamCount')
+    get hasReachedMaxTeamSize(){
+        return this._teamCount >= this._maxTeamSize;
     }
 
     @computedFrom('_joined')

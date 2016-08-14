@@ -167,6 +167,10 @@ textarea.card-text{
     cursor: pointer;
 }
 
+.card .team-controls i.fa-battery-full {
+  cursor: initial;
+}
+
 .card .team-controls, .modal-header .team-controls {
   color: #27616A;
 }
