@@ -12,6 +12,10 @@
         class="btn btn-success navbar-btn">
         <i class="fa fa-plus"></i>
     </button>
+    <button type="button" if.bind="auth.isAuthenticated()" click.trigger="Refresh()" 
+        class="btn btn-info navbar-btn">
+        <i class="fa fa-refresh"></i>
+    </button>
     <div class="dropdown profile" if.bind="auth.isAuthenticated()">
       <button type="button" id="dropdownMenu1" data-toggle="dropdown">
         <img src.bind="avatarUrl" crossorigin ref="image" class="img-circle" width="40px" />

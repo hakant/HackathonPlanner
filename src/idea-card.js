@@ -8,6 +8,7 @@ import {_} from 'lodash';
 export class IdeaCard {
     @bindable project = null;
     @bindable joined;
+    @bindable selected;
 
     constructor(router, projectService) {
         this.router = router;
@@ -15,7 +16,15 @@ export class IdeaCard {
     }
 
     goToCardDetails(event) {
-        this.router.navigateToRoute('ideaDetail', { id: this.project._id });
+        this.selected(this.project);
+        $("#card-detail").modal('show');
+        history.pushState(undefined, "Hackathon Planner", `/#/ideas/${this.project._id}`);
+        
+        $('#card-detail').on('hidden.bs.modal', function () {
+            history.pushState(undefined, "Hackathon Planner", "/#/");
+        });
+
+        //this.router.navigateToRoute('ideaDetail', { id: this.project._id });
     }
 
     like(event) {

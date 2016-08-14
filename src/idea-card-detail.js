@@ -19,9 +19,7 @@ export class IdeaCardDetail {
     _lastProjectOverview = null;
     _lastProjectDescription = null;
 
-    project = {
-        description: ''  // Markdown component doesn't like null values!
-    };
+    @bindable project = undefined;
 
     constructor(http, router, projectService, tooltipService) {
         http.configure(config => {
@@ -37,25 +35,47 @@ export class IdeaCardDetail {
     }
 
     activate(params) {
-        this.projectService.getProjects()
-            .then(projects => {
-                this.project = _.find(projects, { _id: params.id })
+        // Check if this is result of a click action
+        if (params instanceof Project) {
+            this.project = params;
 
-                this._lastProjectTitle = this.project._title;
-                this._lastProjectOverview = this.project._overview;
-                this._lastProjectDescription = this.project._description;
-            });
+            this._lastProjectTitle = this.project._title;
+            this._lastProjectOverview = this.project._overview;
+            this._lastProjectDescription = this.project._description;
+
+            return;
+        }
+
+        // Check if this is result of a deep link
+        if (typeof params !== "undefined") {
+            this.projectService.getProjects()
+                .then(projects => {
+                    this.project = _.find(projects, { _id: params.id })
+
+                    this._lastProjectTitle = this.project._title;
+                    this._lastProjectOverview = this.project._overview;
+                    this._lastProjectDescription = this.project._description;
+
+                    this.showDialog();
+                });
+        }
     }
 
     attached() {
+        if (typeof this.project !== "undefined"){
+            this.showDialog();
+        }
+
+        // tooltips still need a bit of polishing.
+        //this.tooltipService.DisplayForPage("IdeaCardDetail");
+    }
+
+    showDialog(){
         var myRouter = this.router;
         $("#card-detail").modal('show');
         $('#card-detail').on('hidden.bs.modal', function () {
             myRouter.navigateToRoute('overview');
         });
-
-        // tooltips still need a bit of polishing.
-        //this.tooltipService.DisplayForPage("IdeaCardDetail");
     }
 
     @computedFrom('_titleEditEnabled')
@@ -92,14 +112,14 @@ export class IdeaCardDetail {
     EnableOverviewEdit(event) {
         var me = this;
         var selector = "div.card-overview"
-        $(selector).on('doubletap', function() {
+        $(selector).on('doubletap', function () {
             me._overviewEditEnabled = true;
             setTimeout(function () {
                 $("textarea.card-overview").select();
             }, 0);
         });
         // $(selector).dblclick(function () {
-            
+
         // });
     }
 
@@ -110,7 +130,7 @@ export class IdeaCardDetail {
 
         var me = this;
         var selector = "div.card-text"
-        $(selector).on('doubletap', function() {
+        $(selector).on('doubletap', function () {
             me.DoEnableDescrEditMode();
         });
     }

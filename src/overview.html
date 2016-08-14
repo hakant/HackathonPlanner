@@ -4,8 +4,11 @@
 
 	<section>
 		<div class="card-columns">
-			<idea-card project.bind="project" joined.call="refreshJoins(project._id)" repeat.for="project of projects" />
+			<idea-card project.bind="project" joined.call="refreshJoins(project._id)" selected.call="changeSelectedProject(project)" repeat.for="project of projects" />
 		</div>
 	</section>
+
+	<!--<idea-card-detail project.bind="projects[0]"></idea-card-detail>-->
+	<compose view-model="./idea-card-detail" model.bind="selectedProject"></compose>
 	
 </template>
