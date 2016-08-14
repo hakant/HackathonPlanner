@@ -98,14 +98,22 @@ export class ProjectService {
     }
 
     join(project) {
-        return this.http.createRequest('/ideas/join')
-            .withCredentials(true)
-            .asPost()
-            .withHeader('Content-Type', 'application/json; charset=utf-8')
-            .withContent(JSON.stringify({
-                ideaId: project._id
-            }))
-            .send();
+        return new Promise((resolve, reject) => {
+            if (project.hasReachedMaxTeamSize) {
+                reject({ message: "This project has reached the maximum team size already!" });
+                return;
+            }
+
+            resolve(this.http.createRequest('/ideas/join')
+                .withCredentials(true)
+                .asPost()
+                .withHeader('Content-Type', 'application/json; charset=utf-8')
+                .withContent(JSON.stringify({
+                    ideaId: project._id
+                }))
+                .send()
+            );
+        });
     }
 
     unjoin(project) {

@@ -30,18 +30,21 @@ export class IdeaCard {
         let projectId = this.project._id;
         let projectService = this.projectService;
 
+        let promise;
         if (this.project.joined) {
-            projectService.unjoin(this.project)
-                .then(() => {
-                    this.project.joined = !this.project.joined
-                    this.joined();
-                });
+            promise = projectService.unjoin(this.project);
         } else {
-            projectService.join(this.project)
-                .then(() => {
-                    this.project.joined = !this.project.joined
-                    this.joined();
-                });
+            promise = projectService.join(this.project);
         }
+
+        let me = this;
+        promise
+        .then((res) => {
+            if (typeof res !== "undefined" && res.statusCode === 200) {
+                me.project.joined = !me.project.joined;
+            }
+
+            me.joined(me.project._id);
+        });
     }
 }

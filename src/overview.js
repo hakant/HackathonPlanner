@@ -3,6 +3,7 @@ import {computedFrom} from 'aurelia-framework';
 import {HttpClient} from 'aurelia-fetch-client';
 import {ProjectService} from './services/project-service';
 import {TooltipService} from './services/tooltip-service';
+import {_} from "lodash";
 
 import 'fetch';
 
@@ -35,8 +36,11 @@ export class Overview {
         //this.tooltipService.DisplayForPage("Overview");    
     }
 
-    refresh(){
-        this.projectService.getProjects()
-            .then(p => this._projects = p);
+    refreshJoins(newProjectId){
+        _.each(this._projects, project => {
+            if (project._id !== newProjectId && project.joined){
+                project.joined = false; 
+            }
+        });
     }
 }
