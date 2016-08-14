@@ -31,7 +31,8 @@ export class Overview {
     }
     
     attached(){
-        this.tooltipService.DisplayForPage("Overview");    
+        // tooltips still need a bit of polishing.
+        //this.tooltipService.DisplayForPage("Overview");    
     }
 
     refresh(){

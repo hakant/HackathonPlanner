@@ -53,7 +53,9 @@ export class IdeaCardDetail {
         $('#card-detail').on('hidden.bs.modal', function () {
             myRouter.navigateToRoute('overview');
         });
-        this.tooltipService.DisplayForPage("IdeaCardDetail");
+
+        // tooltips still need a bit of polishing.
+        //this.tooltipService.DisplayForPage("IdeaCardDetail");
     }
 
     @computedFrom('_titleEditEnabled')

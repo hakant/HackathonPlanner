@@ -60,11 +60,10 @@ export class NewCardAdmin {
         $("input.card-user").focus();
 
         $("input.card-user").blur(function(){
-            if (typeof me.userName === "undefined") return;
+            if (me.userName === "") return;
 
             me.auth.getAnotherGitHubUser(me.userName)
             .then(function(user){
-                console.log(user);
                 me.project._user = {
                             login: user.login,
                             id: user.id,
@@ -89,7 +88,6 @@ export class NewCardAdmin {
                 this.router.navigateToRoute('overview');
             })
             .catch(error => {
-                console.log(error);
                 $("#new-card").modal('hide');
                 this.router.navigateToRoute('overview');
             });
