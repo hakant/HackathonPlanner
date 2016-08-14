@@ -37,13 +37,14 @@ export class IdeaCard {
             promise = projectService.join(this.project);
         }
 
+        let me = this;
         promise
         .then((res) => {
-            if (typeof res !== "undefined" && res.statusCode === "200") {
-                this.project.joined = !this.project.joined;
+            if (typeof res !== "undefined" && res.statusCode === 200) {
+                me.project.joined = !me.project.joined;
             }
 
-            this.joined();
+            me.joined(me.project._id);
         });
     }
 }
