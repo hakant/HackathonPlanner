@@ -1,19 +1,26 @@
 import {Router} from "aurelia-router";
 import {inject} from 'aurelia-framework';
+import {EventAggregator} from 'aurelia-event-aggregator';
 import {computedFrom} from 'aurelia-framework';
 import {AuthService} from './services/auth-service'; 
 
-@inject(Router, AuthService)
+@inject(Router, AuthService, EventAggregator)
 export class NavBar {
     _avatarUrl;
     
-    constructor(router, auth) {
+    constructor(router, auth, eventAggregator) {
         this.router = router;
         this.auth = auth;
+        this.eventAgg = eventAggregator;
     }
 
     NewCard() {
         this.router.navigateToRoute('newIdea');
+    }
+
+    Refresh() {
+        this.eventAgg.publish('RefreshIdeas');
+        $("button").blur();
     }
     
     loadProfilePictureUrl(){
