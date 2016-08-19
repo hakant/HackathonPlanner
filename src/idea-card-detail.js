@@ -62,7 +62,7 @@ export class IdeaCardDetail {
     }
 
     attached() {
-        if (typeof this.project !== "undefined"){
+        if (typeof this.project !== "undefined") {
             this.showDialog();
         }
 
@@ -70,7 +70,7 @@ export class IdeaCardDetail {
         //this.tooltipService.DisplayForPage("IdeaCardDetail");
     }
 
-    showDialog(){
+    showDialog() {
         var myRouter = this.router;
         $("#card-detail").modal('show');
         $('#card-detail').on('hidden.bs.modal', function () {
@@ -118,9 +118,6 @@ export class IdeaCardDetail {
                 $("textarea.card-overview").select();
             }, 0);
         });
-        // $(selector).dblclick(function () {
-
-        // });
     }
 
     EnableDescrEdit(event) {
@@ -151,17 +148,18 @@ export class IdeaCardDetail {
     SaveTitle() {
         this.project.validation.validate()
             .then(() => {
-                this.DoSaveTitle();
-                this.projectService.editProjectTitle(this.project);
-            }).catch(error => {
-                console.error(error);
-                if (error.properties._title.IsValid) {
-                    this.DoSaveTitle();
+                return this.projectService.editProjectTitle(this.project);
+            })
+            .then((response) => {
+                if (typeof response !== "undefined" && response.statusCode === 200) {
+                    this.ReflectSaveTitle();
+                } else {
+                    this.CancelTitle();
                 }
             });
     }
 
-    DoSaveTitle() {
+    ReflectSaveTitle() {
         this._lastProjectTitle = this.project._title;
         this._titleEditEnabled = false;
     }
@@ -174,16 +172,18 @@ export class IdeaCardDetail {
     SaveOverview() {
         this.project.validation.validate()
             .then(() => {
-                this.DoSaveOverview();
-                this.projectService.editProjectOverview(this.project);
-            }).catch(error => {
-                if (error.properties._overview.IsValid) {
-                    this.DoSaveOverview();
+                return this.projectService.editProjectOverview(this.project);
+            })
+            .then((response) => {
+                if (typeof response !== "undefined" && response.statusCode === 200) {
+                    this.ReflectSaveOverview();
+                } else {
+                    this.CancelOverview();
                 }
             });
     }
 
-    DoSaveOverview() {
+    ReflectSaveOverview() {
         this._lastProjectOverview = this.project._overview;
         this._overviewEditEnabled = false;
     }
@@ -194,9 +194,15 @@ export class IdeaCardDetail {
     }
 
     SaveDescription() {
-        this._lastProjectDescription = this.project._description;
-        this._descrEditEnabled = false;
-        this.projectService.editProjectDescription(this.project);
+        this.projectService.editProjectDescription(this.project)
+            .then((response) => {
+                if (typeof response !== "undefined" && response.statusCode === 200) {
+                    this._lastProjectDescription = this.project._description;
+                    this._descrEditEnabled = false;
+                } else {
+                    this.CancelDescription();
+                }
+            });
     }
 
     CancelDescription() {
@@ -209,24 +215,35 @@ export class IdeaCardDetail {
         element.style.height = (element.scrollHeight) + "px";
     }
 
-    Like() {
+    Like(event) {
         let projectId = this.project._id;
         let projectService = this.projectService;
 
         projectService.like(this.project)
-            .then(() => this.project.liked = !this.project.liked);
+            .then((response) => {
+                if (typeof response !== "undefined" && response.statusCode === 200) {
+                    this.project.liked = !this.project.liked
+                }
+            });
     }
 
-    Join() {
+    Join(event) {
         let projectId = this.project._id;
         let projectService = this.projectService;
 
+        let promise;
         if (this.project.joined) {
-            projectService.unjoin(this.project)
-                .then(() => this.project.joined = !this.project.joined);
+            promise = projectService.unjoin(this.project);
         } else {
-            projectService.join(this.project)
-                .then(() => this.project.joined = !this.project.joined);
+            promise = projectService.join(this.project);
         }
+
+        let me = this;
+        promise
+        .then((response) => {
+            if (typeof response !== "undefined" && response.statusCode === 200) {
+                me.project.joined = !me.project.joined;
+            }
+        });
     }
 }
