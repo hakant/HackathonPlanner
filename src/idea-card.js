@@ -32,7 +32,11 @@ export class IdeaCard {
         let projectService = this.projectService;
 
         projectService.like(this.project)
-            .then(() => this.project.liked = !this.project.liked);
+            .then((response) => {
+                if (typeof response !== "undefined" && response.statusCode === 200) {
+                    this.project.liked = !this.project.liked
+                }
+            });
     }
 
     join(event) {
@@ -48,8 +52,8 @@ export class IdeaCard {
 
         let me = this;
         promise
-        .then((res) => {
-            if (typeof res !== "undefined" && res.statusCode === 200) {
+        .then((response) => {
+            if (typeof response !== "undefined" && response.statusCode === 200) {
                 me.project.joined = !me.project.joined;
             }
 
