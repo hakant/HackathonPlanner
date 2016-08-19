@@ -8,10 +8,12 @@
         <a class="nav-link" href.bind="row.href">${row.title}</a>
       </li>
     </ul>
+    <!-- Temporarily disabled to manage the process
     <button type="button" if.bind="auth.isAuthenticated()" click.trigger="NewCard()" 
         class="btn btn-success navbar-btn">
         <i class="fa fa-plus"></i>
     </button>
+    -->
     <button type="button" if.bind="auth.isAuthenticated()" click.trigger="Refresh()" 
         class="btn btn-info navbar-btn">
         <i class="fa fa-refresh"></i>
